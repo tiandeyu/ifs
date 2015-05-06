@@ -90,6 +90,12 @@ public class ProjectContract extends HzASPPageProviderWf
    private ASPCommandBar contract_detain_class_bar;
    private ASPTable contract_detain_class_tbl;
    private ASPBlockLayout contract_detain_class_lay;
+   
+   private ASPBlock contract_variation_blk;
+   private ASPRowSet contract_variation_set;
+   private ASPCommandBar contract_variation_bar;
+   private ASPTable contract_variation_tbl;
+   private ASPBlockLayout contract_variation_lay;
 
    protected DecimalFormat df;
    protected ASPTabContainer tabs;
@@ -190,6 +196,7 @@ public class ProjectContract extends HzASPPageProviderWf
       eval( third_side_set.syncItemSets() );
       eval( second_account_set.syncItemSets() );   
       eval( contract_detain_class_set.syncItemSets() );
+      eval( contract_variation_set.syncItemSets() );
    }
    
    
@@ -364,7 +371,40 @@ public class ProjectContract extends HzASPPageProviderWf
       data = trans.getBuffer("DETAINCLASS/DATA");
       contract_detain_class_set.addRow(data);
    } 
+   
+   public void okFindITEM5()
+   {
+      ASPManager mgr = getASPManager();
+      ASPTransactionBuffer trans = mgr.newASPTransactionBuffer();
+      ASPQuery q;
+      int headrowno;
 
+      q = trans.addQuery(contract_variation_blk);
+      q.addWhereCondition("PROJ_NO = ? AND CONTRACT_ID = ? AND OBJSTATE = 'Released' ");
+      q.addParameter("PROJ_NO", headset.getValue("PROJ_NO"));
+      q.addParameter("CONTRACT_ID", headset.getValue("CONTRACT_ID"));
+      q.includeMeta("ALL");
+      headrowno = headset.getCurrentRowNo();
+      mgr.querySubmit(trans,contract_variation_blk);
+      headset.goTo(headrowno);
+   }
+   
+   public void newRowITEM5()
+   {
+      ASPManager mgr = getASPManager();
+      ASPTransactionBuffer trans = mgr.newASPTransactionBuffer();
+      ASPCommand cmd;
+      ASPBuffer data;
+
+      
+      cmd = trans.addEmptyCommand("ITEM1","CONTRACT_VARIATION_API.New__",contract_variation_blk);
+      cmd.setOption("ACTION","PREPARE");
+      cmd.setParameter("ITEM5_PROJ_NO", headset.getValue("PROJ_NO"));
+      cmd.setParameter("ITEM5_CONTRACT_ID", headset.getValue("CONTRACT_ID"));
+      trans = mgr.perform(trans);
+      data = trans.getBuffer("ITEM5/DATA");    
+      contract_variation_set.addRow(data);
+   }
    //-----------------------------------------------------------------------------
    //------------------------  Predefines Head ---------------------------
    //-----------------------------------------------------------------------------
@@ -1399,6 +1439,57 @@ public class ProjectContract extends HzASPPageProviderWf
       contract_detain_class_tbl.setWrap();
       contract_detain_class_lay = contract_detain_class_blk.getASPBlockLayout();
       contract_detain_class_lay.setDefaultLayoutMode(contract_detain_class_lay.MULTIROW_LAYOUT);
+      
+      
+      contract_variation_blk = mgr.newASPBlock("ITEM5");
+      contract_variation_blk.addField("ITEM5_OBJID").
+                                setDbName("OBJID").
+                                setHidden();
+      contract_variation_blk.addField("ITEM5_OBJVERSION").
+                                setDbName("OBJVERSION").
+                                setHidden();
+      contract_variation_blk.addField("ITEM5_PROJ_NO").
+                                setDbName("PROJ_NO").
+                                setHidden().
+                                setMandatory().
+                                setLabel("CONTRACTVARIATIONPROJNO: Proj No").
+                                setSize(50);
+      contract_variation_blk.addField("ITEM5_CONTRACT_ID").
+                                setDbName("CONTRACT_ID").
+                                setMandatory().
+                                setHidden().
+                                setInsertable().
+                                setLabel("CONTRACTVARIATIONCONTRACTID: Contract Id").
+                                setSize(100);
+      contract_variation_blk.addField("CONTRACT_VAR_NO","Number").
+                             setInsertable().
+                             setHidden().      
+                             setLabel("CONTRACTVARIATIONOTHCONTRACTVARNO: Contract Var No").
+                             setSize(30);
+      contract_variation_blk.addField("ITEM5_CHANGE_CONTRACT_ID").
+                             setDbName("CHANGE_CONTRACT_ID").
+                             setLabel("CONTRACTVARIATIONCHANGECONTRACTID: Change Contract Id").
+                             setSize(30);
+      contract_variation_blk.addField("ITEM5_CONTRACT_VAR_DESC").
+                             setDbName("CONTRACT_VAR_DESC").
+                             setLabel("CONTRACTVARIATIONCONTRACTVARDESC: Contract Var Desc").
+                             setSize(30);
+      contract_variation_blk.addField("ITEM5_CHANGING_PRICE").
+                             setFunction("CONTRACT_VARIATION_API.Cal_VR_Total(:PROJ_NO, :CONTRACT_ID,:CONTRACT_VAR_NO)").
+                             setLabel("CONTRACTVARIATIONCHANGINGPRICE: Changing Price").
+                             setSize(30);
+      contract_variation_blk.setView("CONTRACT_VARIATION");
+      contract_variation_blk.defineCommand("CONTRACT_VARIATION_API","");
+      contract_variation_blk.setMasterBlock(headblk);
+      contract_variation_set = contract_variation_blk.getASPRowSet();
+      contract_variation_bar = mgr.newASPCommandBar(contract_variation_blk);
+      contract_variation_bar.defineCommand(contract_variation_bar.OKFIND, "okFindITEM5");
+      contract_variation_tbl = mgr.newASPTable(contract_variation_blk);    
+      contract_variation_tbl.setTitle("CONTRACT_VARIATIONTBLcontract_variation: Contract Variation");
+      contract_variation_tbl.enableRowSelect();
+      contract_variation_tbl.setWrap();
+      contract_variation_lay = contract_variation_blk.getASPBlockLayout();
+      contract_variation_lay.setDefaultLayoutMode(contract_variation_lay.MULTIROW_LAYOUT);
           
       
       tabs = mgr.newASPTabContainer();
@@ -1406,10 +1497,12 @@ public class ProjectContract extends HzASPPageProviderWf
       tabs.addTab(mgr.translate("CONTRACTTHIRDTAB: Contract Third" ), "javascript:commandSet('MAIN.activateThird', '')");
       tabs.addTab(mgr.translate("CONTRACTSECONDACCOUNTTAB: Second Account" ), "javascript:commandSet('MAIN.activateSedcondAccount', '')");
       tabs.addTab(mgr.translate("PROJECTCONTRACTDETAINTAB: Contract Detain Class" ), "javascript:commandSet('MAIN.activateDetainClass', '')");
+      tabs.addTab(mgr.translate("CONTRACTVARIATIONTAB: Contract Variation" ), "javascript:commandSet('MAIN.activateContractVariation', '')");
       headbar.addCustomCommand("activateContractLine", "");
       headbar.addCustomCommand("activateThird", "");
       headbar.addCustomCommand("activateSedcondAccount", "");
       headbar.addCustomCommand("activateDetainClass", "");
+      headbar.addCustomCommand("activateContractVariation", "");
    }  
 
    public void activateContractLine()
@@ -1431,6 +1524,11 @@ public class ProjectContract extends HzASPPageProviderWf
    {
       tabs.setActiveTab(4);
       okFindDetainClass();   
+   }
+   public void activateContractVariation()
+   {
+      tabs.setActiveTab(5);
+      okFindITEM5();   
    }
    
    public void adjust() throws FndException
@@ -1605,6 +1703,8 @@ public class ProjectContract extends HzASPPageProviderWf
               appendToHTML(second_account_lay.show());
           if (tabs.getActiveTab() == 4)  
              appendToHTML(contract_detain_class_lay.show());
+          if (tabs.getActiveTab() == 5)  
+             appendToHTML(contract_variation_lay.show());
           appendToHTML(tabs.showTabsFinish());      
       }    
    }

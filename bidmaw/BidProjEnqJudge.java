@@ -395,7 +395,7 @@ public class BidProjEnqJudge extends ASPPageProvider
               setMandatory().
               setInsertable().
               setDynamicLOV("BID_CRE_PROJ_APPLY_LOV","PROJ_NO").
-              setLOVProperty("WHERE", "STATE='Íê³É' AND BID_PROJ_TYPE_DB='PROJECTSERVER'"). 
+              setLOVProperty("WHERE", "STATUS='2' AND BID_PROJ_TYPE_DB='PROJECTSERVER'"). 
               setLabel("BIDPROJENQJUDGECREID: Cre Id").
               setCustomValidation("PROJ_NO,CRE_ID", "CREATE_BID_NAME,FEE_BUDGET").
               setSize(30);

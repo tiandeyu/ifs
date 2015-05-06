@@ -29,6 +29,8 @@ package ifs.contrw;
 //-----------------------------   Import def  ------------------------------
 //-----------------------------------------------------------------------------
 
+import java.io.UnsupportedEncodingException;
+
 import ifs.fnd.asp.*;
 import ifs.fnd.buffer.*;
 import ifs.fnd.service.*;
@@ -128,6 +130,8 @@ public class ContractVariationMat extends HzASPPageProviderWf
       {
          mgr.showAlert("CONTRACTVARIATIONNODATA: No data found.");
          headset.clear();
+      }else{
+         okFindITEM1();
       }
       eval( contract_var_item_set.syncItemSets() );
    }
@@ -272,18 +276,23 @@ public class ContractVariationMat extends HzASPPageProviderWf
       mgr.getASPField("PROJ_NO").setValidation("GENERAL_PROJECT_PROJ_DESC");
       headblk.addField("CONTRACT_ID").
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO"). 
-              setLOVProperty("WHERE", "SCHEDULE = 'FALSE'").
+              setLOVProperty("WHERE", "SCHEDULE = 'FALSE' AND CLASS_NO IN ('SB','WZ','WX') ").
               setLOVProperty("ORDER_BY", "CONTRACT_ID").  
               setMandatory().
               setInsertable().
               setLabel("CONTRACTVARIATIONOTHCONTRACTID: Contract Id").
-              setSize(30);    
+              setSize(30);  
       headblk.addField("CONTRACT_DESC").
               setReadOnly().
+              setWfProperties().
               setFunction("PROJECT_CONTRACT_API.GET_CONTRACT_DESC(:PROJ_NO,:CONTRACT_ID)").
               setLabel("CONTRACTVARIATIONOTHCONTRACTDESC: Contract Desc").
               setSize(30); 
       mgr.getASPField("CONTRACT_ID").setValidation("CONTRACT_DESC");
+      headblk.addField("CHANGE_CONTRACT_ID").
+              setInsertable().
+              setLabel("CONTRACTVARIATIONMATCHANGECONTRACTID: Change Contract Id").
+              setSize(30);
       headblk.addField("CONTRACT_VAR_NO","Number").
               setInsertable().
               setHidden().      
@@ -422,7 +431,7 @@ public class ContractVariationMat extends HzASPPageProviderWf
       headbar = mgr.newASPCommandBar(headblk);
       headbar.addSecureCustomCommand("Release","CONTRACTVARIATIONOTHRELEASE: Release Contract Variation", "CONTRACT_VARIATION_API.Release__");
       headbar.addCommandValidConditions("Release",     "OBJSTATE",    "Enable",      "Initialization");  
-      
+      headbar.addCustomCommand("printReport", "CONTRACTVARIATIONMATPRINTREPORT: Print Report...");
       headtbl = mgr.newASPTable(headblk);
       headtbl.setTitle("CONTRACTVARIATIONOTHTBLHEAD: Contract Variations");
       headtbl.enableRowSelect();
@@ -643,7 +652,26 @@ public class ContractVariationMat extends HzASPPageProviderWf
    //-----------------------------------------------------------------------------
    //------------------------  Presentation functions  ---------------------------
    //-----------------------------------------------------------------------------
-
+   
+   public void  printReport() throws FndException, UnsupportedEncodingException
+   {
+    ASPManager mgr = getASPManager();
+    ASPConfig cfg = getASPConfig();
+    String URL=cfg.getParameter("APPLICATION/RUNQIAN/SERVER_URL");
+    
+    if (headlay.isMultirowLayout())
+       headset.goTo(headset.getRowSelected());
+    if (headset.countRows()>0 )
+          {   
+             String proj_no = headset.getValue("PROJ_NO");
+             String contract_id = headset.getValue("CONTRACT_ID");
+             String contract_var_no = headset.getValue("CONTRACT_VAR_NO");
+              appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=RptContractVariation.raq&proj_no="+proj_no+"&contract_id="+contract_id+"&contract_var_no="+contract_var_no
+                + "','_blank','height=600, width=780, top=200, left=350, toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');");                                
+         }
+   }   
+   
+   
    public void validate()
    {
        ASPManager mgr = getASPManager();

@@ -33,12 +33,13 @@ import ifs.fnd.asp.*;
 import ifs.fnd.buffer.*;
 import ifs.fnd.service.*;
 import ifs.fnd.*;
+import ifs.hzwflw.HzASPPageProviderWf;
 
 //-----------------------------------------------------------------------------
 //-----------------------------   Class def  ------------------------------
 //-----------------------------------------------------------------------------
 
-public class BidMatResult extends ASPPageProvider
+public class BidMatResult extends HzASPPageProviderWf
 {
 
    //-----------------------------------------------------------------------------
@@ -77,8 +78,9 @@ public class BidMatResult extends ASPPageProvider
       super(mgr,page_path);
    }
 
-   public void run()
+   public void run() throws FndException
    {
+      super.run();
       ASPManager mgr = getASPManager();
 
       if( mgr.commandBarActivated() )
@@ -113,6 +115,8 @@ public class BidMatResult extends ASPPageProvider
       {
          mgr.showAlert("BIDMATRESULTNODATA: No data found.");
          headset.clear();
+      }else{
+         okFindITEM1();
       }
       eval( bid_mat_result_line_set.syncItemSets() );
    }
@@ -235,10 +239,8 @@ public class BidMatResult extends ASPPageProvider
               setSize(20);
       headblk.addField("PURCH_CONTRACT_ID").
               setInsertable().
-              setDynamicLOV("PROJECT_CONTRACT").
-              setLOVProperty("WHERE", " CLASS_NO= 'SB' ").
-              setLOVProperty("OR", " CLASS_NO= 'WX' ").
-              setLOVProperty("OR", " CLASS_NO= 'WZ' ").
+              setDynamicLOV("PROJECT_CONTRACT","PROJ_NO").
+              setLOVProperty("WHERE", " CLASS_NO IN ('SB','WX','WZ') ").
               setLabel("BIDMATRESULTPURCHCONTRACTID: Purch Contract Id").
               setSize(30);
       headblk.addField("PURCH_CONTRACT_NAME").
@@ -264,12 +266,14 @@ public class BidMatResult extends ASPPageProvider
               setSize(30);
       headblk.addField("PURCH_ID").
               setInsertable().
+              setReadOnly().
               setDynamicLOV("BID_MAT_PURCH","PROJ_NO").
               setLOVProperty("WHERE", " CREATE_RESULT = 'FALSE' AND STATUS = '2' ").
               setLabel("BIDMATRESULTPURCHID: Purch Id").
               setSize(30);
       headblk.addField("BID_MAT_PURCH_PURCH_NAME").
               setReadOnly().
+              setWfProperties().
               setFunction("BID_MAT_PURCH_API.GET_PURCH_NAME ( :PROJ_NO,:PURCH_ID)").
               setLabel("BIDMATRESULTBIDMATPURCHPURCHNAME: Bid Mat Purch Purch Name").
               setSize(30);
@@ -393,11 +397,11 @@ public class BidMatResult extends ASPPageProvider
                               setLabel("BIDMATRESULTLINENOTE: Note").
                               setSize(120);
       //Own fields
-      bid_mat_result_line_blk.addField("PURCH_PRICE","Number").
+      bid_mat_result_line_blk.addField("PURCH_PRICE","Money","#0.00").
                               setInsertable().
                               setLabel("BIDMATRESULTLINEPURCHPRICE: Purch Price").
                               setSize(30);
-      bid_mat_result_line_blk.addField("PURCH_TOTAL_PRICE","Number").
+      bid_mat_result_line_blk.addField("PURCH_TOTAL_PRICE","Money","#0.00").
                               setInsertable().
                               setLabel("BIDMATRESULTLINEPURCHTOTALPRICE: Purch Total Price").
                               setSize(30);
@@ -429,9 +433,9 @@ public class BidMatResult extends ASPPageProvider
 
    }
    
-   public void  adjust()
+   public void  adjust() throws FndException
    {
-      // fill function body
+      super.adjust();
       if(headset.countRows() > 0 && headlay.isSingleLayout() && "TRUE".equals(headset.getValue("GENERATED_CONTRACT"))){
          headbar.disableCommand(headbar.DELETE);
          bid_mat_result_line_bar.disableCommand(headbar.EDITROW);
@@ -474,6 +478,7 @@ public class BidMatResult extends ASPPageProvider
 
    protected void printContents() throws FndException
    {
+      super.printContents();
       ASPManager mgr = getASPManager();
       if (headlay.isVisible())
           appendToHTML(headlay.show());
@@ -485,5 +490,10 @@ public class BidMatResult extends ASPPageProvider
       if (bid_mat_result_line_lay.isVisible())
           appendToHTML(bid_mat_result_line_lay.show());
 
+   }
+
+   @Override
+   protected ASPBlock getBizWfBlock() {
+      return headblk;
    }
 }
