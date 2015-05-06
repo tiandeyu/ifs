@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>测试带复选框的树形结构</title>
+
+	<link rel="StyleSheet" href="/b2e/unsecured/common/scripts/dtree.css" type="text/css" />
+	<script type="text/javascript" src="/b2e/unsecured/common/scripts/dtree.js"></script>
+
+</head>
+
+<body>
+
+<div class="dtree">
+	<p><a href="javascript: mytree.openAll();">全部展开</a> | <a href="javascript: mytree.closeAll();">全部关闭</a></p>
+	<script type="text/javascript">
+	
+function delSameItem(arr) {
+    var _temp = {};
+    var _arrTemp = [];
+    var _len = arr.length;
+    for(var i = 0; i < _len; i++) {
+        if(!_temp[arr[i]]) {
+            _arrTemp.push(arr[i]);
+            _temp[arr[i]] = 1;
+        }
+    }
+    return _arrTemp;
+};
+
+		//<!--
+    //节点的函数node有9个参数，并不需要全部传，但若只传几个，默认为前面几个
+		mytree = new dTree('mytree');
+		mytree.config.useCheckbox = true;  //设置有复选框
+		mytree.add(0,-1,'根节点');
+	function getNodes(){
+		var arr = mytree.getNodes();
+		delSameItem(arr);
+		alert(arr)
+		
+	};
+/**		
+	<%
+		TreeDAO dao = new TreeDAO();
+		List list = dao.getTree();
+		for(int i = 0; i<list.size(); i++){
+			TreeNode tn = (TreeNode)list.get(i);
+			%>
+			mytree.add('<%=tn.getTid()%>','<%=tn.getPid()%>','<%=tn.getTname()%>','checkboxExample.jsp');
+			
+			<%
+		}
+	%>
+**/	
+		mytree.add(1,0,'节点 1','checkboxExample.html');
+		mytree.add(2,0,'节点 2','checkboxExample.html');
+		mytree.add(4,0,'节点 3','checkboxExample.html');
+		mytree.add(5,3,'节点 1.1.1','checkboxExample.html');
+		mytree.add(6,5,'节点 1.1.1.1','checkboxExample.html');
+		mytree.add(7,0,'节点 4','checkboxExample.html');
+		mytree.add(8,1,'节点 1.2','checkboxExample.html');
+		document.write(mytree);
+
+		//-->
+	</script>
+</div>
+	<input type="button" value="确定" onclick="getNodes()">
+</body>
+
+</html>
