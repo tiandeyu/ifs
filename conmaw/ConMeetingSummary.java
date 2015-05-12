@@ -217,6 +217,8 @@ public class ConMeetingSummary extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONMEETINGSUMMARYPROJNO: Proj No").
               setSize(30);
@@ -239,31 +241,36 @@ public class ConMeetingSummary extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("MEETING_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONMEETINGSUMMARYMEETINGNO: Meeting No").
               setSize(30);
       headblk.addField("MEETING_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONMEETINGSUMMARYMEETINGNAME: Meeting Name").
               setSize(30);
       headblk.addField("COMPERE").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PERSON_INFO").
               setLabel("CONMEETINGSUMMARYCOMPERE: Compere").
               setSize(20);
       headblk.addField("COMPERE_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("PERSON_INFO_API.GET_NAME( :COMPERE)").
               setLabel("CONMEETINGSUMMARYCOMPERENAME: Compere Name").
               setSize(30);
       mgr.getASPField("COMPERE").setValidation("COMPERE_NAME"); 
       headblk.addField("RECORDER").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PERSON_INFO").
               setLabel("CONMEETINGSUMMARYRECORDER: Recorder").
               setSize(20);
       headblk.addField("RECORDER_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("PERSON_INFO_API.GET_NAME( :RECORDER)").
               setLabel("CONMEETINGSUMMARYRECORDERNAME: Recorder Name").
               setSize(30);
@@ -271,10 +278,12 @@ public class ConMeetingSummary extends HzASPPageProviderWf
       
       headblk.addField("MEETING_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONMEETINGSUMMARYMEETINGTIME: Meeting Time").
               setSize(30);
       headblk.addField("MEETING_PLACE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONMEETINGSUMMARYMEETINGPLACE: Meeting Place").
               setSize(30);
       headblk.addField("STATUS").
@@ -288,14 +297,22 @@ public class ConMeetingSummary extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("MEETING_CONTENT").
               setInsertable().
+              setDefaultNotVisible().
               setHeight(7).
               setLabel("CONMEETINGSUMMARYMEETINGCONTENT: Meeting Content").
               setSize(120);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setHeight(3).
               setLabel("CONMEETINGSUMMARYNOTE: Note").
               setSize(120);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("MEETING_NAME").
+              setLabel("FLOWTITLE: Flow Title");
       headblk.addField("ALL_ATTENDER").setHidden();
       headblk.addField("CON_MEETING_TYPE_DB").setHidden();
       headblk.setView("CON_MEETING_SUMMARY");

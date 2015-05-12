@@ -420,6 +420,7 @@ public class ContractReportQty extends HzASPPageProviderWf {
              setDynamicLOV("GENERAL_PROJECT").
              setInsertable(). 
              setWfProperties(). 
+             setDefaultNotVisible().
              setLabel("CONTRACTPAYMENTPROJNO: Proj No").
              setSize(50);
 	  headblk.addField("GENERAL_PROJECT_PROJ_DESC").
@@ -450,6 +451,7 @@ public class ContractReportQty extends HzASPPageProviderWf {
 				setReadOnly().
 				setWfProperties(). 
 				unsetInsertable().
+				setDefaultNotVisible().
 				setLabel("CONTRACTREPORTQTYREPORTNO: Report No").
 				setSize(10);
 		
@@ -468,21 +470,25 @@ public class ContractReportQty extends HzASPPageProviderWf {
 				setSize(10);
 	   headblk.addField("START_DATE", "Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTREPORTQTYSTARTDATE: Start Date").
               setSize(10);
 	   headblk.addField("END_DATE", "Date").
-	           setInsertable().  
+	           setInsertable(). 
+	           setDefaultNotVisible().
               setLabel("CONTRACTREPORTQTYENDDATE: End Date").
               setSize(10);  
 		  
 		// 3
 		headblk.addField("REPORTOR").
 				setReadOnly().
+				setDefaultNotVisible().
 				setLabel("CONTRACTREPORTQTYREPORTOR: Reportor").
 				setDynamicLOV("PERSON_INFO_LOV").
 				setSize(10);
 		headblk.addField("REPORTOR_NAME").
 				setReadOnly().
+				setDefaultNotVisible().
 				setFunction("PERSON_INFO_API.GET_NAME(:REPORTOR)").
 				setLabel("CONTRACTREPORTQTYREPORTORNAME: Reportor Name").
 				setSize(10);
@@ -490,17 +496,20 @@ public class ContractReportQty extends HzASPPageProviderWf {
 		
 		headblk.addField("REPORT_DATE", "Date").
 				setReadOnly().
+				setDefaultNotVisible().
 				setLabel("CONTRACTREPORTQTYREPORTDATE: Report Date").
 				setSize(10);
 		
 		// 4
 		headblk.addField("INSPECTOR").
 				setReadOnly().
+				setDefaultNotVisible().
 				setLabel("CONTRACTREPORTQTYINSPECTOR: Inspector").
 				setDynamicLOV("PERSON_INFO").
 				setSize(10);
 		headblk.addField("INSPECTOR_NAME").
 				setReadOnly().
+				setDefaultNotVisible().
 				setFunction("PERSON_INFO_API.GET_NAME(:INSPECTOR)").
 				setLabel("CONTRACTREPORTQTYINSPECTORNAME: Inspector Name").
 				setSize(10);
@@ -508,17 +517,20 @@ public class ContractReportQty extends HzASPPageProviderWf {
 		
 		headblk.addField("INSPECT_DATE", "Date").
 				setReadOnly().
+				setDefaultNotVisible().
 				setLabel("CONTRACTREPORTQTYINSPECTDATE: Inspect Date").
 				setSize(10);
 		
 		// 5
 		headblk.addField("APPROVER").
 				setReadOnly().
+				setDefaultNotVisible().
 				setLabel("CONTRACTREPORTQTYAPPROVER: Approver").
 				setDynamicLOV("PERSON_INFO").
 				setSize(10);
 		headblk.addField("APPROVER_NAME").
 				setReadOnly().
+				setDefaultNotVisible().
 				setFunction("PERSON_INFO_API.GET_NAME(:APPROVER)").
 				setLabel("CONTRACTREPORTQTYAPPROVERNAME: Approver Name").
 				setSize(10);
@@ -526,17 +538,20 @@ public class ContractReportQty extends HzASPPageProviderWf {
 		
 		headblk.addField("APPROVE_DATE", "Date").
 				setReadOnly().
+				setDefaultNotVisible().
 				setLabel("CONTRACTREPORTQTYAPPROVEDATE: Approve Date").
 				setSize(10);
 		
 		// 6
 		headblk.addField("AUDITOR").
 				setReadOnly().
+				setDefaultNotVisible().
 				setLabel("CONTRACTREPORTQTYAUDITOR: Auditor").
 				setDynamicLOV("PERSON_INFO").
 				setSize(10);
 		headblk.addField("AUDITOR_NAME").
 				setReadOnly().
+				setDefaultNotVisible().
 				setFunction("PERSON_INFO_API.GET_NAME(:AUDITOR)").
 				setLabel("CONTRACTREPORTQTYAUDITORNAME: Auditor Name").
 				setSize(10);
@@ -544,12 +559,14 @@ public class ContractReportQty extends HzASPPageProviderWf {
 		
 		headblk.addField("AUDIT_DATE", "Date").
 				setReadOnly().
+				setDefaultNotVisible().
 				setLabel("CONTRACTREPORTQTYAUDITDATE: Audit Date").
 				setSize(10);
 		
 		// 7
 		headblk.addField("COMPLETE_DATE", "Date").
 				setReadOnly().
+				setDefaultNotVisible().
 				setLabel("CONTRACTREPORTQTYCOMPLETEDATE: Complete Date").
 				setSize(10);
 		headblk.addField("STATE").
@@ -560,6 +577,7 @@ public class ContractReportQty extends HzASPPageProviderWf {
 		// 8
 		headblk.addField("REPORT_NOTE").
 				setInsertable().
+				setMandatory().
 				setLabel("CONTRACTREPORTQTYREPORTNOTE: Report Note").
 				setSize(50);
 		headblk.addField("MON_OWN_TOTAL", "Money" ,"#0.00").
@@ -578,7 +596,13 @@ public class ContractReportQty extends HzASPPageProviderWf {
               setInsertable().
               setCheckBox("FALSE,TRUE").
               setLabel("CONTRACTREPORTQTYISFINISH: Is Finish").
-              setSize(20);  
+              setSize(20);
+	   headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("REPORT_NOTE").
+              setLabel("FLOWTITLE: Flow Title");  
 		headblk.setView("CONTRACT_REPORT_QTY");
 		headblk.defineCommand("CONTRACT_REPORT_QTY_API", "New__,Modify__,Remove__,Report__,Inspect__,Untread__,Approve__,Restart__,Audit__,Complete__");
 		headset = headblk.getASPRowSet();

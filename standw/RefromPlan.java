@@ -285,13 +285,13 @@ public class RefromPlan extends HzASPPageProviderWf
       mgr.getASPField("GROUP_NO").setValidation("GROUP_NAME");
       headblk.addField("REFORM_ORG_NAME").
               setInsertable().
-              setDynamicLOV("PERSON_ZONE").
+              setDynamicLOV("GENERAL_ORGANIZATION_LOV","PROJ_NO").
               setLabel("REFROMPLANREFORMORGNAME: Reform Org Name").
               setSize(20);
       headblk.addField("REFORM_ORG_NAME_LABEL").
               setReadOnly().
               setLabel("REFROMPLANREFORMORGNAMELABEL: Reform Org Name Label").
-              setFunction("GENERAL_ZONE_API.Get_Zone_Desc (:REFORM_ORG_NAME)").
+              setFunction("GENERAL_ORGANIZATION_API.Get_Org_Desc(:REFORM_ORG_NAME)").
               setSize(20);
       mgr.getASPField("REFORM_ORG_NAME").setValidation("REFORM_ORG_NAME_LABEL");
       headblk.addField("REFORM_CONTENT").

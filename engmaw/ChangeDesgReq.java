@@ -289,7 +289,7 @@ public class ChangeDesgReq extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("REQ_NAME").
               setInsertable().
-              setWfProperties().
+//              setWfProperties().
               setMandatory().
               setLabel("CHANGEDESGREQREQNAME: Req Name").
               setSize(20);
@@ -406,7 +406,15 @@ public class ChangeDesgReq extends HzASPPageProviderWf
               setHidden().
               setLabel("CHANGEDESGREQCREATETIME: Create Time").
               setSize(20);
-
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("REQ_NAME").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
 
 
       headblk.setView("CHANGE_DESG_REQ");

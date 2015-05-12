@@ -221,7 +221,7 @@ public class HseLargeMacRevExam extends HzASPPageProviderWf
               setCustomValidation("PROJ_NO,CONTRACT_ID", "CONTRACT_NAME,SECOND_SIDE,SECOND_SIDE_NAME");
       headblk.addField("CONTRACT_NAME").
               setReadOnly().
-              setWfProperties().
+//              setWfProperties().
               setFunction("PROJECT_CONTRACT_API.Get_Contract_Desc (:PROJ_NO,:CONTRACT_ID)").
               setLabel("HSELARGEMACREVEXAMCONTRACTNAME: Contract Name").
               setSize(30);
@@ -235,7 +235,7 @@ public class HseLargeMacRevExam extends HzASPPageProviderWf
 
       headblk.addField("SECOND_SIDE_NAME").
               setReadOnly().
-              setWfProperties().
+//              setWfProperties().
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_ID))").
               setLabel("HSELARGEMACREVEXAMSECONDSIDENAME: Constraction Org Name").
               setSize(30);
@@ -275,6 +275,15 @@ public class HseLargeMacRevExam extends HzASPPageProviderWf
 //              setHidden().
               setLabel("HSELARGEMACREVEXAMCREATETIME: Create Time").
               setSize(20);
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("PROJECT_CONTRACT_API.Get_Contract_Desc (:PROJ_NO,:CONTRACT_ID)").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("HSE_LARGE_MAC_REV_EXAM");
       headblk.defineCommand("HSE_LARGE_MAC_REV_EXAM_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

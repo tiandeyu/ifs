@@ -209,6 +209,7 @@ public class BidMatReq extends HzASPPageProviderWf
               setMandatory().
               setDynamicLOV("GENERAL_PROJECT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDMATREQPROJNO: Proj No").
               setSize(30);
       headblk.addField("GENERAL_PROJECT_PROJ_DESC").
@@ -224,11 +225,12 @@ public class BidMatReq extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("REQ_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("BIDMATREQREQNAME: Req Name").
               setSize(30);
       headblk.addField("SUB_PROJECT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDMATREQSUBPROJECT: Sub Project").
               setSize(30);
       headblk.addField("DEPT").
@@ -242,17 +244,20 @@ public class BidMatReq extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("CREATE_PERSON").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PERSON_INFO").
               setLabel("BIDMATREQCREATEPERSON: Create Person").
               setSize(20);
       headblk.addField("CREATE_PERSON_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("PERSON_INFO_API.GET_NAME (:CREATE_PERSON)").
               setLabel("BIDMATREQCREATEPERSONNAME: Create Person Name").
               setSize(30);
       mgr.getASPField("CREATE_PERSON").setValidation("CREATE_PERSON_NAME");
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDMATREQCREATETIME: Create Time").
               setSize(30);
       headblk.addField("STATUS").
@@ -267,9 +272,16 @@ public class BidMatReq extends HzASPPageProviderWf
       mgr.getASPField("STATUS").setValidation("STATUS_DESC");
       headblk.addField("PURCH_REASON").
               setInsertable().
+              setDefaultNotVisible().
               setHeight(3).
               setLabel("BIDMATREQPURCHREASON: Purch Reason").
               setSize(120);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("REQ_NAME").
+              setLabel("FLOWTITLE: Flow Title");
       headblk.setView("BID_MAT_REQ");
       headblk.defineCommand("BID_MAT_REQ_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

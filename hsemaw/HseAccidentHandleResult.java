@@ -243,13 +243,13 @@ public class HseAccidentHandleResult extends HzASPPageProviderWf
               setHidden();
       headblk.addField("ID").
               setHidden().
-              setWfProperties().
+//              setWfProperties().
               setLabel("HSEACCIDENTHANDLERESULTID: Id").
               setSize(30);
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
-              setWfProperties().
+//              setWfProperties().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("HSEACCIDENTHANDLERESULTPROJNO: Proj No").
               setSize(30); 
@@ -347,7 +347,15 @@ public class HseAccidentHandleResult extends HzASPPageProviderWf
               setHidden().
               setLabel("HSEACCIDENTRESULTBELONGTOLU: Belong To Lu").
               setSize(30);
-
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("QUA_ACCIDENT_NO").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("QUA_ACCIDENT");
       headblk.defineCommand("QUA_ACCIDENT_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

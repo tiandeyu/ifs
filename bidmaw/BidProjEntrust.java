@@ -214,10 +214,10 @@ public class BidProjEntrust extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTPROJNO: Proj No").
               setSize(30).
               setDynamicLOV("GENERAL_PROJECT");
-      
       headblk.addField("GENERAL_PROJECT_PROJ_DESC").
               setFunction("GENERAL_PROJECT_API.GET_PROJ_DESC ( :PROJ_NO)").
               setLabel("CONADJUSTNOTICEGENERALPROJECTPROJDESC: General Project Proj Desc").
@@ -226,6 +226,7 @@ public class BidProjEntrust extends HzASPPageProviderWf
       mgr.getASPField("PROJ_NO").setValidation("GENERAL_PROJECT_PROJ_DESC");
       headblk.addField("CONTRACT_ID").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT","PROJ_NO").
               setLabel("BIDPROJENTRUSTCONTRACTID: Contract Id").
               setCustomValidation("PROJ_NO,CONTRACT_ID", "CONTRACT_DESC,SECOND_ORG,SECOND_ORG_NAME").
@@ -237,6 +238,7 @@ public class BidProjEntrust extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("CRE_ID").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("BID_CRE_PROJ_APPLY","PROJ_NO").
               setLabel("BIDPROJENTRUSTCREID: Cre Id").
               setSize(30);
@@ -248,6 +250,7 @@ public class BidProjEntrust extends HzASPPageProviderWf
       mgr.getASPField("CRE_ID").setValidation("CREATE_BID_NAME");
       headblk.addField("SECOND_ORG").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("GENERAL_ORGANIZATION_API.GET_ORG_NO( :PROJ_NO, :CONTRACT_ID)").
               setLabel("BIDPROJENTRUSTSECONDORG: Second Org").
               setSize(30);
@@ -259,17 +262,18 @@ public class BidProjEntrust extends HzASPPageProviderWf
       mgr.getASPField("SECOND_ORG").setValidation("SECOND_ORG_NAME");
       headblk.addField("SERIAL_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTSERIALNO: Serial No").
               setSize(30).
               setHidden();
       headblk.addField("ENTRUST_BILL_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTENTRUSTBILLNO: Entrust Bill No").
               setSize(30);
       headblk.addField("ENTRUST_NAME").
               setInsertable().
               setMandatory().
-              setWfProperties().
               setLabel("BIDPROJENTRUSTENTRUSTNAME: Entrust Name").
               setSize(30);
       headblk.addField("RECOMMEND_ORG").
@@ -278,19 +282,23 @@ public class BidProjEntrust extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("FEE_BUDGET","Money","#0.00").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTFEEBUDGET: Fee Budget").
               setSize(30);
       headblk.addField("ENTRUST_TYPE").
               setInsertable().
+              setDefaultNotVisible().
               setCheckBox("FALSE,TRUE").
               setLabel("BIDPROJENTRUSTENTRUSTTYPE: Entrust Type").
               setSize(20);
       headblk.addField("REQUEST_TIME").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTREQUESTTIME: Request Time").
               setSize(30);
       headblk.addField("IS_VALID").
               setInsertable().
+              setDefaultNotVisible().
               setCheckBox("FALSE,TRUE").
               setLabel("BIDPROJENTRUSTISVALID: Is Valid").
               setSize(30);
@@ -306,12 +314,14 @@ public class BidProjEntrust extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("APPLY_PERSON").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTAPPLYPERSON: Apply Person").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
               setFunction("PERSON_INFO_API.GET_NAME ( :APPLY_PERSON)").
               setLabel("BIDMATENQJUDGECREATEPERSONNAME: Create Person Name").
               setSize(30).
+              setDefaultNotVisible().
               setReadOnly();
       headblk.addField("STATUS").
               setInsertable().
@@ -326,23 +336,33 @@ public class BidProjEntrust extends HzASPPageProviderWf
       mgr.getASPField("STATUS").setValidation("STATUS_DESC");  
       headblk.addField("APPLY_DATE","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTAPPLYDATE: Apply Date").
               setSize(30);
       headblk.addField("CREATE_REASON").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTCREATEREASON: Create Reason").
               setSize(129).
               setHeight(5);
       headblk.addField("CREATE_CONTENT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTCREATECONTENT: Create Content").
               setSize(129).
               setHeight(5);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTNOTE: Note").
               setSize(129).
               setHidden();
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("ENTRUST_NAME").
+              setLabel("FLOWTITLE: Flow Title");
       headblk.setView("BID_PROJ_ENTRUST");
       headblk.defineCommand("BID_PROJ_ENTRUST_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

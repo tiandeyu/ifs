@@ -256,7 +256,7 @@ public class HseAccident extends HzASPPageProviderWf
       
       headblk.addField("PROJ_NO").
               setMandatory().
-              setWfProperties().
+//              setWfProperties().
               setInsertable().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("HSEACCIDENTPROJNO: Proj No").
@@ -270,7 +270,7 @@ public class HseAccident extends HzASPPageProviderWf
 //      mgr.getASPField("PROJ_NO").setValidation("GENERAL_PROJECT_PROJ_DESC");
       headblk.addField("ID").
               setHidden().
-              setWfProperties().
+//              setWfProperties().
               setLabel("HSEACCIDENTID: Id").
               setSize(30);
       headblk.addField("QUA_ACCIDENT_NO").
@@ -336,6 +336,7 @@ public class HseAccident extends HzASPPageProviderWf
               setMaxLength(100);
       headblk.addField("ACCIDENT_NAME").
               setInsertable().
+              setMandatory().
               setLabel("HSEACCIDENTACCIDENTNAME: Accident Name").
               setSize(30).
               setMaxLength(100);
@@ -423,6 +424,14 @@ public class HseAccident extends HzASPPageProviderWf
               setLabel("HSEACCIDENTBELONGTOLU: Belong To Lu").
               setSize(30);
       
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("ACCIDENT_NAME").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
 
       headblk.setView("QUA_ACCIDENT");
       headblk.defineCommand("QUA_ACCIDENT_API","New__,Modify__,Remove__");

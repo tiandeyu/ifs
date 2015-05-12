@@ -268,6 +268,7 @@ public class ContractContactReq extends HzASPPageProviderWf
               setMandatory().
               setDynamicLOV("GENERAL_PROJECT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTCONTACTREQPROJNO: Proj No").
               setSize(30);
       
@@ -294,7 +295,8 @@ public class ContractContactReq extends HzASPPageProviderWf
       headblk.addField("CON_REQ_NO").
 //              setMandatory().  
               setReadOnly().
-//              setInsertable().      
+//              setInsertable().  
+              setDefaultNotVisible().
               setLabel("CONTRACTCONTACTREQCONREQNO: Con Req No").
               setSize(30);
       headblk.addField("CON_REQ_NAME").
@@ -329,6 +331,7 @@ public class ContractContactReq extends HzASPPageProviderWf
           
       headblk.addField("BOOKLET_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("DOC_BOOKLET").
               setLabel("CONTRACTCONTACTREQBOOKLETNO: Booklet No").
               setSize(30);
@@ -336,6 +339,7 @@ public class ContractContactReq extends HzASPPageProviderWf
               setFunction("Doc_Booklet_Api.Get_Booklet_Name(:BOOKLET_NO)").
               setLabel("CONTRACTCONTACTREQBOOKLETNAME: Booklet Name").
               setSize(30).
+              setDefaultNotVisible().
               setReadOnly();
       mgr.getASPField("BOOKLET_NO").setValidation("BOOKLET_NAME");
 
@@ -348,10 +352,12 @@ public class ContractContactReq extends HzASPPageProviderWf
               setFunction("PERSON_INFO_API.GET_NAME ( :CREATE_PERSON)").
               setLabel("CONTRACTCONTACTREQCRATEPERSONNAME: Create Person Name").
               setSize(30).
+              setDefaultNotVisible().
               setReadOnly();
       mgr.getASPField("CREATE_PERSON").setValidation("CREATE_PERSON_NAME");
       headblk.addField("CREATE_DATE","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTCONTACTREQCREATEDATE: Create Date").
               setSize(30);
       
@@ -365,6 +371,7 @@ public class ContractContactReq extends HzASPPageProviderWf
               setFunction("GENERAL_ZONE_API.Get_Zone_Desc(:DEPT)").
               setLabel("CONPROJCONNECTIONLISTCOSTORGDEPTDESC: Dept Desc").
               setSize(30).
+              setDefaultNotVisible().
               setReadOnly();
       
       mgr.getASPField("DEPT").setValidation("DEPT_DESC");
@@ -372,11 +379,13 @@ public class ContractContactReq extends HzASPPageProviderWf
    // 3
       headblk.addField("REPORTOR").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTCONTACTREQREPORTOR: Reportor").
             setDynamicLOV("PERSON_INFO_LOV").
             setSize(30);
       headblk.addField("REPORTOR_NAME").
             setReadOnly().
+            setDefaultNotVisible().
             setFunction("PERSON_INFO_API.GET_NAME(:REPORTOR)").
             setLabel("CONTRACTCONTACTREQREPORTORNAME: Reportor Name").
             setSize(30);
@@ -384,17 +393,20 @@ public class ContractContactReq extends HzASPPageProviderWf
       
       headblk.addField("REPORT_DATE", "Date").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTCONTACTREQREPORTDATE: Report Date").
             setSize(30);
       
       // 4
       headblk.addField("INSPECTOR").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTCONTACTREQINSPECTOR: Inspector").
             setDynamicLOV("PERSON_INFO").
             setSize(30);
       headblk.addField("INSPECTOR_NAME").
             setReadOnly().
+            setDefaultNotVisible().
             setFunction("PERSON_INFO_API.GET_NAME(:INSPECTOR)").
             setLabel("CONTRACTCONTACTREQINSPECTORNAME: Inspector Name").
             setSize(30);
@@ -402,17 +414,20 @@ public class ContractContactReq extends HzASPPageProviderWf
       
       headblk.addField("INSPECT_DATE", "Date").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTCONTACTREQINSPECTDATE: Inspect Date").
             setSize(30);
       
       // 5
       headblk.addField("APPROVER").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTCONTACTREQAPPROVER: Approver").
             setDynamicLOV("PERSON_INFO").
             setSize(30);
       headblk.addField("APPROVER_NAME").
             setReadOnly().
+            setDefaultNotVisible().
             setFunction("PERSON_INFO_API.GET_NAME(:APPROVER)").
             setLabel("CONTRACTCONTACTREQAPPROVERNAME: Approver Name").
             setSize(30);
@@ -420,17 +435,20 @@ public class ContractContactReq extends HzASPPageProviderWf
       
       headblk.addField("APPROVE_DATE", "Date").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTCONTACTREQAPPROVEDATE: Approve Date").
             setSize(30);
       
       // 6
       headblk.addField("AUDITOR").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTCONTACTREQAUDITOR: Auditor").
             setDynamicLOV("PERSON_INFO").
             setSize(30);
       headblk.addField("AUDITOR_NAME").
             setReadOnly().
+            setDefaultNotVisible().
             setFunction("PERSON_INFO_API.GET_NAME(:AUDITOR)").
             setLabel("CONTRACTCONTACTREQAUDITORNAME: Auditor Name").
             setSize(30);
@@ -438,11 +456,13 @@ public class ContractContactReq extends HzASPPageProviderWf
       
       headblk.addField("AUDIT_DATE", "Date").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTCONTACTREQAUDITDATE: Audit Date").
             setSize(30);
       
       headblk.addField("COMPLETE_DATE", "Date").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTCONTACTREQCOMPLETEDATE: Complete Date").
             setSize(30);
           
@@ -453,38 +473,45 @@ public class ContractContactReq extends HzASPPageProviderWf
       
       headblk.addField("ALL_REPORT_TOTAL","Number","#0.00").    
               setReadOnly(). 
+              setDefaultNotVisible().
               setFunction("CONTRACT_CONTACT_REQ_ITEM_API.CAL_REPORT_TOTAL(:PROJ_NO,:CONTRACT_ID,:CON_REQ_NO)").
               setLabel("CONTRACTCONTACTREQALLREPORTTOTAL: All Report Total").
               setSize(30);    
       
       headblk.addField("ALL_INSPECT_TOTAL","Number","#0.00").  
               setReadOnly(). 
+              setDefaultNotVisible().
               setFunction("CONTRACT_CONTACT_REQ_ITEM_API.CAL_INSPECT_TOTAL(:PROJ_NO,:CONTRACT_ID,:CON_REQ_NO)").
               setLabel("CONTRACTCONTACTREQALLINSPECTTOTAL: All Inspect Total").
               setSize(30);
       
       headblk.addField("ALL_OWNER_TOTAL","Number","#0.00").  
               setReadOnly(). 
+              setDefaultNotVisible().
               setFunction("CONTRACT_CONTACT_REQ_ITEM_API.CAL_OWNER_TOTAL(:PROJ_NO,:CONTRACT_ID,:CON_REQ_NO)").
               setLabel("CONTRACTCONTACTREQALLOWNERTOTAL: All Owner Total").
               setSize(30);
       headblk.addField("IS_CHANGE").  
-              setReadOnly(). 
+              setReadOnly().
+              setDefaultNotVisible().
               setCheckBox("FALSE,TRUE").
               setLabel("CONTRACTCONTACTREQISCHANGE: Is Change").
               setSize(30);
       headblk.addField("CHANGE_PAGE").  
               setReadOnly().
               setHidden().
+              setDefaultNotVisible().
               setLabel("CONTRACTCONTACTREQCHANGEPAGE: Change Page").
               setSize(30);      
       headblk.addField("CHANGE_NO").  
                setReadOnly(). 
+               setDefaultNotVisible().
                setFieldHyperlink("/b2e/secured/contrw/ContractVariationSch.page", "CHANGE_PAGE", "CHANGE_NO CONTRACT_VAR_NO","NEWWIN").
                setLabel("CONTRACTCONTACTREQCHANGENO: Change No").
                setSize(30);          
       headblk.addField("CHANGE_NAME").  
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("CONTRACT_VARIATION_API.Get_Contract_Var_Desc(:PROJ_NO,:CONTRACT_ID,:CHANGE_NO)"). 
               setLabel("CONTRACTCONTACTREQCHANGENAME: Change Name").
               setSize(30); 
@@ -493,6 +520,7 @@ public class ContractContactReq extends HzASPPageProviderWf
      headblk.addField("CONTACT_CLASS_NO").  
              setMandatory().  
              setInsertable().
+             setDefaultNotVisible().
              setDynamicLOV("CONTRACT_CONTRACT_TYPE").
              setLabel("CONTRACTCONTACTREQCONTACTCLASSNO: Contact Class No").
              setSize(30);       
@@ -510,6 +538,7 @@ public class ContractContactReq extends HzASPPageProviderWf
       
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTCONTACTREQNOTE: Note").
               setHeight(5).
               setSize(120);

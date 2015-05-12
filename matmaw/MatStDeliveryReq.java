@@ -252,13 +252,13 @@ public class MatStDeliveryReq extends HzASPPageProviderWf
       headblk.addField("DELIVERY_ID").
 //              setReadOnly().
               setInsertable().
-              setWfProperties().
+//              setWfProperties().
               setLabel("MATSTDELIVERYREQDELIVERYID: Delivery Id").
               setSize(30);
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
-              setWfProperties().
+//              setWfProperties().
               setDynamicLOV("GENERAL_PROJECT",600,445).
               setLabel("MATSTDELIVERYREQPROJNO: Proj No").
               setSize(30);
@@ -351,7 +351,15 @@ public class MatStDeliveryReq extends HzASPPageProviderWf
               setInsertable().
               setLabel("MATSTDELIVERYREQCREATETIME: Create Time").
               setSize(30);
-  
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("PROJECT_CONTRACT_API.GET_CONTRACT_DESC(:PROJ_NO,:CONTRACT_ID)").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("MAT_ST_DELIVERY_REQ");
       headblk.defineCommand("MAT_ST_DELIVERY_REQ_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

@@ -291,6 +291,7 @@ public class BidProjpreEnqVerify extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT",600,445).
               setLabel("BIDPROJPREENQVERIFYPROJNO: Proj No").
               setSize(30);
@@ -303,8 +304,9 @@ public class BidProjpreEnqVerify extends HzASPPageProviderWf
       headblk.addField("CRE_ID").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("BID_CRE_PROJ_APPLY_LOV","PROJ_NO").
-              setLOVProperty("WHERE", "STATE='Íê³É' AND BID_PROJ_TYPE_DB = 'PROJECTSERVER'"). 
+              setLOVProperty("WHERE", "STATUS='2' AND BID_PROJ_TYPE_DB = 'PROJECTSERVER'"). 
               setLabel("BIDPROJPREENQVERIFYCREID: Cre Id").
               setSize(30);
       headblk.addField("CREATE_BID_NAME").
@@ -319,24 +321,29 @@ public class BidProjpreEnqVerify extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("VERIFY_BILL_NO").
               setInsertable().
+              setDefaultNotVisible().
               setWfProperties().
               setLabel("BIDPROJPREENQVERIFYVERIFYBILLNO: Verify Bill No").
               setSize(30);
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJPREENQVERIFYCREATETIME: Create Time").
               setSize(30);
       headblk.addField("CREATE_PERSON").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("BIDPROJPREENQVERIFYCREATEPERSON: Create Person").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
               setFunction("PERSON_INFO_API.GET_NAME ( :CREATE_PERSON)").
+              setDefaultNotVisible().
               setLabel("BIDMATENQJUDGECREATEPERSONNAME: Create Person Name").
               setSize(30).
               setReadOnly();
       headblk.addField("CREATE_ORG").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJPREENQVERIFYCREATEORG: Create Org").
               setSize(30).
               setDynamicLOV("GENERAL_ORGANIZATION");
@@ -348,6 +355,7 @@ public class BidProjpreEnqVerify extends HzASPPageProviderWf
       mgr.getASPField("CREATE_ORG").setValidation("START_ORG_NAME");
       headblk.addField("PROJ_NAME").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("CON_QUA_TREE","PROJ_NO").
               setLOVProperty("TREE_PARE_FIELD", "PARENT_ID").
               setLOVProperty("TREE_DISP_FIELD", "NODE_NO,NODE_NAME").
@@ -373,11 +381,13 @@ public class BidProjpreEnqVerify extends HzASPPageProviderWf
       //add end
       headblk.addField("PROJ_CONTENT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJPREENQVERIFYPROJCONTENT: Proj Content").
               setHeight(3).
               setSize(129);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJPREENQVERIFYNOTE: Note").
               setHeight(4).
               setSize(129);

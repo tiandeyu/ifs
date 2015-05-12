@@ -231,6 +231,7 @@ public class DrawingList extends ASPPageProvider
               setHidden();
       headblk.addField("PROJ_NO").
               setInsertable().
+              setDefaultNotVisible().
               setMandatory().  
               setLabel("DRAWINGLISTPROJECTNO: Project No").
               setDynamicLOV("GENERAL_PROJECT").
@@ -253,55 +254,66 @@ public class DrawingList extends ASPPageProvider
       
       headblk.addField("VOLUME_SOURCE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("DRAWINGLISTVOLUMESOURCE: Volume Source").
               setDynamicLOV("VOLUME_SOURCE").
               setSize(20);
       headblk.addField("VOLUME_SOURCE_N").
               setReadOnly().
+              setLabel("DRAWINGLISTVOLUMESOURCE: Volume Source").
               setFunction("SUPPLIER_INFO_API.Get_Name (:VOLUME_SOURCE)").
               setSize(20);
       mgr.getASPField("VOLUME_SOURCE").setValidation("VOLUME_SOURCE_N");
       
       headblk.addField("STATUS_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("VOLUME_STATUS").
               setLabel("DRAWINGLISTSTATUSNO: Status No").
               setSize(20);
       headblk.addField("STATUS_DESC").
               setReadOnly().
+              setLabel("DRAWINGLISTSTATUSNO: Status No").
               setFunction("VOLUME_STATUS_api.Get_Status_Desc (:STATUS_NO)").
               setSize(20);
       mgr.getASPField("STATUS_NO").setValidation("STATUS_DESC");
       
       headblk.addField("TYPE_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("VOLUME_TYPE").
               setLabel("DRAWINGLISTTYPENO: Type No").
               setSize(20);
       headblk.addField("TYPE_DESC").
               setReadOnly().
+              setDefaultNotVisible().
+              setLabel("DRAWINGLISTTYPENO: Type No").
               setFunction("VOLUME_TYPE_api.Get_Type_Desc (:TYPE_NO)").
               setSize(20);
       mgr.getASPField("TYPE_NO").setValidation("TYPE_DESC");
       
       headblk.addField("MAC_GRP_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("DRAWINGLISTMACGRPNO: Mac Grp No").
               setDynamicLOV("GENERAL_MACH_GROUP").
               setSize(20);
       headblk.addField("MAC_GRP_DESC").
               setFunction("General_Mach_Group_Api.Get_Mach_Grp_Desc(:MAC_GRP_NO)").
+              setDefaultNotVisible().
               setReadOnly().
               setSize(20); 
       mgr.getASPField("MAC_GRP_NO").setValidation("MAC_GRP_DESC");
       
       headblk.addField("MAJOR_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("VOLUME_MAJOR").
               setLabel("DRAWINGLISTMAJORNO: Major No").
               setSize(20);
       headblk.addField("MAJOR_DESC").
               setReadOnly().
+              setLabel("DRAWINGLISTMAJORNO: Major No").
               setFunction("VOLUME_MAJOR_API.GET_MAJOR_DESC (:MAJOR_NO)").
               setSize(20);
       mgr.getASPField("MAJOR_NO").setValidation("MAJOR_DESC");
@@ -312,6 +324,7 @@ public class DrawingList extends ASPPageProvider
               setSize(20);
       headblk.addField("CONTRACT_COPIES","Number").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("DRAWINGLISTCONTRACTCOPIES: Contract Copies").
               setSize(20);
       headblk.addField("SEND_QTY_TOTAL","Number").
@@ -321,44 +334,54 @@ public class DrawingList extends ASPPageProvider
               setSize(30);
       headblk.addField("BORROW_QTY_TOTAL","Number").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("DRAWING_BACK_LINE_API.Cal_All_Borrow_Back_Qty(:PROJ_NO,:VOLUME_NO)").
               setLabel("DRAWINGLISTBORROWQTYTOTAL: Borrow Qty Total").
               setSize(30);   
       headblk.addField("PLAN_ARRIVE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("DRAWINGLISTPLANARRIVETIME: Plan Arrive Time").
               setSize(20);
       headblk.addField("ACTUAL_ARRIVAL_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("DRAWINGLISTACTUALARRIVALTIME: Actual Arrival Time").
               setSize(20);
       headblk.addField("REQUIRE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("DRAWINGLISTREQUIRETIME: Require Time").
               setSize(20);
       headblk.addField("WBS_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("DRAWINGLISTWBSNO: Wbs No").
               setSize(20);
       headblk.addField("REV").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("DRAWINGLISTREV: Rev").
               setSize(20); 
       headblk.addField("CREATE_PERSON").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("DRAWINGLISTCREATEPERSON: Create Person").
               setSize(20);    
       headblk.addField("CREATE_PERSON_NAME").
               setFunction("PERSON_INFO_API.GET_NAME ( :CREATE_PERSON)").
               setSize(20).
+              setDefaultNotVisible().
               setReadOnly();
       mgr.getASPField("CREATE_PERSON").setValidation("CREATE_PERSON_NAME");
       headblk.addField("CREATE_TIME","Date").
               setReadOnly().    
+              setDefaultNotVisible().
               setLabel("DRAWINGLISTCREATETIME: Create Time").
               setSize(20);
       headblk.addField("NOTE").    
               setInsertable().
+              setDefaultNotVisible().
               setHeight(6).
               setLabel("DRAWINGLISTNOTE: Note").
               setSize(120);    

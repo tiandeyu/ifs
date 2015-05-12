@@ -236,7 +236,7 @@ public class SchPlanCheck extends HzASPPageProviderWf
       
       headblk.addField("ID").
               setInsertable().
-              setWfProperties().
+//              setWfProperties().
               setDynamicLOV("SCH_PLAN_CHECK_EPS","PROJ_NO").
               setLabel("SCHPLANCHECKID: Eps No").
               setSize(30).
@@ -296,6 +296,14 @@ public class SchPlanCheck extends HzASPPageProviderWf
               setSize(120).
               setHeight(5);
       
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("SCH_EPS_API.Get_Eps_Name ( :PROJ_NO, :ID, :REV)").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("SCH_PLAN_CHECK");
       headblk.defineCommand("SCH_PLAN_CHECK_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

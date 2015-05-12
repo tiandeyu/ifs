@@ -168,6 +168,7 @@ public class QuaPersonnelMan extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("QUAPERSONNELMANPROJNO: Proj No").
               setSize(40);
@@ -180,6 +181,7 @@ public class QuaPersonnelMan extends ASPPageProvider
       mgr.getASPField("PROJ_NO").setValidation("GENERAL_PROJECT_PROJ_DESC");
       headblk.addField("NO").
               setMandatory().
+              setDefaultNotVisible().
               setInsertable().
               setLabel("QUAPERSONNELMANNO: No").
               setSize(40);
@@ -189,62 +191,77 @@ public class QuaPersonnelMan extends ASPPageProvider
               setSize(40);
       headblk.addField("POLTICS_STATUS").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANPOLTICSSTATUS: Poltics Status").
               setSize(40);
       headblk.addField("NATION").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANNATION: Nation").
               setSize(40);
       headblk.addField("NATIVE_PLACE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANNATIVEPLACE: Native Place").
               setSize(40);
       headblk.addField("ID_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANIDNO: Id No").
               setSize(40);
       headblk.addField("EDUCATION").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANEDUCATION: Education").
               setSize(40);
       headblk.addField("GRADUATE_SCHOOL").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANGRADUATESCHOOL: Graduate School").
               setSize(40);
       headblk.addField("GRADUATE_SPECIALTY").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANGRADUATESPECIALTY: Graduate Specialty").
               setSize(40);
       headblk.addField("PHONE_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANPHONENO: Phone No").
               setSize(40);
       headblk.addField("STATION").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANSTATION: Station").
               setSize(40);
       headblk.addField("JOB").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANJOB: Job").
               setSize(40);
       headblk.addField("CERTIFICATE_SORT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANCERTIFICATESORT: Certificate Sort").
               setSize(40);
       headblk.addField("CERTIFICATE_NAME").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANCERTIFICATENAME: Certificate Name").
               setSize(40);
       headblk.addField("CERTIFICATE_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANCERTIFICATENO: Certificate No").
               setSize(40);
       headblk.addField("CERTIFICATION_UNIT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANCERTIFICATIONUNIT: Certification Unit").
               setSize(40);
       headblk.addField("VALIDITY").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAPERSONNELMANVALIDITY: Validity").
               setSize(40);
       headblk.addField("ENABLE_PROJ").
@@ -257,6 +274,7 @@ public class QuaPersonnelMan extends ASPPageProvider
               setSize(40);
       headblk.addField("UNIT").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_ZONE", "PROJ_NO").
               setLabel("QUAPERSONNELMANUNIT: Unit").
               setSize(40);

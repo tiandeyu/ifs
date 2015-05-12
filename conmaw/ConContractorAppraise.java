@@ -204,6 +204,7 @@ public class ConContractorAppraise extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONCONTRACTORAPPRAISEPROJNO: Proj No").
               setSize(30);
@@ -221,6 +222,7 @@ public class ConContractorAppraise extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("CONTRACT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //              setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
               setLabel("CONCONTRACTORAPPRAISECONTRACTNO: Contract No").
@@ -241,6 +243,7 @@ public class ConContractorAppraise extends HzASPPageProviderWf
 
       headblk.addField("SECOND_SIDE_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
               setLabel("CONCONTRACTORAPPRAISESECONDSIDENAME: Constraction Org Name").
               setSize(30);
@@ -270,6 +273,7 @@ public class ConContractorAppraise extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("ZONE_DESC").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("GENERAL_ZONE_API.GET_ZONE_DESC (:ZONE_NO)").
               setLabel("CONCONTRACTORAPPRAISEZONEDESC: Zone Desc").
               setSize(30);
@@ -277,12 +281,11 @@ public class ConContractorAppraise extends HzASPPageProviderWf
       mgr.getASPField("ZONE_NO").setValidation("ZONE_DESC");
       headblk.addField("CHECK_LIST_NO").
               setInsertable().
-              setWfProperties().
               setLabel("CONCONTRACTORAPPRAISECHECKLISTNO: Check List No").
               setSize(30);
       headblk.addField("CHECK_LIST_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONCONTRACTORAPPRAISECHECKLISTNAME: Check List Name").
               setSize(30);
       headblk.addField("CREATE_PERSON").
@@ -299,6 +302,7 @@ public class ConContractorAppraise extends HzASPPageProviderWf
       mgr.getASPField("CREATE_PERSON").setValidation("CREATE_PERSON_NAME");
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONCONTRACTORAPPRAISECREATETIME: Create Time").
               setSize(30);
       headblk.addField("STATUS").
@@ -312,9 +316,16 @@ public class ConContractorAppraise extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("PROJ_RANGE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONCONTRACTORAPPRAISEPROJRANGE: Proj Range").
               setSize(130).
               setHeight(5);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("CHECK_LIST_NAME").
+              setLabel("FLOWTITLE: Flow Title");
 
       headblk.setView("CON_CONTRACTOR_APPRAISE");
       headblk.defineCommand("CON_CONTRACTOR_APPRAISE_API","New__,Modify__,Remove__");

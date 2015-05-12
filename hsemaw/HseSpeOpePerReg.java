@@ -257,7 +257,7 @@ public class HseSpeOpePerReg extends ASPPageProvider
               setSize(20);
       headblk.addField("PROJ_DESC").
                setFunction("GENERAL_PROJECT_API.GET_PROJ_DESC (:PROJ_NO)").
-               setLabel("HSESPEOPEPERREGDESC: Proj Desc").
+               setLabel("HSESPEOPEPERREGPROJDESC: Proj Desc").
                setReadOnly().
                setSize(30);
       mgr.getASPField("PROJ_NO").setValidation("PROJ_DESC");

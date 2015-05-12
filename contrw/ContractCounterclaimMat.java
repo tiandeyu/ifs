@@ -260,7 +260,8 @@ public class ContractCounterclaimMat extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setDynamicLOV("GENERAL_PROJECT").
-              setInsertable().  
+              setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONPROJNO: Proj No").
               setSize(30);
       headblk.addField("GENERAL_PROJECT_PROJ_DESC").
@@ -271,7 +272,7 @@ public class ContractCounterclaimMat extends HzASPPageProviderWf
       mgr.getASPField("PROJ_NO").setValidation("GENERAL_PROJECT_PROJ_DESC");
       headblk.addField("CONTRACT_ID").
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO"). 
-              setLOVProperty("WHERE", "SCHEDULE = 'FALSE'").
+              setLOVProperty("WHERE", "CLASS_NO IN ('SB','WX','WZ')").
               setLOVProperty("ORDER_BY", "CONTRACT_ID").  
               setMandatory().
               setInsertable().
@@ -352,29 +353,35 @@ public class ContractCounterclaimMat extends HzASPPageProviderWf
               setInsertable().  
               setLabel("CONTRACTVARIATIONGISTCONTENT: Gist Content").
               setSize(140).
+              setDefaultNotVisible().
               setHeight(4);
       headblk.addField("FILES").
               setInsertable().
               setLabel("CONTRACTVARIATIONFILES: Files").
               setSize(140).
+              setDefaultNotVisible().
               setHeight(4);
       headblk.addField("COST_EFFECT").
               setInsertable().
               setLabel("CONTRACTVARIATIONCOSTEFFECT: Cost Effect").
               setSize(140).
+              setDefaultNotVisible().
               setHeight(4);
       headblk.addField("SCHEDULE_EFFECT").
               setInsertable().
               setLabel("CONTRACTVARIATIONSCHEDULEEFFECT: Schedule Effect").
               setSize(140).
+              setDefaultNotVisible().
               setHeight(4);
       headblk.addField("ITEM_EFFECT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONITEMEFFECT: Item Effect").
               setSize(140).
               setHeight(4);
       headblk.addField("OTHER_EFFECT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONOTHEREFFECT: Other Effect").
               setSize(140).
               setHeight(4);
@@ -382,16 +389,25 @@ public class ContractCounterclaimMat extends HzASPPageProviderWf
               setInsertable().
               setLabel("CONTRACTVARIATIONVARNEED: Var Need").
               setSize(140).
+              setDefaultNotVisible().
               setHeight(4);
       headblk.addField("NOTE").
               setInsertable().
               setLabel("CONTRACTVARIATIONNOTE: Note").
               setSize(140).
+              setDefaultNotVisible().
               setHeight(4);
       headblk.addField("VAR_TYPE").
               setInsertable().
               setLabel("CONTRACTVARIATIONVARTYPE: Var Type").
               setHidden();
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("PROJECT_CONTRACT_API.GET_CONTRACT_DESC(:PROJ_NO,:CONTRACT_ID)").
+              setLabel("FLOWTITLE: Flow Title");
+      
       headblk.setView("CONTRACT_VARIATION");
       headblk.defineCommand("CONTRACT_VARIATION_API","New__,Modify__,Remove__,Release__");
       headset = headblk.getASPRowSet();

@@ -232,6 +232,7 @@ public class BidResult extends ASPPageProvider
       
       headblk.addField("PROJ_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("General_Project").
               setLabel("BIDRESULTPROJNO: Proj No").
               setSize(30);
@@ -243,6 +244,7 @@ public class BidResult extends ASPPageProvider
       mgr.getASPField("PROJ_NO").setValidateFunction("GENERAL_PROJECT_PROJ_DESC");
       headblk.addField("CRE_ID").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("BID_CRE_PROJ_APPLY_LOV","PROJ_NO").
               setLabel("BIDRESULTCREID: Cre Id").
               setCustomValidation("PROJ_NO,CRE_ID", "CREATE_BID_NAME,BUDGET_PRICE").
@@ -256,25 +258,30 @@ public class BidResult extends ASPPageProvider
       headblk.addField("BID_RESULT_NO").
               //setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDRESULTBIDRESULTNO: Bid Result No").
               setSize(30);
       
       headblk.addField("BUDGET_PRICE","Number").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("BIDRESULTBUDGETPRICE: Budget Price").
               setSize(30);
       headblk.addField("CREATE_DATE","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDRESULTCREATEDATE: Create Date").
               setSize(30);
       headblk.addField("CREATE_PERSON").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("BIDRESULTCREATEPERSON: Create Person").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
               setFunction("PERSON_INFO_API.GET_NAME ( :CREATE_PERSON)").
               setLabel("BIDMATENQJUDGECREATEPERSONNAME: Create Person Name").
               setSize(30).
+              setDefaultNotVisible().
               setReadOnly();
       headblk.addField("STATUS").
               setHidden().
@@ -282,6 +289,7 @@ public class BidResult extends ASPPageProvider
               setSize(30);
       headblk.addField("PREFER_BID_PERSON").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDRESULTPREFERBIDPERSON: Prefer Bid Person").
               setSize(30);
       headblk.addField("ALTER_BID_PERSON").
@@ -298,6 +306,7 @@ public class BidResult extends ASPPageProvider
               setSize(30);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDRESULTNOTE: Note").
               setSize(129).
               setHeight(5);

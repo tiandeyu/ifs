@@ -206,6 +206,7 @@ public class ConConstructionDesign extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONCONSTRUCTIONDESIGNPROJNO: Proj No").
               setSize(30);
@@ -224,6 +225,7 @@ public class ConConstructionDesign extends HzASPPageProviderWf
 
       headblk.addField("CONTRACT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //              setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
               setLabel("CONCONSTRUCTIONDESIGNCONTRACTNO: Contract No").
@@ -247,6 +249,7 @@ public class ConConstructionDesign extends HzASPPageProviderWf
       
       headblk.addField("SECOND_SIDE_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
               setLabel("CONCONSTRUCTIONDESIGNSECONDSIDENAME: Constraction Org Name").
               setSize(30);
@@ -264,6 +267,7 @@ public class ConConstructionDesign extends HzASPPageProviderWf
       headblk.addField("SUB_PROJ_DESC").
               setFunction("CON_PROJ_CONSTRUCTION_MAN_API.Get_Node_Name ( :PROJ_NO,:SUB_PROJ_NO)").
               setLabel("CONCONSTRUCTIONDESIGNSUBPROJDESC: SUB PROJ DESC").
+              setDefaultNotVisible().
               setReadOnly().
               setSize(30);
       mgr.getASPField("SUB_PROJ_NO").setValidation("SUB_PROJ_DESC");
@@ -276,6 +280,7 @@ public class ConConstructionDesign extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("ZONE_DESC").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("GENERAL_ZONE_API.GET_ZONE_DESC (:ZONE_NO)").
               setLabel("CONCONSTRUCTIONDESIGNZONEDESC: Zone Desc").
               setSize(30);
@@ -283,11 +288,11 @@ public class ConConstructionDesign extends HzASPPageProviderWf
       
       headblk.addField("CON_ORG_DESIGN_NO").
               setInsertable().
-              setWfProperties().
               setLabel("CONCONSTRUCTIONDESIGNCONORGDESIGNNO: Con Org Design No").
               setSize(30);
       headblk.addField("CON_ORG_DESIGN_NAME").
               setInsertable().
+              setMandatory().
               setLabel("CONCONSTRUCTIONDESIGNCONORGDESIGNNAME: Con Org Design Name").
               setSize(30);
       headblk.addField("SPECIAL_NO").
@@ -318,6 +323,7 @@ public class ConConstructionDesign extends HzASPPageProviderWf
       
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONCONSTRUCTIONDESIGNCREATETIME: Create Time").
               setSize(30);
       headblk.addField("STATUS").
@@ -332,9 +338,16 @@ public class ConConstructionDesign extends HzASPPageProviderWf
       
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONCONSTRUCTIONDESIGNNOTE: Note").
               setSize(130).
               setHeight(5);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("CON_ORG_DESIGN_NAME").
+              setLabel("FLOWTITLE: Flow Title");
 
       
       headblk.setView("CON_CONSTRUCTION_DESIGN");

@@ -291,6 +291,7 @@ public class BidProjEntrustReport extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTREPORTPROJNO: Proj No").
               setSize(30).
               setDynamicLOV("GENERAL_PROJECT");
@@ -302,6 +303,8 @@ public class BidProjEntrustReport extends ASPPageProvider
       mgr.getASPField("PROJ_NO").setValidation("GENERAL_PROJECT_PROJ_DESC");
       headblk.addField("SERIAL_NO").
               setInsertable().
+              setMandatory().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTREPORTENTRUSTBILLNO: Entrust Bill No").
               setSize(30).
               setDynamicLOV("BID_PROJ_ENTRUST","PROJ_NO");
@@ -318,19 +321,23 @@ public class BidProjEntrustReport extends ASPPageProvider
               setHidden();
       headblk.addField("HANDLER").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTREPORTHANDLER: Handler").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
               setFunction("PERSON_INFO_API.GET_NAME ( :HANDLER)").
               setLabel("BIDMATENQJUDGECREATEPERSONNAME: Create Person Name").
               setSize(30).
+              setDefaultNotVisible().
               setReadOnly();
       headblk.addField("HANDLE_DATE","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTREPORTHANDLEDATE: Handle Date").
               setSize(30);
       headblk.addField("ENTRUST_CONTENT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTREPORTENTRUSTCONTENT: Entrust Content").
               setSize(129).
               setHeight(5);
@@ -341,6 +348,7 @@ public class BidProjEntrustReport extends ASPPageProvider
               setHidden();
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPROJENTRUSTREPORTNOTE: Note").
               setSize(129).
               setHeight(3).

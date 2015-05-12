@@ -309,9 +309,9 @@ public class SelfNeceCond extends ASPPageProvider
       headblk.addField("CONTRACT_NO").
               setInsertable().
               setDynamicLOV("PROJECT_CONTRACT","PRE_EXAM_PRO_NO").
-              setLOVProperty("WHERE", "STATUS='1'").  
-              setLOVProperty("TREE_PARE_FIELD", "PRE_CONTRACT_NO").
-              setLOVProperty("TREE_DISP_FIELD", "CONTRACT_ID,CONTRACT_DESC").
+              //setLOVProperty("WHERE", "STATUS='1'").  
+//              setLOVProperty("TREE_PARE_FIELD", "PRE_CONTRACT_NO").
+//              setLOVProperty("TREE_DISP_FIELD", "CONTRACT_ID,CONTRACT_DESC").
               setLabel("SELFNECECONDCONTRACTNO: Contract No").
               setCustomValidation("PRE_EXAM_PRO_NO,CONTRACT_NO", "CONTRACT_DESC,CONSTRUCT_ORG,CONSTRUCT_ORG_DESC").
               setSize(20);

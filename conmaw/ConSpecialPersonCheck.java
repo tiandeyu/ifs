@@ -257,6 +257,7 @@ public class ConSpecialPersonCheck extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONSPECIALPERSONCHECKPROJNO: Proj No").
               setSize(30);
@@ -274,6 +275,7 @@ public class ConSpecialPersonCheck extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("CONTRACT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //              setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
               setLabel("CONSPECIALPERSONCHECKCONTRACTNO: Contract No").
@@ -294,6 +296,7 @@ public class ConSpecialPersonCheck extends HzASPPageProviderWf
 
       headblk.addField("SECOND_SIDE_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
               setLabel("CONSPECIALPERSONCHECKSECONDSIDENAME: Constraction Org Name").
               setSize(25);
@@ -317,12 +320,11 @@ public class ConSpecialPersonCheck extends HzASPPageProviderWf
       
       headblk.addField("CHECK_LIST_NO").
               setInsertable().
-              setWfProperties().
               setLabel("CONSPECIALPERSONCHECKCHECKLISTNO: Check List No").
               setSize(30);
       headblk.addField("CHECK_LIST_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONSPECIALPERSONCHECKCHECKLISTNAME: Check List Name").
               setSize(30);
       headblk.addField("CREATE_PERSON").
@@ -339,6 +341,7 @@ public class ConSpecialPersonCheck extends HzASPPageProviderWf
       mgr.getASPField("CREATE_PERSON").setValidation("CREATE_PERSON_NAME");
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSPECIALPERSONCHECKCREATETIME: Create Time").
               setSize(30);
       headblk.addField("STATUS").
@@ -351,9 +354,16 @@ public class ConSpecialPersonCheck extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSPECIALPERSONCHECKNOTE: Note").
               setSize(130).
               setHeight(5);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("CHECK_LIST_NAME").
+              setLabel("FLOWTITLE: Flow Title");
 
       headblk.setView("CON_SPECIAL_PERSON_CHECK");
       headblk.defineCommand("CON_SPECIAL_PERSON_CHECK_API","New__,Modify__,Remove__");

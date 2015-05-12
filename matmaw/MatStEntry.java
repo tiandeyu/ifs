@@ -356,6 +356,7 @@ public class MatStEntry extends ASPPageProvider
               setSize(20);
       headblk.addField("PROJ_NO").
               setMandatory().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setInsertable().
               setLabel("MATSTENTRYPROJNO: Proj No").
@@ -384,6 +385,7 @@ public class MatStEntry extends ASPPageProvider
 //              setSize(20);
       headblk.addField("CONTRACT_ID").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
               setLOVProperty("WHERE", "CLASS_NO IN ('SB','WZ')").
               setLabel("MATSTENTRYCONTRACTID: Contract Id").
@@ -396,6 +398,7 @@ public class MatStEntry extends ASPPageProvider
       mgr.getASPField("CONTRACT_ID").setValidation("CONTRACT_DESC");
       headblk.addField("STORAGE_ID").
               setInsertable().
+              setDefaultNotVisible().
               setMandatory().
               setDynamicLOV("MAT_STOWAGE","PROJ_NO").
               setLabel("MATSTENTRYSTORAGEID: Storage Id").
@@ -408,6 +411,7 @@ public class MatStEntry extends ASPPageProvider
       mgr.getASPField("STORAGE_ID").setValidation("STORAGE_DESC");
       headblk.addField("ADMIN_ID").
               setInsertable().
+              setDefaultNotVisible().
 //              setDynamicLOV("PERSON_INFO").
               setDynamicLOV("MAT_STORAGE_ADMIN_LOV","PROJ_NO,STORAGE_ID").
               setLabel("MATSTENTRYADMINID: Admin Id").
@@ -417,6 +421,7 @@ public class MatStEntry extends ASPPageProvider
               setFunction("PERSON_INFO_API.GET_NAME ( MAT_STORAGE_ADMIN_API.GET_ADMIN_USER( :PROJ_NO, :STORAGE_ID, :ADMIN_ID))").
 //              setFunction("PERSON_INFO_API.GET_NAME (:ADMIN_ID)").
               setLabel("MATSTENTRYADMINNAME: Admin Name").
+              setDefaultNotVisible().
               setReadOnly().
               setSize(30);
 //      mgr.getASPField("ADMIN_ID").setValidation("ADMIN_NAME");
@@ -433,12 +438,14 @@ public class MatStEntry extends ASPPageProvider
 
       headblk.addField("CREATE_PERSON").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PERSON_INFO").
               setLabel("MATARRIVECREATEPERSON: Create Person").
               setSize(20);
       headblk.addField("PERSON_NAME").
               setFunction("PERSON_INFO_API.GET_NAME (:CREATE_PERSON)").
               setLabel("MATARRIVEPERSONINFONAME: Person Name").
+              setDefaultNotVisible().
               setReadOnly().
               setSize(30);
       mgr.getASPField("CREATE_PERSON").setValidation("PERSON_NAME");

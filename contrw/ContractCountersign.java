@@ -268,6 +268,7 @@ public class ContractCountersign extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("PROJECTCONTRACTPROJNO: Proj No").
               setSize(20);  
@@ -284,6 +285,7 @@ public class ContractCountersign extends HzASPPageProviderWf
               setSize(20);   
      headblk.addField("PRE_CONTRACT_NO").
              setInsertable().
+             setDefaultNotVisible().
              setLabel("PROJECTCONTRACTPRECONTRACTNO: Pre Contract No").
              setSize(20);
 //add by lhh 20141205
@@ -308,7 +310,6 @@ public class ContractCountersign extends HzASPPageProviderWf
 //add by lhh 20141205  end  
        headblk.addField("CONTRACT_DESC").
                setMandatory().
-               setWfProperties(). 
                setInsertable().
                setLabel("PROJECTCONTRACTCONTRACTDESC: Contract Desc").
                setSize(100); 
@@ -316,22 +317,26 @@ public class ContractCountersign extends HzASPPageProviderWf
                setInsertable().
                setUpperCase().
                setMandatory().
+               setDefaultNotVisible().
                setDynamicLOV("CONTRACT_CLASS").
                setLabel("PROJECTCONTRACTCONTRACTCLASS: Contract Class").
                setSize(20);
        headblk.addField("CONTRACT_CLASS_NAME").
-               setReadOnly().  
+               setReadOnly().
+               setDefaultNotVisible().
                setFunction("Contract_Class_API.Get_Class_Name(:CLASS_NO)").
                setLabel("PROJECTCONTRACTCONTRACTCLASSNAME: Class Name").
                setSize(20);
       mgr.getASPField("CLASS_NO").setValidation("CONTRACT_CLASS_NAME");
       headblk.addField("PURCH_TYPE_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("CONTRACT_PURCH_TYPE").
               setLabel("PROJECTCONTRACTPURCHTYPE: Purch Type").
               setSize(20);
       headblk.addField("PURCH_TYPE_DESC").    
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("CONTRACT_PURCH_TYPE_API.Get_Description(:PURCH_TYPE_NO)").
               setLabel("PROJECTCONTRACTPURCHTYPEDESC: Purch Type Desc").
               setSize(20);
@@ -339,6 +344,7 @@ public class ContractCountersign extends HzASPPageProviderWf
       headblk.addField("SING_DATE","Date").
               setInsertable().
               setMandatory().
+              setDefaultNotVisible().
               setLabel("PROJECTCONTRACTSINGDATE: Sing Date").
               setSize(20);
       headblk.addField("FIRST_SIDE").
@@ -351,6 +357,7 @@ public class ContractCountersign extends HzASPPageProviderWf
               setSize(20).
               setMaxLength(140).         
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("GENERAL_ZONE_API.Get_Zone_Desc(:FIRST_SIDE)").
               setLabel("PROJECTCONTRACTFIRSTSIDENAME: First Side Name");
       mgr.getASPField("FIRST_SIDE").setValidation("FIRST_SIDE_NAME");
@@ -365,6 +372,7 @@ public class ContractCountersign extends HzASPPageProviderWf
               setSize(20).
               setMaxLength(140).
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("SUPPLIER_INFO_API.GET_NAME(:SECEND_SIDE)").    
               setLabel("PROJECTCONTRACTSECENDSIDENAME: Secend Side Name");
       mgr.getASPField("SECEND_SIDE").setValidation("SECEND_SIDE_NAME");
@@ -381,43 +389,51 @@ public class ContractCountersign extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("FIRST_PERSON_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("PROJECTCONTRACTFIRSTPERSONNAME: First Person Name").
               setFunction("PERSON_INFO_API.Get_Name(:FIRST_PERSON)").
               setSize(20);  
       mgr.getASPField("FIRST_PERSON").setValidation("FIRST_PERSON_NAME");
       headblk.addField("UNDERTAKER").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PERSON_INFO").
               setLabel("CONTRACTCOUNTERSIGNUNDERTAKER: Undertaker").
               setSize(20);
       headblk.addField("UNDERTAKER_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("PERSON_INFO_API.Get_Name(:UNDERTAKER)").
               setLabel("CONTRACTCOUNTERSIGNUNDERTAKERNAME: Undertaker Name").
               setSize(20);
       mgr.getASPField("UNDERTAKER").setValidation("UNDERTAKER_NAME");
       headblk.addField("BUDGET_RANGE","Money","#0.00").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTCOUNTERSIGNBUDGETRANGE: Budget Range").
               setSize(20);
       headblk.addField("UNDERTAKE_DEPT").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_ORGANIZATION_LOV", "PROJ_NO").
               setLabel("CONTRACTCOUNTERSIGNUNDERTAKEDEPT: Undertake Dept").
               setSize(20);
       headblk.addField("UNDERTAKE_DEPT_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("GENERAL_ORGANIZATION_API.Get_Org_Desc( :UNDERTAKE_DEPT)").
               setLabel("CONTRACTCOUNTERSIGNUNDERTAKEDEPTNAME: Undertake Dept Name").
               setSize(20);
       mgr.getASPField("UNDERTAKE_DEPT").setValidation("UNDERTAKE_DEPT_NAME");
       headblk.addField("RELEVANT_DEPT").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_ORGANIZATION_LOV", "PROJ_NO").
               setLabel("CONTRACTCOUNTERSIGNRELEVANTDEPT: Relevant Dept").
               setSize(20);
       headblk.addField("RELEVANT_DEPT_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("GENERAL_ORGANIZATION_API.Get_Org_Desc( :RELEVANT_DEPT)").
               setLabel("CONTRACTCOUNTERSIGNRELEVANTDEPTNAME: Relevant Dept Name").
               setSize(20);
@@ -425,11 +441,13 @@ public class ContractCountersign extends HzASPPageProviderWf
       headblk.addField("SCHEDULE").
               setInsertable().
               setMandatory().
+              setDefaultNotVisible().
               setCheckBox("FALSE,TRUE").  
               setLabel("PROJECTCONTRACTSCHEDULE: Schedule").
               setSize(5);
       headblk.addField("HAS_DOC").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("PROJECTCONTRACTHASDOC: Has Doc").
               setSize(5).setCheckBox("F,T");
       headblk.addField("STATE").
@@ -438,9 +456,16 @@ public class ContractCountersign extends HzASPPageProviderWf
               setSize(20); 
       headblk.addField("UNDERTAKE_INFO").
               setInsertable().
+              setDefaultNotVisible().
               setHeight(3).
               setLabel("CONTRACTCOUNTERSIGNUNDERTAKEINFO: Undertake Info").
               setSize(120);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("CONTRACT_DESC").
+              setLabel("FLOWTITLE: Flow Title");
 
 
       headblk.setView("PROJECT_CONTRACT");

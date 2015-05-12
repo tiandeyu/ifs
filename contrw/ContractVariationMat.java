@@ -264,6 +264,7 @@ public class ContractVariationMat extends HzASPPageProviderWf
               setHidden();
       headblk.addField("PROJ_NO").
               setMandatory().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setInsertable().  
               setLabel("CONTRACTVARIATIONOTHPROJNO: Proj No").
@@ -284,7 +285,6 @@ public class ContractVariationMat extends HzASPPageProviderWf
               setSize(30);  
       headblk.addField("CONTRACT_DESC").
               setReadOnly().
-              setWfProperties().
               setFunction("PROJECT_CONTRACT_API.GET_CONTRACT_DESC(:PROJ_NO,:CONTRACT_ID)").
               setLabel("CONTRACTVARIATIONOTHCONTRACTDESC: Contract Desc").
               setSize(30); 
@@ -317,20 +317,24 @@ public class ContractVariationMat extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("CONTRACT_VAR_DATE","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONOTHCONTRACTVARDATE: Contract Var Date").
               setSize(30);
       headblk.addField("REPORT_TOTAL","Number" ,"#0.00").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONOTHREPORTTOTAL: Report Total").
               setSize(30);
       headblk.addField("INSPECT_TOTAL","Number" ,"#0.00").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONOTHINSPECTTOTAL: Inspect Total").
               setSize(30);
       // 9.1
       headblk.addField("SIGN_PRICE", "Money" ,"#0.00").
               unsetInsertable().
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("PROJECT_CONTRACT_API.Cal_Ori_Contract_Total(:PROJ_NO, :CONTRACT_ID)").
               setLabel("CONTRACTVARIATIONOTHREQSIGNPRICE: Sign Price").
               setSize(20);
@@ -345,12 +349,14 @@ public class ContractVariationMat extends HzASPPageProviderWf
       headblk.addField("CHANGED_PRICE", "Money" ,"#0.00").
               unsetInsertable().
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("CONTRACT_VARIATION_API.Cal_All_VR_Total(:PROJ_NO, :CONTRACT_ID,:CONTRACT_VAR_NO)").
               setLabel("CONTRACTVARIATIONOTHREQCHANGEDPRICE: Changed Price").
               setSize(20);
       headblk.addField("CHANGED_PRICE_PRO", "String").
               unsetInsertable().
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("CONTRACT_VARIATION_API.Cal_All_VR_Pro(:PROJ_NO, :CONTRACT_ID,:CONTRACT_VAR_NO)").
               setLabel("CONTRACTVARIATIONOTHREQCHANGEDPRICEPRO: Changed Price Pro").
               setSize(20);
@@ -358,23 +364,27 @@ public class ContractVariationMat extends HzASPPageProviderWf
                setLabel("CONTRACTVARIATIONOTHCONREQNO: Con Req No").
                setHyperlink("/b2e/secured/contrw/ContractContactReq.page", "PROJ_NO,CONTRACT_ID,CON_REQ_NO","NEWWIN").
                setSize(30).    
+               setDefaultNotVisible().
                setReadOnly(); 
       headblk.addField("CON_REQ_NAME").
                setLabel("CONTRACTVARIATIONOTHCONREQNAME: Con Req Name").
                setFunction("CONTRACT_CONTACT_REQ_API.Get_Con_Req_Name(:PROJ_NO,:CON_REQ_NO,:CONTRACT_ID)").
                setHyperlink("/b2e/secured/contrw/ContractContactReq.page", "PROJ_NO,CONTRACT_ID,CON_REQ_NO","NEWWIN").
-               setSize(30).        
+               setSize(30).      
+               setDefaultNotVisible().  
                setReadOnly();
       headblk.addField("CHANGE_DESIGN_NO").
               setLabel("CONTRACTVARIATIONOTHCHANGEDESIGNNO: Change Design No").
               setHyperlink("/b2e/secured/engmaw/ChangeDesign.page", "PROJ_NO,CONTRACT_ID,CHANGE_DESIGN_NO ID","NEWWIN").
-              setSize(30).          
+              setSize(30).         
+              setDefaultNotVisible(). 
               setReadOnly();     
       headblk.addField("CHANGE_DESIGN_NAME").
               setLabel("CONTRACTVARIATIONOTHCHANGEDESIGNNAME: Change Design NAME").
               setFunction("CHANGE_DESIGN_API.Get_Change_Desc(:PROJ_NO,:CONTRACT_ID,:CHANGE_DESIGN_NO)").
               setHyperlink("/b2e/secured/engmaw/ChangeDesign.page", "PROJ_NO,CONTRACT_ID,CHANGE_DESIGN_NO ID","NEWWIN").
-              setSize(30).        
+              setSize(30).    
+              setDefaultNotVisible().    
               setReadOnly();        
       headblk.addField("STATE").
               setLabel("CONTRACTVARIATIONOTHSTATE: State").
@@ -385,39 +395,47 @@ public class ContractVariationMat extends HzASPPageProviderWf
               setInsertable().  
               setLabel("CONTRACTVARIATIONOTHGISTCONTENT: Gist Content").
               setSize(140).
+              setDefaultNotVisible().
               setHeight(4);
       headblk.addField("FILES").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONOTHFILES: Files").
               setSize(140).
               setHeight(4);
       headblk.addField("COST_EFFECT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONOTHCOSTEFFECT: Cost Effect").
               setSize(140).
               setHeight(4);
       headblk.addField("SCHEDULE_EFFECT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONOTHSCHEDULEEFFECT: Schedule Effect").
               setSize(140).
               setHeight(4);
       headblk.addField("ITEM_EFFECT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONOTHITEMEFFECT: Item Effect").
               setSize(140).
               setHeight(4);
       headblk.addField("OTHER_EFFECT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONOTHOTHEREFFECT: Other Effect").
               setSize(140).
               setHeight(4);
       headblk.addField("VAR_NEED").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONOTHVARNEED: Var Need").
               setSize(140).
               setHeight(4);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONOTHNOTE: Note").
               setSize(140).
               setHeight(4);
@@ -425,6 +443,12 @@ public class ContractVariationMat extends HzASPPageProviderWf
               setInsertable().
               setLabel("CONTRACTVARIATIONOTHVARTYPE: Var Type").
               setHidden();
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("CONTRACT_VAR_DESC").
+              setLabel("FLOWTITLE: Flow Title");
       headblk.setView("CONTRACT_VARIATION");
       headblk.defineCommand("CONTRACT_VARIATION_API","New__,Modify__,Remove__,Release__");
       headset = headblk.getASPRowSet();
@@ -519,7 +543,10 @@ public class ContractVariationMat extends HzASPPageProviderWf
                             setFunction("Iso_Unit_API.Get_Description(:ITEM_UNIT)").
                             setSize(30);
       mgr.getASPField("ITEM_UNIT").setValidation("ITEM_UNIT_DESC");
-      
+      contract_var_item_blk.addField("PRODUCT_CODE").
+                            setInsertable().
+                            setLabel("CONTRACTVARITEMPRODUCTCODE: Product Code").
+                            setSize(30);
       contract_var_item_blk.addField("EXCHANGE_RATE","Number").
                             setInsertable().
                             setLabel("CONTRACTVARITEMEXCHANGERATE: Exchange Rate").
@@ -582,11 +609,6 @@ public class ContractVariationMat extends HzASPPageProviderWf
                             setLabel("CONTRACTVARITEMMATNAME: Mat Name").
                             setSize(30);
       mgr.getASPField("MAT_NO").setValidation("MAT_NAME");  
-      contract_var_item_blk.addField("PRICE_CODE").
-                            setInsertable().
-                            setHidden(). 
-                            setLabel("CONTRACTVARITEMPRICECODE: Price Code").
-                            setSize(30);
       contract_var_item_blk.addField("FULL_PATH").
                             setInsertable().
                             setHidden().

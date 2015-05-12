@@ -256,6 +256,7 @@ public class MatArrive extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("MATARRIVEPROJNO: Proj No").
               setSize(20);
@@ -268,6 +269,7 @@ public class MatArrive extends ASPPageProvider
       headblk.addField("CONTRACT_ID").
               setInsertable().
               setMandatory().
+              setDefaultNotVisible().
 //              setHidden().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
               setLOVProperty("WHERE", "CLASS_NO IN ('SB','WZ')").
@@ -283,6 +285,7 @@ public class MatArrive extends ASPPageProvider
       headblk.addField("MAT_TRANS_METHOD").
               enumerateValues("Mat_Trans_Method_API").
               setSelectBox().
+              setDefaultNotVisible().
               setMandatory().
               setInsertable().
               setLabel("MATARRIVEMATTRANSMETHOD: Mat Trans Method").
@@ -290,6 +293,7 @@ public class MatArrive extends ASPPageProvider
 
       headblk.addField("PRO_ORG").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVEPROORG: Pro Org").
               setSize(20);
 //add by lhh 20141103
@@ -315,61 +319,74 @@ public class MatArrive extends ASPPageProvider
       headblk.addField("STATUS").
 //              setInsertable().
               setReadOnly().
+//              setDefaultNotVisible().
               setLabel("MATARRIVESTATUS: Status").
               setSize(20);
       
       headblk.addField("ARRIVE_TIME","Date","yyyy-MM-dd").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVEARRIVETIME: Arrive Time").
               setSize(20);
       headblk.addField("TRANS_ORG").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVETRANSORG: Trans Org").
               setSize(20);
       headblk.addField("TRANS_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVETRANSNO: Trans No").
               setSize(20);
 //add by lhh 20141126
       headblk.addField("UNIT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVEUNITNO: Unit No").
               setSize(20);
       headblk.addField("GW").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVEGW: Gw").
               setSize(20);
       headblk.addField("VOLUME").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVEVOLUME: Volume").
               setSize(20);
 //add by lhh end     
       headblk.addField("LOT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVELOT: Lot").
               setSize(20);
       headblk.addField("PACKAGE_QTY","Number").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVEPACKAGEQTY: Package Qty").
               setSize(20);
       headblk.addField("NUDE_QTY","Number"). 
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVENUDEQTY: Nude Qty").
               setSize(20);
       headblk.addField("STORE_PLACE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVESTOREPLACE: Store Place").
               setHeight(4).
               setSize(50);
 
       headblk.addField("MAT_PACK_STATUS").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVEMATPACKSTATUS: Mat Pack Status").
               setHeight(4).
               setSize(50);
 
       headblk.addField("ARRIVE_MSG").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVEARRIVEMSG: Arrive Msg").
               setHeight(4).
               setSize(50);
@@ -379,17 +396,20 @@ public class MatArrive extends ASPPageProvider
 //              setSize(30);
       headblk.addField("CREATE_PERSON").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PERSON_INFO").
               setLabel("MATARRIVECREATEPERSON: Create Person").
               setSize(20);
       headblk.addField("PERSON_NAME").
               setFunction("PERSON_INFO_API.GET_NAME (:CREATE_PERSON)").
               setLabel("MATARRIVEPERSONINFONAME: Person Name").
+              setDefaultNotVisible().
               setReadOnly().
               setSize(30);
       mgr.getASPField("CREATE_PERSON").setValidation("PERSON_NAME");
       headblk.addField("CREATE_TIME","Date","yyyy-MM-dd").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATARRIVECREATETIME: Create Time").
               setSize(20);
       

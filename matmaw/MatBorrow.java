@@ -275,7 +275,8 @@ public class MatBorrow extends HzASPPageProviderWf
               setHidden();
       headblk.addField("PROJ_NO").
               setMandatory().
-              setWfProperties().
+              setDefaultNotVisible().
+//              setWfProperties().
               setInsertable().
               setDynamicLOV("GENERAL_PROJECT",600,445).
               setLabel("MATBORROWPROJNO: Proj No").
@@ -289,6 +290,7 @@ public class MatBorrow extends HzASPPageProviderWf
       //Dec4th add Contract_Id and Contract_desc by @natic
       headblk.addField("CONTRACT_ID").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
               setLOVProperty("WHERE", "CLASS_NO IN ('SB','WZ')").
               setLabel("MATBORROWCONTRACTID: Contract Id").
@@ -303,7 +305,7 @@ public class MatBorrow extends HzASPPageProviderWf
       headblk.addField("BORROW_ID").
 //              setReadOnly().
               setInsertable().
-              setWfProperties().
+//              setWfProperties().
               setLabel("MATBORROWBORROWID: Borrow Id").
               setSize(20);
 //      headblk.addField("STOWAGE_ID").
@@ -332,6 +334,7 @@ public class MatBorrow extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("BORROW_ORG").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATBORROWBORROWORG: Borrow Org").
               setDynamicLOV("PERSON_ZONE", "BORROW_PERSON PERSON_ID").
 //              setFunction("PERSON_ZONE_API.Get_User_Zones (:BORROW_PERSON)").
@@ -341,6 +344,7 @@ public class MatBorrow extends HzASPPageProviderWf
               setFunction("general_zone_api.Get_Zone_Desc ( :BORROW_ORG)").
               setLabel("MATBORROWBORROWORGNAME: Borrow Org Name").
               setReadOnly().
+              setDefaultNotVisible().
               setSize(30);
       mgr.getASPField("BORROW_ORG").setValidation("BORROW_ORG_NAME");
       headblk.addField("BORROW_TIME","Date").
@@ -390,9 +394,19 @@ public class MatBorrow extends HzASPPageProviderWf
              setSize(150);
       headblk.addField("NOTE").
              setInsertable().
+             setDefaultNotVisible().
              setLabel("MATBORROWNOTE: Note").
              setHeight(4).
              setSize(150);
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("BORROW_ID").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("MAT_BORROW");
       headblk.defineCommand("MAT_BORROW_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

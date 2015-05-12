@@ -279,11 +279,10 @@ public class HseSafeConAdjustNotice extends HzASPPageProviderWf
 
       headblk.addField("NOTICE_NO").
               setInsertable().
-//              setWfProperties().
               setLabel("CONADJUSTNOTICENOTICENO: Notice No").
               setSize(30);
       headblk.addField("NOTICE_NAME").
-              setWfProperties().
+              setMandatory().
               setInsertable().
               setLabel("CONADJUSTNOTICENOTICENAME: Notice Name").
               setSize(30);
@@ -333,6 +332,12 @@ public class HseSafeConAdjustNotice extends HzASPPageProviderWf
               setHidden().
               setLabel("CONADJUSTNOTICENOTE: Type Id").
               setSize(20);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("NOTICE_NAME").
+              setLabel("FLOWTITLE: Flow Title"); 
 
       headblk.setView("CON_ADJUST_NOTICE");
       headblk.defineCommand("CON_ADJUST_NOTICE_API","New__,Modify__,Remove__");

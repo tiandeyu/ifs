@@ -231,6 +231,7 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
          headblk.addField("PROJ_NO").
                  setDynamicLOV("GENERAL_PROJECT").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTCOSTORGPROJNO: Proj No").
                  setSize(30);
          headblk.addField("GENERAL_PROJECT_PROJ_DESC").
@@ -241,8 +242,8 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
          
          mgr.getASPField("PROJ_NO").setValidation("GENERAL_PROJECT_PROJ_DESC");
          headblk.addField("CONTRACT_ID").
-                 setMandatory().
                  setInsertable().
+                 setDefaultNotVisible().
                  setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //                 setLOVProperty("WHERE", "SCHEDULE='TRUE'").
                  setLabel("CONPROJCONNECTIONLISTCOSTORGCONTRACTID: Contract Id").
@@ -261,29 +262,32 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
          headblk.addField("LIST_NAME").
                  setInsertable().
                  setMandatory().
-                 setWfProperties().
                  setLabel("CONPROJCONNECTIONLISTCOSTORGLISTNAME: List Name").
                  setSize(30);
          headblk.addField("GENSET").
                  setInsertable().
                  setMandatory().
+                 setDefaultNotVisible().
                  setDynamicLOV("CON_GENSET_DATA","PROJ_NO").
                  setLabel("CONPROJCONNECTIONLISTCOSTORGGENSET: Genset").
                  setSize(30).
                  setCustomValidation("PROJ_NO,GENSET", "GENSET_NO,GENSET_NAME");
          headblk.addField("GENSET_NO").
                  setReadOnly().
+                 setDefaultNotVisible().
                  setFunction("CON_GENSET_DATA_API.GET_GENSET_NO ( :PROJ_NO,:GENSET)").
                  setLabel("CONPROJCONNECTIONLISTCOSTORGGENSETNO: Genset No").
                  setSize(30);
          headblk.addField("GENSET_NAME").
                  setReadOnly().
+                 setDefaultNotVisible().
                  setFunction("GENERAL_MACH_GROUP_API.Get_Mach_Grp_Desc (CON_GENSET_DATA_API.GET_GENSET_NO ( :PROJ_NO,:GENSET))").
                  setLabel("CONPROJCONNECTIONLISTCOSTORGGENSETNAME: Genset Name").
                  setSize(30);
          headblk.addField("MAJOR").
                  setInsertable().
                  setMandatory().
+                 setDefaultNotVisible().
                  setDynamicLOV("CON_MAJOR_DATA","PROJ_NO").
                  setLabel("CONPROJCONNECTIONLISTCOSTORGMAHOR: Major").
                  setSize(30);
@@ -297,19 +301,20 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
          
          headblk.addField("BOOK_NO").
                  setInsertable().
+                 setDefaultNotVisible().
                  setDynamicLOV("DRAWING_LIST_LOV","PROJ_NO").
                  setLabel("CONPROJCONNECTIONLISTCOSTORGBOOKNO: Book No").
                  setSize(30);
          headblk.addField("BOOK_NAME").
                  setFunction("Drawing_List_api.Get_Volume_Desc(:PROJ_NO, :BOOK_NO)").
                  setLabel("CONPROJCONNECTIONLISTCOSTORGBOOKNAME: Book Name").
+                 setDefaultNotVisible().
                  setSize(30).
                  setReadOnly();
          mgr.getASPField("BOOK_NO").setValidation("BOOK_NAME");
          
          headblk.addField("SUB_PROJ_NO").
                  setInsertable().
-                 setMandatory().
                  setDefaultNotVisible().
                  setDynamicLOV("CON_QUA_TREE","PROJ_NO").
                  setLOVProperty("TREE_PARE_FIELD", "PARENT_ID").
@@ -332,11 +337,13 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
          //Cost Only Fields
          headblk.addField("IS_VALID").
                  setReadOnly().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTCOSTORGISVALID: Is Valid").
                  setCheckBox("FALSE,TRUE").
                  setSize(30);
          headblk.addField("HAS_FEEDBACK").
                  setReadOnly().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTCOSTORGHASFEEDBACK: Has Feedback").
                  setCheckBox("FALSE,TRUE").
                  setSize(30);
@@ -347,6 +354,7 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
                  setSize(30);
          headblk.addField("ESTIMATE_COST").
                  setReadOnly().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTCOSTORGESTIMATECOST: Estimate Cost").
                  setSize(30);
          
@@ -364,12 +372,14 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
          mgr.getASPField("CREATE_PERSON").setValidation("CREATE_PERSON_NAME");
          headblk.addField("START_ORG").
                  setInsertable().
+                 setDefaultNotVisible().
                  setDynamicLOV("GENERAL_ORGANIZATION_LOV", "PROJ_NO").
                  setLabel("CONPROJCONNECTIONLISTCOSTORGSTARTORG: Start Org").
                  setSize(30);
          headblk.addField("START_ORG_NAME").
                  setFunction("GENERAL_ORGANIZATION_API.Get_Org_Desc(:START_ORG)").
                  setLabel("CONPROJCONNECTIONLISTCOSTORGSTARTORGNAME: Start Org Name").
+                 setDefaultNotVisible().
                  setSize(30).
                  setReadOnly();
          mgr.getASPField("START_ORG").setValidation("START_ORG_NAME");
@@ -377,28 +387,34 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
          
          headblk.addField("REPLY_LIST_NO").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTCOSTORGREPLYLISTNO: Reply List No").
                  setSize(30);
          headblk.addField("ACTUAL_COST").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTCOSTORGACTUALCOST: Actual Cost").
                  setSize(30);
          headblk.addField("CONTRACT_NO").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTCOSTORGCONTRACTNO: Contract No").
                  setSize(30);      
          headblk.addField("CREATE_TIME","Date").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTCOSTORGCREATETIME: Create Time").
                  setSize(30);
          headblk.addField("IS_REPLY").
                  setInsertable().
+                 setDefaultNotVisible().
                  setCheckBox("0,1").
                  setLabel("CONPROJCONNECTIONLISTCOSTORGISREPLY: Is Reply").
                  setSize(30);
          //Only in this page. Send_to&Copy_to served as Construction_org&Supervising_org.
          headblk.addField("SEND_TO").
                  setMandatory().
+                 setDefaultNotVisible().
                  setInsertable().
                  setDynamicLOV("GENERAL_ORGANIZATION_LOV", "PROJ_NO").
                  setLabel("CONPROJCONNECTIONLISTCOSTOWNERSENDTO: Send To").
@@ -406,11 +422,13 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
          headblk.addField("SEND_TO_NAME").
                  setFunction("GENERAL_ORGANIZATION_API.Get_Org_Desc( :SEND_TO)").
                  setReadOnly().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTCOSTOWNERSENDTONAME: Send To Name").
                  setSize(30);
          mgr.getASPField("SEND_TO").setValidation("SEND_TO_NAME");
          headblk.addField("COPY_TO").
                  setMandatory().
+                 setDefaultNotVisible().
                  setInsertable().
                  setDynamicLOV("GENERAL_ORGANIZATION_LOV", "PROJ_NO").
                  setLabel("CONPROJCONNECTIONLISTCOSTOWNERCOPYTO: Copy To").
@@ -418,6 +436,7 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
          headblk.addField("COPY_TO_NAME").
                  setFunction("GENERAL_ORGANIZATION_API.Get_Org_Desc(:COPY_TO)").
                  setReadOnly().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTCOSTOWNERCOPYTONAME: Copy To Name").
                  setSize(30);
          mgr.getASPField("COPY_TO").setValidation("COPY_TO_NAME");
@@ -431,20 +450,28 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
                  setFunction("FLOW_STATUS_API.Get_Status_Desc (:STATUS)").
                  setLabel("CONPROJCONNECTIONLISTCOSTORGSTATUSDESC: Status Desc").
                  setSize(30);
-         headblk.addField("NOTE").
-                 setInsertable().
-                 setLabel("CONPROJCONNECTIONLISTCOSTORGNOTE: Note").
-                 setSize(130).
-                 setHeight(5);
          headblk.addField("CONTENT").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTCOSTORGCONTENT: Content").
+                 setSize(130).
+                 setHeight(5);
+         headblk.addField("NOTE").
+                 setInsertable().
+                 setDefaultNotVisible().
+                 setLabel("CONPROJCONNECTIONLISTCOSTORGNOTE: Note").
                  setSize(130).
                  setHeight(5);
          headblk.addField("TYPE_ID").
                  setFunction("''").
                  setHidden();
          headblk.addField("CON_LIST_TYPE_DB").setHidden();
+         headblk.addField("FLOW_TITLE").
+                 setWfProperties().
+                 setReadOnly().
+                 setHidden().
+                 setFunction("LIST_NAME").
+                 setLabel("FLOWTITLE: Flow Title");
          
          
          headblk.setView("CON_PROJ_CONNECTION_LIST");
@@ -468,6 +495,7 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
          headlay.setSimple("SEND_TO_NAME");
          headlay.setSimple("COPY_TO_NAME");
          headlay.setDataSpan("NOTE", 5);
+         headlay.setDataSpan("CONTENT", 5);
          headlay.setDataSpan("STATUS_DESC", 5);
          headlay.setSimple("SUB_PROJ_DESC");
          headlay.setSimple("START_ORG_NAME");
@@ -611,14 +639,12 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
 
       public void  adjust() throws FndException
       {
-         // fill function body
          ASPManager mgr = getASPManager();
          super.adjust();
          mgr.getASPField("ID").setHidden();
          mgr.getASPField("ACTUAL_COST").setHidden();
          mgr.getASPField("REPLY_LIST_NO").setHidden();
          mgr.getASPField("IS_REPLY").setHidden();
-         mgr.getASPField("CONTENT").setHidden();   
          mgr.getASPField("CONTRACT_NO").setHidden();
          mgr.getASPField("ITEM0_PROJ_NO").setHidden();
          mgr.getASPField("ITEM0_ID").setHidden();

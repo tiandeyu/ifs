@@ -153,7 +153,7 @@ public class HseMeasurePlan extends HzASPPageProviderWf
               setHidden();
       headblk.addField("PROJ_NO").
               setMandatory().
-              setWfProperties().
+//              setWfProperties().
               setInsertable().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("HSEMEASUREPLANPROJNO: Proj No").
@@ -168,7 +168,7 @@ public class HseMeasurePlan extends HzASPPageProviderWf
       
       headblk.addField("ID").
               setLabel("HSEMEASUREPLANID: Id").
-              setWfProperties().
+//              setWfProperties().
               setSize(30).
               setHidden();
       headblk.addField("DOC_NAME").
@@ -201,6 +201,14 @@ public class HseMeasurePlan extends HzASPPageProviderWf
               setLabel("HSEMEASUREPLANNOTE: Note").
               setSize(120).
               setHeight(5);
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("DOC_NAME").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
      
       headblk.setView("HSE_MEASURE_PLAN");
       headblk.defineCommand("HSE_MEASURE_PLAN_API","New__,Modify__,Remove__");

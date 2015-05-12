@@ -362,6 +362,7 @@ public class ConContractQuantitiesVisa extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONCONTRACTQUANTITIESVISAPROJNO: Proj No").
               setSize(30);
@@ -379,12 +380,11 @@ public class ConContractQuantitiesVisa extends HzASPPageProviderWf
               setHidden();
       headblk.addField("VISA_NO").
               setInsertable().
-              setWfProperties().
               setLabel("CONQUANTITIESVISAVISANO: Visa No").
               setSize(30);
       headblk.addField("VISA_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONQUANTITIESVISAVISANAME: Visa Name").
               setSize(30);
       headblk.addField("CONTRACT_ENTRUST_NO").
@@ -395,6 +395,7 @@ public class ConContractQuantitiesVisa extends HzASPPageProviderWf
       
       headblk.addField("CONTRACT_ID").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //              setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
               setLabel("CONCONTRACTQUANTITIESVISACONTRACTENTRUSTNO: Contract Id").
@@ -409,21 +410,25 @@ public class ConContractQuantitiesVisa extends HzASPPageProviderWf
       headblk.addField("CONSTRUCTION_ORG_NO").
               setFunction("PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO , :CONTRACT_ID)").
               setLabel("CONCONTRACTQUANTITIESVISACONSTRUCTIONORGNO: Construction Org No").
+              setDefaultNotVisible().
               setSize(30).
               setReadOnly();
       headblk.addField("ORG").
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_ID))").
               setLabel("CONCONTRACTQUANTITIESVISACONSTRUCTIONORGNAME: Construction Org Name").
+              setDefaultNotVisible().
               setSize(30).
               setReadOnly();
       
       headblk.addField("ESTIMATE_COST","Number").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONQUANTITIESVISAESTIMATECOST: Estimate Cost").
               setSize(30);
       
       headblk.addField("SUB_PROJ_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("CON_QUA_TREE","PROJ_NO").
               setLOVProperty("TREE_PARE_FIELD", "PARENT_ID").
               setLOVProperty("TREE_DISP_FIELD", "NODE_NO,NODE_NAME").
@@ -439,6 +444,7 @@ public class ConContractQuantitiesVisa extends HzASPPageProviderWf
       
       headblk.addField("CREATE_PERSON").
               setDynamicLOV("PERSON_INFO").
+              setDefaultNotVisible().
               setLabel("CONCONTRACTQUANTITIESVISACREATEPERSON: Create Person").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
@@ -449,6 +455,7 @@ public class ConContractQuantitiesVisa extends HzASPPageProviderWf
       mgr.getASPField("CREATE_PERSON").setValidation("CREATE_PERSON_NAME");
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONQUANTITIESVISACREATETIME: Create Time").
               setSize(30);
       headblk.addField("STATUS").
@@ -462,9 +469,16 @@ public class ConContractQuantitiesVisa extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("VISA_REASON").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONQUANTITIESVISAVISAREASON: Visa Reason").
               setSize(120).
               setHeight(5);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("VISA_NAME").
+              setLabel("FLOWTITLE: Flow Title");
       
       
       headblk.setView("CON_QUANTITIES_VISA");

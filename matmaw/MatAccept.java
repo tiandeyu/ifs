@@ -534,6 +534,7 @@ public class MatAccept extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("MATACCEPTPROJNO: Proj No").
               setSize(20);
@@ -556,6 +557,7 @@ public class MatAccept extends ASPPageProvider
       headblk.addField("CONTRACT_ID").
               setInsertable().
 //              setHidden().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
               setLOVProperty("WHERE", "CLASS_NO IN ('SB','WZ')").
               setLabel("MATACCEPTCONTRACTID: Contract Id").
@@ -586,23 +588,27 @@ public class MatAccept extends ASPPageProvider
 
       headblk.addField("BATCH").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("MATACCEPTBATCH: Batch").
               setSize(20);
 
       headblk.addField("PACKAGE_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATACCEPTPACKAGENO: Package No").
               setSize(30);
 
       headblk.addField("MAIN_UNIT_NO").
               setDbName("UNIT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_MACH_GROUP").
               setLabel("MATACCEPTUNITNO: Unit No").
               setSize(30);
 
       headblk.addField("MAIN_UNIT_DESC").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("GENERAL_MACH_GROUP_API.Get_Mach_Grp_Desc (:MAIN_UNIT_NO)").
               setLabel("MATACCEPTUNITDESC: Unit Desc").
               setSize(30);
@@ -611,18 +617,21 @@ public class MatAccept extends ASPPageProvider
       headblk.addField("MAT_PACK_STATUS").
               enumerateValues("Mat_Pack_Status_API").
               setSelectBox().
+              setDefaultNotVisible().
               setInsertable().
               setLabel("MATACCEPTMATPACKSTATUS: Mat Pack Status").
               setSize(20);
       headblk.addField("MAT_PACK_TYPE").
               enumerateValues("Mat_Pack_Type_API").
               setSelectBox().
+              setDefaultNotVisible().
               setInsertable().
               setLabel("MATACCEPTMATPACKTYPE: Mat Pack Type").
               setSize(20);
       headblk.addField("MAT_ACCEPT_CLASS").
               enumerateValues("Mat_Accept_Class_API").
               setSelectBox().
+              setDefaultNotVisible().
               setInsertable().
               setLabel("MATACCEPTMATACCEPTCLASS: Mat Accept Class").
               setSize(20);
@@ -630,10 +639,12 @@ public class MatAccept extends ASPPageProvider
               enumerateValues("Mat_Accept_Status_API").
               setSelectBox().
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATACCEPTMATACCEPTSTATUS: Mat Accept Status").
               setSize(20);
       headblk.addField("STORAGE_ID").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("MAT_STOWAGE","PROJ_NO").
               setLabel("MATACCEPTSTORAGEID: Storage Id").
               setSize(20);
@@ -641,16 +652,19 @@ public class MatAccept extends ASPPageProvider
               setFunction("MAT_STOWAGE_API.GET_STORAGE_DESC ( :PROJ_NO,:STORAGE_ID)").
               setLabel("MATACCEPTSTORAGEDESC: torage Desc").
               setReadOnly().
+              setDefaultNotVisible().
               setSize(30);
       mgr.getASPField("STORAGE_ID").setValidation("STORAGE_DESC");
       
       headblk.addField("STORAGE_ADMIN").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PERSON_INFO").
               setLabel("MATACCEPTSTORAGEADMIN: Storage Admin").
               setSize(20);
       headblk.addField("STORAGE_ADMIN_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("MATACCEPTSTORAGEADMINNNAME: Storage Admin Name").
               setFunction("PERSON_INFO_API.GET_NAME (:STORAGE_ADMIN)").
               setSize(20);
@@ -659,12 +673,14 @@ public class MatAccept extends ASPPageProvider
 
       headblk.addField("UNPACK_PLACE").
               setInsertable().
+              setDefaultNotVisible().
               setHeight(3).
               setLabel("MATACCEPTUNPACKPLACE: Unpack Place").
               setSize(50);
       headblk.addField("ACCEPT_ACCORD").
 //              setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setHeight(3).
               setLabel("MATACCEPTACCEPTACCORD: Accept Accord").
               setSize(50);

@@ -198,6 +198,7 @@ public class QuanlityPlan extends HzASPPageProviderWf
               setMandatory().
               setDynamicLOV("GENERAL_PROJECT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUANLITYPLANPROJNO: Proj No").             
               setSize(20);
       headblk.addField("GENERAL_PROJECT_DESC").
@@ -209,11 +210,13 @@ public class QuanlityPlan extends HzASPPageProviderWf
       headblk.addField("UNIT").
               setInsertable().
               setMandatory().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_MACH_GROUP").
               setLabel("QUANLITYPLANUNIT: Unit").
               setSize(30);
       headblk.addField("UNIT_DESC").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("GENERAL_MACH_GROUP_API.Get_Mach_Grp_Desc (:UNIT)").
               setLabel("QUANLITYPLANUNITDESC: Unit Desc").
               setSize(30);
@@ -221,6 +224,7 @@ public class QuanlityPlan extends HzASPPageProviderWf
       headblk.addField("CONTRACT_NO").
               setInsertable().
               setMandatory().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
               //setLOVProperty("TREE_PARE_FIELD", "PRE_CONTRACT_NO").
               //setLOVProperty("TREE_DISP_FIELD", "CONTRACT_ID,CONTRACT_DESC").
@@ -240,6 +244,7 @@ public class QuanlityPlan extends HzASPPageProviderWf
               setSize(30);      
       headblk.addField("PROJECT_CRITERION").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUANLITYPLANPROJECTCRITERION: Project Criterion").
               setSize(30);
       headblk.addField("PROJECT_TYPE_NO").
@@ -251,13 +256,14 @@ public class QuanlityPlan extends HzASPPageProviderWf
       
       headblk.addField("PLAN_NO").
               setHidden().
-              setWfProperties().
+//              setWfProperties().
               setInsertable().
               setLabel("QUANLITYPLANPLANNO: Plan No").
               setSize(50);
       headblk.addField("PLAN_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
+//              setWfProperties().
               setLabel("QUANLITYPLANPLANNAME: Plan Name").
               setSize(50).
               setMaxLength(200);
@@ -277,6 +283,7 @@ public class QuanlityPlan extends HzASPPageProviderWf
       
       headblk.addField("CONSTRUCT_ORG").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUANLITYPLANCONSTRUCTORG: Construct Org").     
               setSize(30).
               setDynamicLOV("GENERAL_ORGANIZATION");
@@ -284,11 +291,13 @@ public class QuanlityPlan extends HzASPPageProviderWf
               setFunction("GENERAL_ORGANIZATION_API.Get_Org_Desc(:CONSTRUCT_ORG)").
               setLabel("QUANLITYPLANCONSTRUCTORGGENERALORGANIZATION: Construct Org Name").
               setSize(30).
+              setDefaultNotVisible().
               setReadOnly();
       mgr.getASPField("CONSTRUCT_ORG").setValidation("CONSTRUCT_ORG_NAME");
       headblk.addField("CREATE_DATE","Date").
               setLabel("QUANLITYPLANCREATEDATE: Create Date").
               setSize(50).
+              setDefaultNotVisible().
               setReadOnly();
       headblk.addField("STATUS").
               setReadOnly().
@@ -299,6 +308,15 @@ public class QuanlityPlan extends HzASPPageProviderWf
               setFunction("FLOW_STATUS_API.Get_Status_Desc (:STATUS)").
               setLabel("QUANLITYPLANSTATUSDESC: Status Desc").
               setSize(30);
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("PLAN_NAME").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("QUANLITY_PLAN");
       headblk.defineCommand("QUANLITY_PLAN_API","New__,Modify__,Remove__,FindTree__");
       headset = headblk.getASPRowSet();

@@ -262,6 +262,7 @@ public class ConStartReport extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONSTARTREPORTPROJNO: Proj No").
               setSize(30);
@@ -279,6 +280,7 @@ public class ConStartReport extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("CONTRACT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //              setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
               setLabel("CONSTARTREPORTCONTRACTNO: Contract No").
@@ -299,6 +301,7 @@ public class ConStartReport extends HzASPPageProviderWf
 
       headblk.addField("SECOND_SIDE_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
               setLabel("CONSTARTREPORTSECONDSIDENAME: Constraction Org Name").
               setSize(30);
@@ -310,6 +313,7 @@ public class ConStartReport extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("ZONE_DESC").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("GENERAL_ZONE_API.GET_ZONE_DESC (:ZONE_NO)").
               setLabel("CONSTARTREPORTZONEDESC: Zone Desc").
               setSize(30);
@@ -335,12 +339,11 @@ public class ConStartReport extends HzASPPageProviderWf
       
       headblk.addField("CHECK_LIST_NO").
               setInsertable().
-              setWfProperties().
               setLabel("CONSTARTREPORTCHECKLISTNO: Check List No").
               setSize(30);
       headblk.addField("CHECK_LIST_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONSTARTREPORTCHECKLISTNAME: Check List Name").
               setSize(30);
       
@@ -362,6 +365,7 @@ public class ConStartReport extends HzASPPageProviderWf
       mgr.getASPField("CREATE_PERSON").setValidation("CREATE_PERSON_NAME");
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSTARTREPORTCREATETIME: Create Time").
               setSize(30);
       headblk.addField("STATUS").
@@ -375,6 +379,7 @@ public class ConStartReport extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSTARTREPORTNOTE: Note").
               setSize(130).
               setHeight(5);
@@ -385,6 +390,12 @@ public class ConStartReport extends HzASPPageProviderWf
               setFunction("CON_START_REPORT_API.Get_Condition_Count (:PROJ_NO,:ID)").
               setSize(130).
               setHeight(5);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("CHECK_LIST_NAME").
+              setLabel("FLOWTITLE: Flow Title");
 
       headblk.setView("CON_START_REPORT");
       headblk.defineCommand("CON_START_REPORT_API","New__,Modify__,Remove__");

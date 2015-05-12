@@ -274,7 +274,7 @@ public class HseLargeEquRevAppl extends HzASPPageProviderWf
               setCustomValidation("PROJ_NO,CONTRACT_ID", "CONTRACT_NAME,SECOND_SIDE,SECOND_SIDE_NAME");
       headblk.addField("CONTRACT_NAME").
               setReadOnly().
-              setWfProperties().
+//              setWfProperties().
               setFunction("PROJECT_CONTRACT_API.Get_Contract_Desc (:PROJ_NO,:CONTRACT_ID)").
               setLabel("HSELARGEEQUREVAPPLCONTRACTNAME: Contract Name").
               setSize(30);
@@ -288,7 +288,7 @@ public class HseLargeEquRevAppl extends HzASPPageProviderWf
 
       headblk.addField("SECOND_SIDE_NAME").
               setReadOnly().
-              setWfProperties().
+//              setWfProperties().
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_ID))").
               setLabel("HSELARGEEQUREVAPPLSECONDSIDENAME: Constraction Org Name").
               setSize(30);
@@ -322,6 +322,15 @@ public class HseLargeEquRevAppl extends HzASPPageProviderWf
 //              setHidden().
               setLabel("HSELARGEEQUREVAPPLCREATETIME: Create Time").
               setSize(20);
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("PROJECT_CONTRACT_API.Get_Contract_Desc (:PROJ_NO,:CONTRACT_ID)").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("HSE_LARGE_EQU_REV_APPL");
       headblk.defineCommand("HSE_LARGE_EQU_REV_APPL_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

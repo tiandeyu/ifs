@@ -124,7 +124,7 @@ public class MatStConOut extends HzASPPageProviderWf
       {
          mgr.showAlert("MATSTENTRYNODATA: No data found.");
          headset.clear();
-      }
+      }else okFindITEM1();
       eval( mat_st_entry_line_set.syncItemSets() );
    }
 
@@ -280,12 +280,12 @@ public class MatStConOut extends HzASPPageProviderWf
 //              setMandatory().
 //              setInsertable().
               setReadOnly().
-              setWfProperties().
+//              setWfProperties().
               setLabel("MATSTENTRYOUTID: Out Id").
               setSize(20);
       headblk.addField("PROJ_NO").
               setMandatory().
-              setWfProperties().
+//              setWfProperties().
               setDynamicLOV("GENERAL_PROJECT").
               setInsertable().
               setLabel("MATSTENTRYPROJNO: Proj No").
@@ -359,7 +359,15 @@ public class MatStConOut extends HzASPPageProviderWf
               setLabel("MATARRIVEPERSONINFONAME: Person Name").
               setReadOnly().
               setSize(30);
-      mgr.getASPField("CREATE_PERSON").setValidation("PERSON_NAME");
+      mgr.getASPField("CREATE_PERSON").setValidation("PERSON_NAME");      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("PROJECT_CONTRACT_API.GET_CONTRACT_DESC ( :PROJ_NO,:CONTRACT_ID)").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("MAT_ST_OUT");
       headblk.defineCommand("MAT_ST_OUT_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();
@@ -468,15 +476,17 @@ public class MatStConOut extends HzASPPageProviderWf
 
       mat_st_entry_line_blk.addField("ENTRY_PRICE","Number").
                             setInsertable().
+                            setHidden().
                             setLabel("MATSTENTRYLINEENTRYPRICE: Entry Price").
-                            setSize(20);
-      mat_st_entry_line_blk.addField("TAX_RATE","Number").
-                            setInsertable().
-                            setLabel("MATSTENTRYLINETAXRATE: Tax Rate").
                             setSize(20);
       mat_st_entry_line_blk.addField("NO_TAX_PRICE","Number").
                             setInsertable().
                             setLabel("MATSTENTRYLINENOTAXPRICE: No Tax Price").
+                            setSize(20);
+
+      mat_st_entry_line_blk.addField("TAX_RATE","Number").
+                            setInsertable().
+                            setLabel("MATSTENTRYLINETAXRATE: Tax Rate").
                             setSize(20);
       mat_st_entry_line_blk.addField("TOTLE_PRICE","Number").
                             setInsertable().
@@ -526,9 +536,10 @@ public class MatStConOut extends HzASPPageProviderWf
       mat_st_entry_line_lay = mat_st_entry_line_blk.getASPBlockLayout();
       mat_st_entry_line_lay.setDefaultLayoutMode(mat_st_entry_line_lay.MULTIROW_LAYOUT);
 
-//      mat_st_entry_line_lay.setDataSpan("STOCK", 5);
+      mat_st_entry_line_lay.setDataSpan("TOTLE_PRICE", 5);
 
       mat_st_entry_line_lay.setSimple("ITEM0_PERSON_NAME");
+      mat_st_entry_line_lay.setSimple("MAT_NAME");
 
 
 

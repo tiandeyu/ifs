@@ -261,6 +261,7 @@ public class ConSporadicProjAccept extends HzASPPageProviderWf
       //PROJ_NO
       headblk.addField("PROJ_NO").
               setMandatory().
+              setDefaultNotVisible().
               setInsertable().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONSPORADICPROJACCEPTPROJNO: Proj No").
@@ -274,6 +275,7 @@ public class ConSporadicProjAccept extends HzASPPageProviderWf
       
       headblk.addField("CONTRACT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //              setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
               setLabel("CONADJUSTNOTICECONTRACTNO: Contract No").
@@ -286,25 +288,29 @@ public class ConSporadicProjAccept extends HzASPPageProviderWf
               setReadOnly();
       headblk.addField("CONSTRUCTION_ORG_NO").
               setFunction("PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO , :CONTRACT_NO)").
+              setDefaultNotVisible().
               setLabel("CONADJUSTNOTICECONSTRUCTIONORGNO: Construction Org No").
               setSize(30).
               setReadOnly();
       headblk.addField("CONSTRUCTION_ORG_NAME").
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
               setLabel("CONADJUSTNOTICECONSTRUCTIONORGNAME: Construction Org Name").
+              setDefaultNotVisible().
               setSize(30).
               setReadOnly();
       
       //MONITOR_ORG_NO
       headblk.addField("ZONE_NO").
               setInsertable().
-              setDynamicLOV("GENERAL_ZONE").
+              setDynamicLOV("GENERAL_ORGANIZATION_LOV","PROJ_NO").
+              setDefaultNotVisible().
               setLabel("CONSPORADICPROJACCEPTMONITORORGNO: Monitor Org No").
               setSize(30);
       //MONITOR_ORG_NAME
       headblk.addField("ZONE_DESC").
-              setFunction("GENERAL_ZONE_API.GET_ZONE_DESC ( :ZONE_NO)").
+              setFunction("GENERAL_ORGANIZATION_API.Get_Org_Desc ( :ZONE_NO)").
               setLabel("CONSPORADICPROJACCEPTMONITORORGNAME: Monitor Org Name").
+              setDefaultNotVisible().
               setSize(30).
               setReadOnly();
       mgr.getASPField("ZONE_NO").setValidation("ZONE_DESC");
@@ -313,17 +319,17 @@ public class ConSporadicProjAccept extends HzASPPageProviderWf
       //ACCEPT_LIST_NO
       headblk.addField("ACCEPT_LIST_NO").
               setInsertable().
-              setWfProperties().
               setLabel("CONSPORADICPROJACCEPTACCEPTLISTNO: Accept List No").
               setSize(30);
       headblk.addField("ACCEPT_LIST_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONSPORADICPROJACCEPTACCEPTLISTNAME: Accept List Name").
               setSize(30);
       
       headblk.addField("SUB_PROJ_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("CON_QUA_TREE","PROJ_NO").
               setLOVProperty("TREE_PARE_FIELD", "PARENT_ID").
               setLOVProperty("TREE_DISP_FIELD", "NODE_NO,NODE_NAME").
@@ -340,25 +346,30 @@ public class ConSporadicProjAccept extends HzASPPageProviderWf
       //PROJ_TIME
       headblk.addField("PROJ_TIME","Number").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSPORADICPROJACCEPTPROJTIME: Proj Time").
               setSize(30);
       
       headblk.addField("START_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSPORADICPROJACCEPTSTARTTIME: Start Time").
               setSize(30);
       headblk.addField("COMPLETE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSPORADICPROJACCEPTCOMPLETETIME: Complete Time").
               setSize(30);
       headblk.addField("ACCEPT_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSPORADICPROJACCEPTACCEPTTIME: Accept Time").
               setSize(30);
       
       
       headblk.addField("CREATE_PERSON").
               setDynamicLOV("PERSON_INFO").
+              setDefaultNotVisible().
               setLabel("CONSPORADICPROJACCEPTPERSONINFOUSERID: Create Person").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
@@ -370,6 +381,7 @@ public class ConSporadicProjAccept extends HzASPPageProviderWf
       
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSPORADICPROJACCEPTCREATETIME: Create Time").
               setSize(30);
       
@@ -384,9 +396,16 @@ public class ConSporadicProjAccept extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSPORADICPROJACCEPTNOTE: Note").
               setSize(120).
               setHeight(5);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("ACCEPT_LIST_NAME").
+              setLabel("FLOWTITLE: Flow Title");
       
       
       headblk.setView("CON_SPORADIC_PROJ_ACCEPT");

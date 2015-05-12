@@ -204,6 +204,7 @@ public class BidPlan extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("BIDPLANPROJNO: Proj No").
               setSize(30);
@@ -216,6 +217,7 @@ public class BidPlan extends ASPPageProvider
       headblk.addField("PLAN_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPLANPLANNO: Plan No").
               setSize(30);
       headblk.addField("PLAN_NAME").
@@ -224,19 +226,23 @@ public class BidPlan extends ASPPageProvider
               setSize(30);
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPLANCREATETIME: Create Time").
               setSize(30);
       headblk.addField("CREATE_PERSON").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("BIDPLANCREATEPERSON: Create Person").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
               setFunction("PERSON_INFO_API.GET_NAME ( :CREATE_PERSON)").
               setLabel("BIDMATENQJUDGECREATEPERSONNAME: Create Person Name").
               setSize(30).
+              setDefaultNotVisible().
               setReadOnly();
       headblk.addField("CREATE_ORG").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPLANCREATEORG: Create Org").
               setSize(30).
               setDynamicLOV("GENERAL_ORGANIZATION");
@@ -254,6 +260,7 @@ public class BidPlan extends ASPPageProvider
               setHidden();
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDPLANNOTE: Note").
               setHeight(5).
               setSize(129);

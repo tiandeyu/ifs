@@ -282,6 +282,7 @@ public class BidMatEnqJudge extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT",600,445).
               setLabel("BIDMATENQJUDGEPROJNO: Proj No").
               setSize(30);
@@ -294,6 +295,7 @@ public class BidMatEnqJudge extends ASPPageProvider
       headblk.addField("CRE_ID").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("BID_CRE_PROJ_APPLY_LOV","PROJ_NO").
               setLOVProperty("WHERE", "STATUS='2' AND BID_PROJ_TYPE_DB = 'MAT'"). 
               setLabel("BIDMATENQJUDGECREID: Cre Id").
@@ -307,6 +309,7 @@ public class BidMatEnqJudge extends ASPPageProvider
       headblk.addField("BID_MAT_ID").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("BID_MATPRE_ENQ_VERIFY", "PROJ_NO,CRE_ID").
               setLOVProperty("WHERE", "STATUS='2'").
               setLabel("BIDMATENQJUDGEBIDMATID: Bid Mat Id").
@@ -317,23 +320,28 @@ public class BidMatEnqJudge extends ASPPageProvider
               setSize(30);
       headblk.addField("FEE_BUDGET","Number").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("BIDMATENQJUDGEFEEBUDGET: Fee Budget").
               setSize(30);
       headblk.addField("CREATE_DATE","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDMATENQJUDGECREATEDATE: Create Date").
               setSize(30);
       headblk.addField("CREATE_PERSON").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("BIDMATENQJUDGECREATEPERSON: Create Person").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
               setFunction("PERSON_INFO_API.GET_NAME ( :CREATE_PERSON)").
+              setDefaultNotVisible().
               setLabel("BIDMATENQJUDGECREATEPERSONNAME: Create Person Name").
               setSize(30).
               setReadOnly();
       headblk.addField("CREATE_ORG").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDMATENQJUDGECREATEORG: Create Org").
               setSize(30).
               setDynamicLOV("GENERAL_ORGANIZATION");
@@ -345,6 +353,7 @@ public class BidMatEnqJudge extends ASPPageProvider
       mgr.getASPField("CREATE_ORG").setValidation("START_ORG_NAME");
       headblk.addField("BID_DESC").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDMATENQJUDGEBIDDESC: Bid Desc").
               setHeight(3).
               setSize(129);      
@@ -354,6 +363,7 @@ public class BidMatEnqJudge extends ASPPageProvider
               setSize(30);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDMATENQJUDGENOTE: Note").
               setHeight(5).
               setSize(129);

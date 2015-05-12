@@ -202,7 +202,7 @@ public class HseMeasureExam extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("PROJ_NO").
               setMandatory().
-              setWfProperties().
+//              setWfProperties().
               setInsertable().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("HSEMEASUREEXAMPROJNO: Proj No").
@@ -217,7 +217,7 @@ public class HseMeasureExam extends HzASPPageProviderWf
       
       headblk.addField("ID").
               setLabel("HSEMEASUREEXAMID: Id").
-              setWfProperties().
+//              setWfProperties().
               setSize(30).
               setHidden();
 
@@ -332,6 +332,15 @@ public class HseMeasureExam extends HzASPPageProviderWf
               setLabel("HSEMEASUREEXAMTYPEID: Type Id").
               setSize(30).
               setHidden();
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("PROJECT_CONTRACT_API.Get_Contract_Desc (:PROJ_NO,:CONTRACT_ID)").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("HSE_MEASURE_PLAN");
       headblk.defineCommand("HSE_MEASURE_PLAN_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

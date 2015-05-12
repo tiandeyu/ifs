@@ -402,6 +402,7 @@ public class BidEnqDocMan extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT",600,445).
               setLabel("BIDENQDOCMANPROJNO: Proj No").
               setSize(30);
@@ -414,8 +415,9 @@ public class BidEnqDocMan extends ASPPageProvider
       headblk.addField("CRE_ID").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("BID_CRE_PROJ_APPLY_LOV","PROJ_NO").
-              setLOVProperty("WHERE", "STATUS='2'"). 
+              //setLOVProperty("WHERE", "STATUS='2'"). 
               setLabel("BIDENQDOCMANCREID: Cre Id").
               setCustomValidation("PROJ_NO,CRE_ID", "CREATE_BID_NAME,BID_PROJ_TYPE,PURCH_TYPE_NO,DESCRIPTION").
               setSize(30);
@@ -431,6 +433,7 @@ public class BidEnqDocMan extends ASPPageProvider
               setSize(200);
       headblk.addField("ENQUIRY_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDENQDOCMANENQUIRYNO: Enquiry No").
               setSize(30);
       headblk.addField("ENQUIRY_NAME").
@@ -439,27 +442,33 @@ public class BidEnqDocMan extends ASPPageProvider
               setSize(30);
       headblk.addField("PLAN_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDENQDOCMANPLANTIME: Plan Time").
               setSize(30);
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDENQDOCMANCREATETIME: Create Time").
               setSize(30);
       headblk.addField("CREATE_PERSON").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("BIDENQDOCMANCREATEPERSON: Create Person").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
               setFunction("PERSON_INFO_API.GET_NAME ( :CREATE_PERSON)").
+              setDefaultNotVisible().
               setLabel("BIDMATENQJUDGECREATEPERSONNAME: Create Person Name").
               setSize(30).
               setReadOnly();
       headblk.addField("CREATE_ORG").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDENQDOCMANCREATEORG: Create Org").
               setSize(30).
               setDynamicLOV("GENERAL_ORGANIZATION");
       headblk.addField("START_ORG_NAME").
+      setDefaultNotVisible().
               setFunction("GENERAL_ORGANIZATION_API.Get_Org_Desc(:CREATE_ORG)").
               setLabel("CONPROJCONNECTIONLISTFREENOREPLYSTARTORGNAME: Start Org Name").
               setSize(30).
@@ -479,6 +488,7 @@ public class BidEnqDocMan extends ASPPageProvider
               setSize(30);
       headblk.addField("PURCH_TYPE_NO").
               setReadOnly().
+              setDefaultNotVisible().
               setDynamicLOV("CONTRACT_PURCH_TYPE").
               setLabel("BIDENQDOCMANPURCHTYPENO: Purch Type No").
               setSize(30);
@@ -489,6 +499,7 @@ public class BidEnqDocMan extends ASPPageProvider
               setSize(30);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDENQDOCMANNOTE: Note").
               setHeight(4).
               setSize(129);

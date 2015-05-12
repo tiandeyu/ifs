@@ -203,6 +203,7 @@ public class ConProjMeasureCheck extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONPROJMEASURECHECKPROJNO: Proj No").
               setSize(30);
@@ -221,6 +222,7 @@ public class ConProjMeasureCheck extends HzASPPageProviderWf
       
       headblk.addField("CONTRACT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //              setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
               setLabel("CONPROJMEASURECHECKCONTRACTNO: Contract No").
@@ -241,6 +243,7 @@ public class ConProjMeasureCheck extends HzASPPageProviderWf
 
       headblk.addField("SECOND_SIDE_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
               setLabel("CONPROJMEASURECHECKSECONDSIDENAME: Constraction Org Name").
               setSize(30);
@@ -264,12 +267,11 @@ public class ConProjMeasureCheck extends HzASPPageProviderWf
       
       headblk.addField("CHECK_NO").
               setInsertable().
-              setWfProperties().
               setLabel("CONPROJMEASURECHECKCHECKNO: Check No").
               setSize(30);
       headblk.addField("CHECK_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONPROJMEASURECHECKCHECKNAME: Check Name").
               setSize(30);
       headblk.addField("TIME","Date").
@@ -291,6 +293,7 @@ public class ConProjMeasureCheck extends HzASPPageProviderWf
       mgr.getASPField("CREATE_PERSON").setValidation("CREATE_PERSON_NAME");
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONPROJMEASURECHECKCREATETIME: Create Time").
               setSize(30);
       headblk.addField("STATUS").
@@ -303,6 +306,7 @@ public class ConProjMeasureCheck extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONPROJMEASURECHECKNOTE: Note").
               setSize(130).
               setHeight(5);
@@ -311,6 +315,12 @@ public class ConProjMeasureCheck extends HzASPPageProviderWf
               setLabel("CONPROJMEASURECHECKLOCATION: Location").
               setSize(2000).
               setHidden();
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("CHECK_NAME").
+              setLabel("FLOWTITLE: Flow Title");
 
       headblk.setView("CON_PROJ_MEASURE_CHECK");
       headblk.defineCommand("CON_PROJ_MEASURE_CHECK_API","New__,Modify__,Remove__");

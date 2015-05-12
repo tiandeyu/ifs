@@ -259,6 +259,7 @@ public class ContractCounterclaimOth extends HzASPPageProviderWf
               setHidden();
       headblk.addField("PROJ_NO").
               setMandatory().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setInsertable().  
               setLabel("CONTRACTVARIATIONPROJNO: Proj No").
@@ -350,21 +351,25 @@ public class ContractCounterclaimOth extends HzASPPageProviderWf
       
       headblk.addField("GIST_CONTENT").
               setInsertable().  
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONGISTCONTENT: Gist Content").
               setSize(140).
               setHeight(4);
       headblk.addField("FILES").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONFILES: Files").
               setSize(140).
               setHeight(4);
       headblk.addField("COST_EFFECT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONCOSTEFFECT: Cost Effect").
               setSize(140).
               setHeight(4);
       headblk.addField("SCHEDULE_EFFECT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONSCHEDULEEFFECT: Schedule Effect").
               setSize(140).
               setHeight(4);
@@ -372,14 +377,17 @@ public class ContractCounterclaimOth extends HzASPPageProviderWf
               setInsertable().
               setLabel("CONTRACTVARIATIONITEMEFFECT: Item Effect").
               setSize(140).
+              setDefaultNotVisible().
               setHeight(4);
       headblk.addField("OTHER_EFFECT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONOTHEREFFECT: Other Effect").
               setSize(140).
               setHeight(4);
       headblk.addField("VAR_NEED").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTVARIATIONVARNEED: Var Need").
               setSize(140).
               setHeight(4);
@@ -387,6 +395,7 @@ public class ContractCounterclaimOth extends HzASPPageProviderWf
               setInsertable().
               setLabel("CONTRACTVARIATIONNOTE: Note").
               setSize(140).
+              setDefaultNotVisible().
               setHeight(4);
       headblk.addField("VAR_TYPE").
               setInsertable().

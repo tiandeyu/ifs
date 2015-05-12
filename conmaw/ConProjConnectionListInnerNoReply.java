@@ -225,6 +225,7 @@ public class ConProjConnectionListInnerNoReply extends HzASPPageProviderWf {
          headblk.addField("PROJ_NO").
                  setDynamicLOV("GENERAL_PROJECT").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYPROJNO: Proj No").
                  setSize(30);
          headblk.addField("GENERAL_PROJECT_PROJ_DESC").
@@ -237,6 +238,7 @@ public class ConProjConnectionListInnerNoReply extends HzASPPageProviderWf {
          
          headblk.addField("CONTRACT_ID").
                  setInsertable().
+                 setDefaultNotVisible().
                  setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //                 setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYCONTRACTID: Contract Id").
@@ -256,12 +258,12 @@ public class ConProjConnectionListInnerNoReply extends HzASPPageProviderWf {
          headblk.addField("LIST_NAME").
                  setInsertable().
                  setMandatory().
-                 setWfProperties().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYLISTNAME: List Name").
                  setSize(30);
          headblk.addField("MAJOR").
                  setInsertable().
                  setMandatory().
+                 setDefaultNotVisible().
                  setDynamicLOV("CON_MAJOR_DATA","PROJ_NO").
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYMAHOR: Major").
                  setSize(30);
@@ -274,22 +276,26 @@ public class ConProjConnectionListInnerNoReply extends HzASPPageProviderWf {
          headblk.addField("GENSET").
                  setInsertable().
                  setMandatory().
+                 setDefaultNotVisible().
                  setDynamicLOV("CON_GENSET_DATA","PROJ_NO").
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYGENSET: Genset").
                  setSize(30).
                  setCustomValidation("PROJ_NO,GENSET", "GENSET_NO,GENSET_NAME");
          headblk.addField("GENSET_NO").
                  setReadOnly().
+                 setDefaultNotVisible().
                  setFunction("CON_GENSET_DATA_API.GET_GENSET_NO ( :PROJ_NO,:GENSET)").
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYGENSETNO: Genset No").
                  setSize(30);
          headblk.addField("GENSET_NAME").
                  setReadOnly().
+                 setDefaultNotVisible().
                  setFunction("GENERAL_MACH_GROUP_API.Get_Mach_Grp_Desc (CON_GENSET_DATA_API.GET_GENSET_NO ( :PROJ_NO,:GENSET))").
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYGENSETNAME: Genset Name").
                  setSize(30);
          headblk.addField("SEND_TO").
                  setInsertable().
+                 setDefaultNotVisible().
                  setMandatory().
                  setDynamicLOV("GENERAL_ORGANIZATION_LOV", "PROJ_NO").
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYSENDTO: Send To").
@@ -297,27 +303,32 @@ public class ConProjConnectionListInnerNoReply extends HzASPPageProviderWf {
          headblk.addField("SEND_TO_NAME").
                  setFunction("GENERAL_ORGANIZATION_API.Get_Org_Desc( :SEND_TO)").
                  setReadOnly().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYSENDTONAME: Send To Name").
                  setSize(30);
          mgr.getASPField("SEND_TO").setValidation("SEND_TO_NAME");
  
          headblk.addField("COPY_TO").
                  setReadOnly().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYCOPYTO: Copy To").
                  setSize(30);
          headblk.addField("COPY_TO_PERSON").
                  setHidden().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYCOPYTOPERSON: Copy To Person").
                  setSize(30);
          
          headblk.addField("IS_REPLY").
                  setHidden().
+                 setDefaultNotVisible().
                  setCheckBox("0,1").
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYISREPLY: Is Reply").
                  setSize(30);
 
          headblk.addField("SUB_PROJ_NO").
                  setInsertable().
+                 setDefaultNotVisible().
                  setDynamicLOV("CON_QUA_TREE","PROJ_NO").
                  setLOVProperty("TREE_PARE_FIELD", "PARENT_ID").
                  setLOVProperty("TREE_DISP_FIELD", "NODE_NO,NODE_NAME").
@@ -338,6 +349,7 @@ public class ConProjConnectionListInnerNoReply extends HzASPPageProviderWf {
                  setSize(200);
          headblk.addField("CREATE_PERSON").
                  setInsertable().
+                 setDefaultNotVisible().
                  setDynamicLOV("PERSON_INFO").
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYCREATEPERSON: Create Person").
                  setSize(30).
@@ -351,6 +363,7 @@ public class ConProjConnectionListInnerNoReply extends HzASPPageProviderWf {
          
          headblk.addField("START_ORG").
                  setInsertable().
+                 setDefaultNotVisible().
                  setDynamicLOV("GENERAL_ORGANIZATION_LOV", "PROJ_NO").
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYSTARTORG: Start Org").
                  setSize(30);
@@ -358,39 +371,48 @@ public class ConProjConnectionListInnerNoReply extends HzASPPageProviderWf {
                  setFunction("GENERAL_ORGANIZATION_API.Get_Org_Desc(:START_ORG)").
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYSTARTORGNAME: Start Org Name").
                  setSize(30).
+                 setDefaultNotVisible().
                  setReadOnly();
          mgr.getASPField("START_ORG").setValidation("START_ORG_NAME");
  
          headblk.addField("CREATE_TIME","Date").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYCREATETIME: Create Time").
                  setSize(30);
          headblk.addField("REPLY_LIST_NO").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYREPLYLISTNO: Reply List No").
                  setSize(30);
          headblk.addField("BOOK_NO").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYBOOKNO: Book No").
                  setSize(30);
          headblk.addField("BOOK_NAME").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYBOOKNAME: Book Name").
                  setSize(30);
          headblk.addField("ESTIMATE_COST").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYESTIMATECOST: Estimate Cost").
                  setSize(30);
          headblk.addField("ACTUAL_COST").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYACTUALCOST: Actual Cost").
                  setSize(30);
          headblk.addField("CONTRACT_NO").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYCONTRACTNO: Contract No").
                  setSize(30);       
          headblk.addField("NOTE").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYNOTE: Note").
                  setSize(2000);
          headblk.addField("STATUS").
@@ -404,9 +426,16 @@ public class ConProjConnectionListInnerNoReply extends HzASPPageProviderWf {
                  setSize(30);
          headblk.addField("CONTENT").
                  setInsertable().
+                 setDefaultNotVisible().
                  setLabel("CONPROJCONNECTIONLISTINNERNOREPLYCONTENT: Content").
                  setSize(130).
                  setHeight(5);
+         headblk.addField("FLOW_TITLE").
+                 setWfProperties().
+                 setReadOnly().
+                 setHidden().
+                 setFunction("LIST_NAME").
+                 setLabel("FLOWTITLE: Flow Title");
          headblk.addField("CON_LIST_TYPE_DB").setHidden();
          
          headblk.setView("CON_PROJ_CONNECTION_LIST_OTHER");

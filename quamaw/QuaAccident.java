@@ -231,6 +231,7 @@ public class QuaAccident extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("QUAACCIDENTPROJNO: Proj No").
               setCustomValidation("PROJ_NO", "GENERAL_PROJECT_PROJ_DESC,PROJECT_TYPE_NO").
@@ -248,12 +249,14 @@ public class QuaAccident extends ASPPageProvider
               setSize(50);
       headblk.addField("QUA_ACCIDENT_NO").
               setMandatory().
+              setDefaultNotVisible().
               setInsertable().
               setLabel("QUAACCIDENTNO: Qua Accident No").
               setSize(30);
       headblk.addField("CONTRACT_NO").
               setInsertable().
               setMandatory().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO"). 
               //setLOVProperty("TREE_PARE_FIELD", "PRE_CONTRACT_NO").
               //setLOVProperty("TREE_DISP_FIELD", "CONTRACT_ID,CONTRACT_DESC").
@@ -274,26 +277,29 @@ public class QuaAccident extends ASPPageProvider
               setSize(20);
       headblk.addField("CONSTRUCT_ORG_DESC").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("GENERAL_ZONE_API.Get_Zone_Desc (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
               setLabel("QUAACCIDENTCONSTRUCTORGEDESC: Construct Org Desc").
               setSize(30);
       headblk.addField("SUPERVISION_ORG").
               setInsertable(). 
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_ZONE").
               //setLOVProperty("WHERE", "person_id = Fnd_Session_API.Get_Fnd_User").
               //setFunction("PROJECT_CONTRACT_API.Get_Third_Side (:PROJ_NO,:CONTRACT_NO)").
               setLabel("QUAACCIDENTSUPERVISIONORG: Supervision Org").
-              setDefaultNotVisible().
               setSize(20);
       headblk.addField("SUPERVISION_ORG_DESC").
               setReadOnly().
+              setDefaultNotVisible().
 //              setFunction("GENERAL_ZONE_API.Get_Zone_Desc (PROJECT_CONTRACT_API.Get_Third_Side (:PROJ_NO,:CONTRACT_NO))").
               setFunction("GENERAL_ZONE_API.GET_ZONE_DESC ( :SUPERVISION_ORG)").
               setLabel("QUAACCIDENTSUPERVISIONORGDESC: Supervision Org Desc").
               setSize(30);
       mgr.getASPField("SUPERVISION_ORG").setValidation("SUPERVISION_ORG_DESC");
       headblk.addField("SUB_PROJ_NO").
-              setInsertable().    
+              setInsertable(). 
+              setDefaultNotVisible().   
               setDynamicLOV("CON_QUA_TREE","PROJ_NO").
               setLOVProperty("TREE_PARE_FIELD", "PARENT_ID").
               setLOVProperty("TREE_DISP_FIELD", "NODE_NO,NODE_NAME").
@@ -308,6 +314,7 @@ public class QuaAccident extends ASPPageProvider
       mgr.getASPField("SUB_PROJ_NO").setValidation("SUB_PROJ_NAME");
       headblk.addField("PROJ_POSITION").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAACCIDENTPROJPOSITION: Proj Position").
               setSize(50).
               setMaxLength(100);
@@ -318,11 +325,13 @@ public class QuaAccident extends ASPPageProvider
               setMaxLength(100);
       headblk.addField("QUA_GRADE_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAACCIDENTQUAGRADENO: Qua Grade No").
               setDynamicLOV("QUALITY_GRADE", "PROJECT_TYPE_NO").
               setDefaultNotVisible().
               setSize(30);
       headblk.addField("QUA_GRADE_DESC").
+      setDefaultNotVisible().
               setFunction("QUALITY_GRADE_API.Get_Description_ByProjNo( :PROJ_NO, :QUA_GRADE_NO)").
               setLabel("QUAACCIDENTGRADEDESC: Qua Grade Desc").
               setReadOnly().
@@ -331,6 +340,7 @@ public class QuaAccident extends ASPPageProvider
      
       headblk.addField("ACCIDENT_CAUSE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAACCIDENTACCIDENTCAUSE: Accident Cause").
               setSize(50).
               setMaxLength(500).
@@ -344,16 +354,19 @@ public class QuaAccident extends ASPPageProvider
       
       headblk.addField("ACCIDENT_CONDITION").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAACCIDENTACCIDENTCONDITION: Accident Condition").
               setSize(50).
               setMaxLength(2000).
               setHeight(3);
       headblk.addField("LOSS_AMOUT","Number").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAACCIDENTLOSSAMOUT: Loss Amout").
               setSize(50);
       headblk.addField("HAPPEN_DATE","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAACCIDENTHAPPENDATE: Happen Date").
               setSize(30);
       headblk.addField("DUTY_ORG").
@@ -366,6 +379,7 @@ public class QuaAccident extends ASPPageProvider
 
       headblk.addField("DUTY_ORG_DESC").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("GENERAL_ZONE_API.GET_ZONE_DESC ( :DUTY_ORG)").
               setLabel("QUAACCIDENTDUTYORG: Duty Org").
               setSize(30);
@@ -377,6 +391,7 @@ public class QuaAccident extends ASPPageProvider
               setDefaultNotVisible().
               setSize(30);
       headblk.addField("HANDLE_PERSON_NAME").
+              setDefaultNotVisible().
               setFunction("PERSON_INFO_API.GET_NAME ( :HANDLE_PERSON)").
               setLabel("MATBORROWHANDLEPERSONINFONAME: Handle Person Name").
               setReadOnly().
@@ -385,15 +400,18 @@ public class QuaAccident extends ASPPageProvider
       headblk.addField("HANDLE_TIME","Date").
               setLabel("QUAACCIDENTHANDLETIME: Handle Time").
               setInsertable().
+              setDefaultNotVisible().
               setSize(30);
       headblk.addField("INITIAL_DEAL_ADVICE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAACCIDENTINITIALDEALADVICE: Initial Deal Advice").
               setSize(150).
               setMaxLength(500).
               setHeight(3);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAACCIDENTNOTE: Note").
               setSize(150).
               setMaxLength(500).

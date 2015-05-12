@@ -196,6 +196,7 @@ public class BidCreProjApply extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT",600,445).
               setLabel("BIDCREPROJAPPLYPROJNO: Proj No").
               setSize(30);
@@ -218,38 +219,45 @@ public class BidCreProjApply extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("CREATE_BID_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("BIDCREPROJAPPLYCREATEBIDNAME: Create Bid Name").
               setSize(30);
       headblk.addField("APPLY_PERSON").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("BIDCREPROJAPPLYAPPLYPERSON: Apply Person").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
+              setDefaultNotVisible().
               setFunction("PERSON_INFO_API.GET_NAME ( :APPLY_PERSON)").
               setLabel("BIDMATENQJUDGECREATEPERSONNAME: Create Person Name").
               setSize(25).
               setReadOnly();
       headblk.addField("APPLY_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDCREPROJAPPLYAPPLYTIME: Apply Time").
               setSize(30);
       headblk.addField("FEE","Number").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDCREPROJAPPLYFEE: Fee(The-Thousand)").
               setSize(30);
       headblk.addField("REQUEST_TIME").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDCREPROJAPPLYREQUESTTIME: Request Time").
               setSize(30);
       headblk.addField("COST_LIST").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDCREPROJAPPLYCOSTLIST: Cost List").
               setSize(30).
               setDynamicLOV("PROJECT_BUDGET_LINE","PROJ_NO").
               setLOVProperty("WHERE", "STATUS='1'");
       headblk.addField("BUDGET_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("PROJECT_BUDGET_LINE_API.GET_BUDGET_NAME ( :PROJ_NO,:COST_LIST)").
               setLabel("BIDCREPROJAPPLYBUDGETNAME: Budget Name").
               setSize(25);
@@ -257,6 +265,7 @@ public class BidCreProjApply extends HzASPPageProviderWf
       mgr.getASPField("COST_LIST").setValidation("BUDGET_NAME");
       headblk.addField("PURCH_TYPE_NO").
              setInsertable().
+             setDefaultNotVisible().
              setDynamicLOV("CONTRACT_PURCH_TYPE").
              setLabel("BIDCREPROJAPPLYPURCHTYPENO: Purch Type No").
              setSize(30);
@@ -266,6 +275,12 @@ public class BidCreProjApply extends HzASPPageProviderWf
               setReadOnly().
               setSize(30);
       mgr.getASPField("PURCH_TYPE_NO").setValidation("DESCRIPTION");
+      headblk.addField("SPORADICALLY").
+              setInsertable().
+              setCheckBox("FALSE,TRUE").
+              setLabel("BIDCREPROJAPPLYSPORADICALLY: Sporadically").
+              setSize(30);
+     
       
       headblk.addField("STATUS").
               setHidden().
@@ -285,19 +300,28 @@ public class BidCreProjApply extends HzASPPageProviderWf
               setSize(30);  
       headblk.addField("CREATE_BID_REASON").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDCREPROJAPPLYCREATEBIDREASON: Create Bid Reason").
               setHeight(3).
               setSize(140);
       headblk.addField("CREATE_BID_CONTENT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDCREPROJAPPLYCREATEBIDCONTENT: Create Bid Content").
               setHeight(12).
               setSize(140);     
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDCREPROJAPPLYNOTE: Note").
               setHeight(4).
-              setSize(140);
+              setSize(140); 
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("CREATE_BID_NAME").
+              setLabel("FLOWTITLE: Flow Title");
       
 
 

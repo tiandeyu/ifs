@@ -154,7 +154,7 @@ public class HseSafetyAward extends ASPPageProvider
               setHidden();
       headblk.addField("PROJ_NO").
               setMandatory().
-              setWfProperties().
+//              setWfProperties().
               setDynamicLOV("PROJECT_CONTRACT").
               setInsertable().
               setLabel("HSESAFETYAWARDPROJNO: Proj No").
@@ -206,6 +206,15 @@ public class HseSafetyAward extends ASPPageProvider
               setInsertable().
               setLabel("HSESAFETYAWARDCREATETIME: Create Time").
               setSize(30);
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("ORG_NAME").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("HSE_SAFETY_AWARD");
       headblk.defineCommand("HSE_SAFETY_AWARD_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

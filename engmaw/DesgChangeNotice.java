@@ -361,7 +361,7 @@ public class DesgChangeNotice extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("NOTICE_NAME").
               setInsertable().
-              setWfProperties().
+//              setWfProperties().
               setMandatory().
               setLabel("DESGCHANGENOTICENOTICENAME: Notice Name").
               setSize(20);
@@ -506,6 +506,15 @@ public class DesgChangeNotice extends HzASPPageProviderWf
               setHidden().
               setLabel("DESGCHANGENOTICECREATETIME: Create Time").
               setSize(20);
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("NOTICE_NAME").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("DESG_CHANGE_NOTICE");
       headblk.defineCommand("DESG_CHANGE_NOTICE_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

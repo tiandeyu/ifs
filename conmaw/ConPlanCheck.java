@@ -232,6 +232,7 @@ public class ConPlanCheck extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONPLANCHECKPROJNO: Proj No").
               setSize(30);
@@ -250,6 +251,7 @@ public class ConPlanCheck extends HzASPPageProviderWf
       
       headblk.addField("CONTRACT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //              setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
               setLabel("CONPLANCHECKCONTRACTNO: Contract No").
@@ -270,6 +272,7 @@ public class ConPlanCheck extends HzASPPageProviderWf
 
       headblk.addField("SECOND_SIDE_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
               setLabel("CONPLANCHECKSECONDSIDENAME: Constraction Org Name").
               setSize(25);
@@ -293,13 +296,12 @@ public class ConPlanCheck extends HzASPPageProviderWf
       
       headblk.addField("CHECK_LIST_NO").
               setInsertable().
-              setWfProperties().
               setLabel("CONPLANCHECKCHECKLISTNO: Check List No").
               setSize(30);
       
       headblk.addField("CHECK_LIST_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONPLANCHECKCHECKLISTNAME: Check List Name").
               setSize(30);
       
@@ -353,6 +355,7 @@ public class ConPlanCheck extends HzASPPageProviderWf
       
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONPLANCHECKCREATETIME: Create Time").
               setSize(30);
 
@@ -366,9 +369,16 @@ public class ConPlanCheck extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONPLANCHECKNOTE: Note").
               setSize(130).
               setHeight(5);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("CHECK_LIST_NAME").
+              setLabel("FLOWTITLE: Flow Title");
 
       headblk.setView("CON_PLAN_CHECK");
       headblk.defineCommand("CON_PLAN_CHECK_API","New__,Modify__,Remove__");

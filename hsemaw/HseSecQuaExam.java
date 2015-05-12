@@ -221,7 +221,7 @@ public class HseSecQuaExam extends HzASPPageProviderWf
       headblk.addField("CONTRACT_DESC").
               setFunction("PROJECT_CONTRACT_API.GET_CONTRACT_DESC ( :PROJ_NO,:CONTRACT_ID)").
               setLabel("HSESECQUAEXAMCONTRACTDESC: Contract Desc").
-              setWfProperties().
+//              setWfProperties().
               setReadOnly().
               setSize(30);
 //      mgr.getASPField("CONTRACT_ID").setValidation("CONTRACT_DESC");
@@ -238,7 +238,7 @@ public class HseSecQuaExam extends HzASPPageProviderWf
               setSize(30).
               setMaxLength(140).
               setReadOnly().
-              setWfProperties().
+//              setWfProperties().
               setFunction("SUPPLIER_INFO_API.GET_NAME(PROJECT_CONTRACT_API.GET_SECEND_SIDE ( :PROJ_NO,:CONTRACT_ID))").    
               setLabel("HSESECQUAEXAMSECENDSIDENAME: Secend Side Name");
 //      mgr.getASPField("SECEND_SIDE").setValidation("SECEND_SIDE_NAME");
@@ -270,7 +270,15 @@ public class HseSecQuaExam extends HzASPPageProviderWf
 //              setHidden().
               setLabel("HSESECQUAEXAMCREATETIME: Create Time").
               setSize(20);
-
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("PROJECT_CONTRACT_API.GET_CONTRACT_DESC ( :PROJ_NO,:CONTRACT_ID)").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("HSE_SEC_QUA_EXAM");
       headblk.defineCommand("HSE_SEC_QUA_EXAM_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

@@ -208,6 +208,7 @@ public class ConSingleProjAccept extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONSINGLEPROJACCEPTPROJNO: Proj No").
               setSize(30);
@@ -220,6 +221,7 @@ public class ConSingleProjAccept extends ASPPageProvider
       
       headblk.addField("CONTRACT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //              setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
               setLabel("CONADJUSTNOTICECONTRACTNO: Contract No").
@@ -233,10 +235,12 @@ public class ConSingleProjAccept extends ASPPageProvider
       headblk.addField("CONSTRUCTION_ORG_NO").
               setFunction("PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO , :CONTRACT_NO)").
               setLabel("CONADJUSTNOTICECONSTRUCTIONORGNO: Construction Org No").
+              setDefaultNotVisible().
               setSize(30).
               setReadOnly();
       headblk.addField("CONSTRUCTION_ORG_NAME").
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
+              setDefaultNotVisible().
               setLabel("CONADJUSTNOTICECONSTRUCTIONORGNAME: Construction Org Name").
               setSize(30).
               setReadOnly();
@@ -244,12 +248,14 @@ public class ConSingleProjAccept extends ASPPageProvider
       //MONITOR_ORG_NO
       headblk.addField("ZONE_NO").
               setInsertable().
-              setDynamicLOV("GENERAL_ZONE").
+              setDefaultNotVisible().
+              setDynamicLOV("GENERAL_ORGANIZATION_LOV","PROJ_NO").
               setLabel("CONSINGLEPROJACCEPTMONITORORGNO: Monitor Org No").
               setSize(30);
       //MONITOR_ORG_NAME
       headblk.addField("ZONE_DESC").
-              setFunction("GENERAL_ZONE_API.GET_ZONE_DESC ( :ZONE_NO)").
+              setFunction("GENERAL_ORGANIZATION_API.Get_Org_Desc ( :ZONE_NO)").
+              setDefaultNotVisible().
               setLabel("CONSINGLEPROJACCEPTMONITORORGNAME: Monitor Org Name").
               setSize(30).
               setReadOnly();
@@ -271,6 +277,7 @@ public class ConSingleProjAccept extends ASPPageProvider
       //SINGLE_PROJ_NAME
       headblk.addField("SINGLE_PROJ_NAME").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("CON_QUA_TREE","PROJ_NO").
               setLOVProperty("TREE_PARE_FIELD", "PARENT_ID").
               setLOVProperty("TREE_DISP_FIELD", "NODE_NO,NODE_NAME").
@@ -288,23 +295,28 @@ public class ConSingleProjAccept extends ASPPageProvider
       
       headblk.addField("PLAN_START_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSINGLEPROJACCEPTPLANSTARTTIME: Plan Start Time").
               setSize(30);
       headblk.addField("PLAN_COMPLETE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSINGLEPROJACCEPTPLANCOMPLETETIME: Plan Complete Time").
               setSize(30);
       headblk.addField("ACTUAL_START_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSINGLEPROJACCEPTACTUALSTARTTIME: Actual Start Time").
               setSize(30);
       headblk.addField("ACTUAL_COMPLETE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSINGLEPROJACCEPTACTUALCOMPLETETIME: Actual Complete Time").
               setSize(30);
       
       headblk.addField("CREATE_PERSON").
               setDynamicLOV("PERSON_INFO").
+              setDefaultNotVisible().
               setLabel("CONSINGLEPROJACCEPTPERSONINFOUSERID: Create Person").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
@@ -316,11 +328,13 @@ public class ConSingleProjAccept extends ASPPageProvider
       
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSINGLEPROJACCEPTCREATETIME: Create Time").
               setSize(30);
       
       headblk.addField("PROJ_CONTENT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONSINGLEPROJACCEPTPROJCONTENT: Proj Content").
               setSize(120).
               setHeight(5);

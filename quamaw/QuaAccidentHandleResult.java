@@ -260,6 +260,7 @@ public class QuaAccidentHandleResult extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("QUAACCIDENTHANDLERESULTPROJNO: Proj No").
               setSize(30); 
@@ -272,11 +273,13 @@ public class QuaAccidentHandleResult extends ASPPageProvider
       headblk.addField("QUA_ACCIDENT_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUAACCIDENTHANDLEPLANNO: Qua Accident No").
               setSize(30);
       
       headblk.addField("QUOTE_ID").
               setMandatory().
+              setDefaultNotVisible().
               setInsertable().
               setDynamicLOV("QUA_ACCIDENT","PROJ_NO").
               setLOVProperty("WHERE", "IS_PLAN = 'TRUE' AND BELONG_TO_LU = 'QuaAccident'").
@@ -286,6 +289,7 @@ public class QuaAccidentHandleResult extends ASPPageProvider
               setSize(30);
       headblk.addField("CONTRACT_NO").
               setReadOnly().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
               //setFunction("QUA_ACCIDENT_API.Get_Contract_No (:PROJ_NO,:QUOTE_ID)").
               setLabel("QUAACCIDENTHANDLERESULTCONTRACTNO: Contract No").
@@ -297,6 +301,7 @@ public class QuaAccidentHandleResult extends ASPPageProvider
               setSize(40);
       headblk.addField("CONSTRUCT_ORG").
               setReadOnly().
+              setDefaultNotVisible().
               //setFunction("PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,QUA_ACCIDENT_API.Get_Contract_No (:PROJ_NO,:QUOTE_ID))").
               setLabel("QUAACCIDENTHANDLERESULTCONSTRUCTORG: Construct Org").
               setSize(10);
@@ -307,6 +312,7 @@ public class QuaAccidentHandleResult extends ASPPageProvider
               setSize(30);
       headblk.addField("SUPERVISION_ORG").
               setReadOnly().
+              setDefaultNotVisible().
 //              setFunction("PROJECT_CONTRACT_API.Get_Third_Side (:PROJ_NO,QUA_ACCIDENT_API.Get_Contract_No (:PROJ_NO,:QUOTE_ID))").
               //setFunction("QUA_ACCIDENT_API.Get_SUPERVISION_ORG (:PROJ_NO,:QUOTE_ID)").
               setLabel("QUAACCIDENTHANDLERESULTSUPERVISIONORG: Supervision Org").
@@ -319,6 +325,7 @@ public class QuaAccidentHandleResult extends ASPPageProvider
               setSize(30);
       headblk.addField("SUB_PROJ_NO").
               setReadOnly().  
+              setDefaultNotVisible().
               setDynamicLOV("QUA_PLAN_LINE_INFO","PROJ_NO").
               //setFunction("QUA_ACCIDENT_API.Get_Sub_Proj_No(:PROJ_NO,:QUOTE_ID)").
               setLabel("QUAACCIDENTHANDLERESULTSUBPROJNO: Sub Proj No").
@@ -338,22 +345,26 @@ public class QuaAccidentHandleResult extends ASPPageProvider
       headblk.addField("HANDLE_PERSON").             
               setLabel("QUAACCIDENTHANDLERESULTHANDLEPERSON: Handle Person").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PERSON_INFO").
               setSize(30);
       headblk.addField("HANDLE_PERSON_NAME").
               setFunction("PERSON_INFO_API.GET_NAME ( :HANDLE_PERSON)").
               setLabel("MATBORROWHANDLEPERSONINFONAME: Handle Person Name").
               setReadOnly().
+              setDefaultNotVisible().
               setSize(30);
       mgr.getASPField("HANDLE_PERSON").setValidation("HANDLE_PERSON_NAME");
       headblk.addField("HANDLE_TIME","Date").
               setLabel("QUAACCIDENTHANDLERESULTHANDLETIME: Handle Time").
               setInsertable().
+              setDefaultNotVisible().
               setSize(30);
       headblk.addField("NOTE").
               setInsertable().
               setLabel("QUAACCIDENTHANDLERESULTNOTE: Note").
               setSize(150).
+              setDefaultNotVisible().
               setMaxLength(500).
               setHeight(3);
       headblk.addField("BELONG_TO_LU").

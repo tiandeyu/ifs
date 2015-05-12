@@ -170,7 +170,7 @@ public class ChangeDesg extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("CHANGE_ORDER_NO").
               setInsertable().
-              setWfProperties().   
+//              setWfProperties().   
               setLabel("DESGCHANGECHANGEORDERNO: Change Order No").
               setSize(20);
       headblk.addField("PROJECT_NO").
@@ -287,6 +287,15 @@ public class ChangeDesg extends HzASPPageProviderWf
               setLabel("DESGCHANGEEXECUTIVE: Executive").
               setSize(120).
               setHeight(7);
+      
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("CHANGE_ORDER_NO").
+              setLabel("FLOWTITLE: Flow Title").
+              setSize(30);
+     
       headblk.setView("DESG_CHANGE");
       headblk.defineCommand("DESG_CHANGE_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

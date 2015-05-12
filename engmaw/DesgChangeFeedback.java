@@ -308,7 +308,7 @@ public class DesgChangeFeedback extends HzASPPageProviderWf
       headblk.addField("FEEDBACK_NAME").
               setInsertable().
               setMandatory().
-              setWfProperties().
+//              setWfProperties().
               setLabel("DESGCHANGEFEEDBACKFEEDBACKNAME: Feedback Name").
               setSize(20);
       headblk.addField("NOTICE_NO").
@@ -423,7 +423,15 @@ public class DesgChangeFeedback extends HzASPPageProviderWf
               setHidden().
               setLabel("DESGCHANGEFEEDBACKCREATETIME: Create Time").
               setSize(20);
-  
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("FEEDBACK_NAME").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("DESG_CHANGE_FEEDBACK");
       headblk.defineCommand("DESG_CHANGE_FEEDBACK_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

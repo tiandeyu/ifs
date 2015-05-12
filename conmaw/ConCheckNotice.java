@@ -250,6 +250,7 @@ public class ConCheckNotice extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONCHECKNOTICEPROJNO: Proj No").
               setSize(30);
@@ -263,6 +264,7 @@ public class ConCheckNotice extends HzASPPageProviderWf
       headblk.addField("CONTRACT_NO").
               setInsertable().
               setMandatory().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
               setLabel("CONADJUSTNOTICECONTRACTNO: Contract No").
               setSize(30).
@@ -281,6 +283,7 @@ public class ConCheckNotice extends HzASPPageProviderWf
       headblk.addField("CONSTRUCTION_ORG_NAME").
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
               setLabel("CONADJUSTNOTICECONSTRUCTIONORGNAME: Construction Org Name").
+              setDefaultNotVisible().
               setSize(30).
               setReadOnly();
 
@@ -300,12 +303,11 @@ public class ConCheckNotice extends HzASPPageProviderWf
       
       headblk.addField("CHECK_NOTICE_NO").
               setInsertable().
-              setWfProperties().
               setLabel("CONCHECKNOTICECHECKNOTICENO: Check Notice No").
               setSize(30);
       headblk.addField("CHECK_NOTICE_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONCHECKNOTICECHECKNOTICENAME: Check Notice Name").
               setSize(30);
 
@@ -335,6 +337,7 @@ public class ConCheckNotice extends HzASPPageProviderWf
       
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONCHECKNOTICECREATETIME: Create Time").
               setSize(30);
       
@@ -351,15 +354,23 @@ public class ConCheckNotice extends HzASPPageProviderWf
       //CHECK_ACCORDING
       headblk.addField("CHECK_ACCORDING").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONCHECKNOTICECHECKACCORDING: Check According").
               setSize(120).
               setHeight(5);
       
       headblk.addField("CAUSE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONCHECKNOTICECAUSE: Cause").
               setSize(120).
               setHeight(5);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("CHECK_NOTICE_NAME").
+              setLabel("FLOWTITLE: Flow Title");
       
       headblk.setView("CON_CHECK_NOTICE");
       headblk.defineCommand("CON_CHECK_NOTICE_API","New__,Modify__,Remove__,Checking__,Close__");

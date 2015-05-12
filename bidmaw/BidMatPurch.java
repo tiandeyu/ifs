@@ -208,6 +208,7 @@ public class BidMatPurch extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("BIDMATPURCHPROJNO: Proj No").
               setSize(30);
@@ -225,34 +226,38 @@ public class BidMatPurch extends HzASPPageProviderWf
       headblk.addField("PURCH_NAME").
               setInsertable().
               setMandatory().
-              setWfProperties().
               setLabel("BIDMATPURCHPURCHNAME: Purch Name").
               setSize(30);
       headblk.addField("PURCH_PERSON").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_ORG_PER_POS_LOV","PROJ_NO").
               setLOVProperty("WHERE", " POS_NO = 'MATZG' ").
               setLabel("BIDMATPURCHPURCHPERSON: Purch Person").
               setSize(20);
       headblk.addField("PURCH_PERSON_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("PERSON_INFO_API.GET_NAME (:PURCH_PERSON)").
               setLabel("BIDMATPURCHPURCHPERSONNAME: Purch Person Name").
               setSize(30);
       mgr.getASPField("PURCH_PERSON").setValidation("PURCH_PERSON_NAME");
       headblk.addField("CREATE_PERSON").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PERSON_INFO").
               setLabel("BIDMATPURCHCREATEPERSON: Create Person").
               setSize(20);
       headblk.addField("CREATE_PERSON_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("PERSON_INFO_API.GET_NAME (:CREATE_PERSON)").
               setLabel("BIDMATPURCHCREATEPERSONNAME: Create Person Name").
               setSize(30);
       mgr.getASPField("CREATE_PERSON").setValidation("CREATE_PERSON_NAME");
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDMATPURCHCREATETIME: Create Time").
               setSize(30);
       headblk.addField("STATUS").
@@ -267,9 +272,16 @@ public class BidMatPurch extends HzASPPageProviderWf
       mgr.getASPField("STATUS").setValidation("STATUS_DESC");
       headblk.addField("PURCH_REASON").
               setInsertable().
+              setDefaultNotVisible().
               setHeight(3).
               setLabel("BIDMATPURCHPURCHREASON: Purch Reason").
               setSize(120);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("PURCH_NAME").
+              setLabel("FLOWTITLE: Flow Title");
       headblk.setView("BID_MAT_PURCH");
       headblk.defineCommand("BID_MAT_PURCH_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();

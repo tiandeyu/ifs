@@ -340,6 +340,7 @@ public class BidMatpreEnqVerify extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT",600,445).
               setLabel("BIDMATPREENQVERIFYPROJNO: Proj No").
               setSize(30);
@@ -352,8 +353,9 @@ public class BidMatpreEnqVerify extends HzASPPageProviderWf
       headblk.addField("CRE_ID").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("BID_CRE_PROJ_APPLY_LOV","PROJ_NO").
-              setLOVProperty("WHERE", "STATE='Íê³É' AND BID_PROJ_TYPE_DB = 'MAT'").
+              setLOVProperty("WHERE", "STATUS='2' AND BID_PROJ_TYPE_DB = 'MAT'").
               setLabel("BIDMATPREENQVERIFYCREID: Cre Id").
               setSize(30);
       headblk.addField("CREATE_BID_NAME").
@@ -368,11 +370,13 @@ public class BidMatpreEnqVerify extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("VERIFY_BILL_NO").
               setInsertable().
+              setDefaultNotVisible().
               setWfProperties().
               setLabel("BIDMATPREENQVERIFYVERIFYBILLNO: Verify Bill No").
               setSize(30);
       headblk.addField("DOC_ID").
               setInsertable().
+              setDefaultNotVisible().
               setMandatory().
               setDynamicLOV("BID_ENQ_DOC_MAN", "PROJ_NO,CRE_ID").
               setLOVProperty("WHERE", "BID_PROJ_TYPE_DB='MAT'").
@@ -386,19 +390,23 @@ public class BidMatpreEnqVerify extends HzASPPageProviderWf
       mgr.getASPField("DOC_ID").setValidation("ENQUIRY_NAME");
       headblk.addField("CREATE_DATE","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDMATPREENQVERIFYCREATEDATE: Create Date").
               setSize(30);
       headblk.addField("CREATE_PERSON").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("BIDMATPREENQVERIFYCREATEPERSON: Create Person").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
               setFunction("PERSON_INFO_API.GET_NAME ( :CREATE_PERSON)").
+              setDefaultNotVisible().
               setLabel("BIDMATENQJUDGECREATEPERSONNAME: Create Person Name").
               setSize(30).
               setReadOnly();
       headblk.addField("CREATE_ORG").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDMATPREENQVERIFYCREATEORG: Create Org").
               setSize(30).
               setDynamicLOV("GENERAL_ORGANIZATION");
@@ -422,6 +430,7 @@ public class BidMatpreEnqVerify extends HzASPPageProviderWf
       //add end
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDMATPREENQVERIFYNOTE: Note").
               setHeight(5).
               setSize(129);

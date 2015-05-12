@@ -424,27 +424,24 @@ public class ProjectContract extends HzASPPageProviderWf
               setHidden(); 
       headblk.addField("PROJ_NO").
               setMandatory().
-              setWfProperties(). 
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("PROJECTCONTRACTPROJNO: Proj No").
               setSize(20);  
       headblk.addField("GENERAL_PROJECT_PROJ_DESC").
               setReadOnly().
-              setWfProperties(). 
               setFunction("GENERAL_PROJECT_API.GET_PROJ_DESC (:PROJ_NO)").
               setLabel("PROJECTCONTRACTGENERALPROJECTPROJDESC: General Project Proj Desc").
               setSize(20);
       mgr.getASPField("PROJ_NO").setValidation("GENERAL_PROJECT_PROJ_DESC");
       headblk.addField("CONTRACT_ID"). 
-              setWfProperties(). 
               setUpperCase().  
               setInsertable().  
               setLabel("PROJECTCONTRACTCONTRACTID: Contract Id").
               setSize(20);   
      headblk.addField("CONTRACT_DESC").
              setMandatory().
-             setWfProperties(). 
              setInsertable().
              setLabel("PROJECTCONTRACTCONTRACTDESC: Contract Desc").
              setSize(120);    
@@ -500,6 +497,7 @@ public class ProjectContract extends HzASPPageProviderWf
               setSize(20).
               setMaxLength(140).         
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("GENERAL_ZONE_API.Get_Zone_Desc(:FIRST_SIDE)").
               setLabel("PROJECTCONTRACTFIRSTSIDENAME: First Side Name");
       mgr.getASPField("FIRST_SIDE").setValidation("FIRST_SIDE_NAME");
@@ -514,6 +512,7 @@ public class ProjectContract extends HzASPPageProviderWf
               setSize(20).
               setMaxLength(140).
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("SUPPLIER_INFO_API.GET_NAME(:SECEND_SIDE)").    
               setLabel("PROJECTCONTRACTSECENDSIDENAME: Secend Side Name");
       mgr.getASPField("SECEND_SIDE").setValidation("SECEND_SIDE_NAME");
@@ -525,6 +524,7 @@ public class ProjectContract extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("FIRST_PERSON_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("PROJECTCONTRACTFIRSTPERSONNAME: First Person Name").
               setFunction("PERSON_INFO_API.Get_Name(:FIRST_PERSON)").
               setSize(20);  
@@ -569,11 +569,13 @@ public class ProjectContract extends HzASPPageProviderWf
       headblk.addField("SIGN_PRICE","Number","#0.00").
               setFunction("PROJECT_CONTRACT_API.Cal_Ori_Contract_Total(:PROJ_NO, :CONTRACT_ID)").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("PROJECTCONTRACTSIGNPRICE: Sign Price").
               setSize(20);  
       headblk.addField("CHANGE_DIFF_PRICE","Number","#0.00").
               unsetInsertable().
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("PROJECT_CONTRACT_API.Cal_Chg_Contract_Diff_Total(:PROJ_NO, :CONTRACT_ID)").
               setLabel("PROJECTCONTRACTCHANGEDIFFPRICE: Change Diff Price").
               setSize(20);      
@@ -595,6 +597,7 @@ public class ProjectContract extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("WORKER_PAY_GUARANTEE_PRICE","Number" ,"#0.00").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("PROJECTCONTRACTWORKERPAYGUARANTEEPRICE: Worker Pay Guarantee Price").
               setSize(20);  
       headblk.addField("PERPAY_PRICE","Number" ,"#0.00").
@@ -647,10 +650,12 @@ public class ProjectContract extends HzASPPageProviderWf
       headblk.addField("SING_DATE","Date").
               setInsertable().
               setMandatory().
+              setDefaultNotVisible().
               setLabel("PROJECTCONTRACTSINGDATE: Sing Date").
               setSize(20);
       headblk.addField("EFFECT_DATE","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("PROJECTCONTRACTEFFECTDATE: Effect Date").
               setSize(20);
       headblk.addField("START_WORK_DATE","Date").
@@ -735,6 +740,7 @@ public class ProjectContract extends HzASPPageProviderWf
       headblk.addField("CHENGTAO_INTER_ID").
               setInsertable().
               setHidden().
+              setDefaultNotVisible().
               setLabel("PROJECTCONTRACTCHENGTAOINTERID: Chengtao Inter Id").
               setSize(100);
       headblk.addField("GONGCHENG_INTER_ID").
@@ -788,6 +794,7 @@ public class ProjectContract extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("SECOND_PERSON_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("PROJECTCONTRACTSECONDPERSONNAME: Second Person Name").
               setFunction("PERSON_INFO_API.Get_Name(:SECOND_PERSON)").
               setSize(20);      
@@ -905,10 +912,12 @@ public class ProjectContract extends HzASPPageProviderWf
               setSize(5);
       headblk.addField("STATUS").
               setReadOnly(). 
+              setDefaultNotVisible().
               setLabel("PROJECTCONTRACTSTATUS: Status").
               setSize(20);  
       headblk.addField("PRE_CONTRACT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("PROJECTCONTRACTPRECONTRACTNO: Pre Contract No").
               setSize(20);
       headblk.addField("CLASS_NO").
@@ -921,6 +930,7 @@ public class ProjectContract extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("CONTRACT_CLASS_NAME").
               setReadOnly().  
+              setDefaultNotVisible().
               setFunction("Contract_Class_API.Get_Class_Name(:CLASS_NO)").
               setLabel("PROJECTCONTRACTCONTRACTCLASSNAME: Class Name").
               setSize(20);
@@ -933,6 +943,7 @@ public class ProjectContract extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("PURCH_TYPE_DESC").    
                setReadOnly().
+               setDefaultNotVisible().
                setFunction("CONTRACT_PURCH_TYPE_API.Get_Description(:PURCH_TYPE_NO)").
                setLabel("PROJECTCONTRACTPURCHTYPEDESC: Purch Type Desc").
                setSize(20);
@@ -942,14 +953,23 @@ public class ProjectContract extends HzASPPageProviderWf
                setSize(30);  
       headblk.addField("ALL_PAY_CST", "Money" ,"#0.00").
               setReadOnly(). 
+              setDefaultNotVisible().
               setFunction("Contract_Payment_API.Cal_All_Contract_Payment(:PROJ_NO,:CONTRACT_ID,1000000000)").    
               setLabel("CONTRACTPAYMENTALLPAYCST: All Pay Cst").
               setSize(20);     
       mgr.getASPField("PURCH_TYPE_NO").setValidation("PURCH_TYPE_DESC");
       headblk.addField("SETTLEMENT_PRICE", "Money" ,"#0.00").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("PROJECTCONTRACTSETTLEMENTPRICE: Settlement Price").
               setSize(20);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("CONTRACT_DESC").
+              setLabel("FLOWTITLE: Flow Title");
+      
       
 
       headblk.setView("PROJECT_CONTRACT");

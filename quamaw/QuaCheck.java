@@ -153,6 +153,7 @@ public class QuaCheck extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUACHECKPROJNO: Proj No").
               setDynamicLOV("GENERAL_PROJECT",600,445).
               setSize(50);
@@ -176,28 +177,33 @@ public class QuaCheck extends ASPPageProvider
               setSize(50);
       headblk.addField("CHECK_DATE","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUACHECKCHECKDATE: Check Date").
               setSize(50);
       headblk.addField("CHECK_CONTENT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUACHECKCHECKCONTENT: Check Content").
               setSize(50).
               setMaxLength(2000).
               setHeight(3);
       headblk.addField("JUDGE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUACHECKJUDGE: Judge").
               setSize(50).
               setMaxLength(500).
               setHeight(3);
       headblk.addField("IMPROVEMENT").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUACHECKIMPROVEMENT: Improvement").
               setSize(50).
               setMaxLength(500).
               setHeight(3);
       headblk.addField("REW_PUN_INFO").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUACHECKREWPUNINFO: Rew Pun Info").
               setSize(50).
               setMaxLength(500).
@@ -210,6 +216,7 @@ public class QuaCheck extends ASPPageProvider
               setSize(50);
       headblk.addField("LEADER_NAME").
               setReadOnly().
+              setDefaultNotVisible().
 //              setHidden().
               setLabel("QUACHECKLEADERID: Leader Id").
               setFunction("PERSON_INFO_API.GET_NAME (:LEADER_ID)").
@@ -221,6 +228,7 @@ public class QuaCheck extends ASPPageProvider
               setSize(50);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUACHECKNOTE: Note").
               setSize(150).
               setMaxLength(500).

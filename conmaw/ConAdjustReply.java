@@ -234,6 +234,7 @@ public class ConAdjustReply extends HzASPPageProviderWf
     //PROJ_NO
       headblk.addField("PROJ_NO").
               setMandatory().
+              setDefaultNotVisible().
               setInsertable().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONADJUSTREPLYPROJNO: Proj No").
@@ -247,6 +248,7 @@ public class ConAdjustReply extends HzASPPageProviderWf
       
       headblk.addField("CONTRACT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //              setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
               setLabel("CONADJUSTNOTICECONTRACTNO: Contract No").
@@ -266,6 +268,7 @@ public class ConAdjustReply extends HzASPPageProviderWf
       headblk.addField("CONSTRUCTION_ORG_NAME").
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
               setLabel("CONADJUSTNOTICECONSTRUCTIONORGNAME: Construction Org Name").
+              setDefaultNotVisible().
               setSize(30).
               setReadOnly();
       
@@ -278,6 +281,7 @@ public class ConAdjustReply extends HzASPPageProviderWf
       headblk.addField("ZONE_DESC").
               setFunction("GENERAL_ZONE_API.GET_ZONE_DESC ( :ZONE_NO)").
               setLabel("CONADJUSTREPLYMONITORORGNAME: Monitor Org Name").
+              setDefaultNotVisible().
               setSize(30).
               setReadOnly();
       mgr.getASPField("ZONE_NO").setValidation("ZONE_DESC");
@@ -319,12 +323,11 @@ public class ConAdjustReply extends HzASPPageProviderWf
   
       headblk.addField("ADJUST_REPLY_NO").
               setInsertable().
-              setWfProperties().
               setLabel("CONADJUSTREPLYADJUSTREPLYNO: Adjust Reply No").
               setSize(30);
       headblk.addField("ADJUST_REPLY_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONADJUSTREPLYADJUSTREPLYNAME: Adjust Reply Name").
               setSize(30);
       
@@ -342,6 +345,7 @@ public class ConAdjustReply extends HzASPPageProviderWf
       
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONADJUSTREPLYCREATETIME: Create Time").
               setSize(30);
       
@@ -358,9 +362,16 @@ public class ConAdjustReply extends HzASPPageProviderWf
       
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONADJUSTREPLYNOTE: Note").
               setSize(120).
               setHeight(5);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("ADJUST_REPLY_NAME").
+              setLabel("FLOWTITLE: Flow Title");
 
       headblk.setView("CON_ADJUST_REPLY");
       headblk.defineCommand("CON_ADJUST_REPLY_API","New__,Modify__,Remove__");

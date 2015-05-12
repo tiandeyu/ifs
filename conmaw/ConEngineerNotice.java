@@ -213,6 +213,7 @@ public class ConEngineerNotice extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONENGINEERNOTICEPROJNO: Proj No").
               setSize(30);
@@ -225,6 +226,7 @@ public class ConEngineerNotice extends HzASPPageProviderWf
       
       headblk.addField("CONTRACT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //              setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
               setLabel("CONADJUSTNOTICECONTRACTNO: Contract No").
@@ -244,6 +246,7 @@ public class ConEngineerNotice extends HzASPPageProviderWf
       headblk.addField("CONSTRUCTION_ORG_NAME").
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
               setLabel("CONADJUSTNOTICECONSTRUCTIONORGNAME: Construction Org Name").
+              setDefaultNotVisible().
               setSize(30).
               setReadOnly();
       
@@ -258,6 +261,7 @@ public class ConEngineerNotice extends HzASPPageProviderWf
       headblk.addField("ZONE_DESC").
               setFunction("GENERAL_ZONE_API.GET_ZONE_DESC ( :ZONE_NO)").
               setLabel("CONENGINEERNOTICEMONITORORGNAME: Monitor Org Name").
+              setDefaultNotVisible().
               setSize(30).
               setReadOnly();
       mgr.getASPField("ZONE_NO").setValidation("ZONE_DESC");
@@ -266,13 +270,12 @@ public class ConEngineerNotice extends HzASPPageProviderWf
       //NOTICE_NO
       headblk.addField("NOTICE_NO").
               setInsertable().
-              setWfProperties().
               setLabel("CONENGINEERNOTICENOTICENO: Notice No").
               setSize(30);
       //NOTICE_THEME
       headblk.addField("NOTICE_THEME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONENGINEERNOTICENOTICETHEME: Notice Theme").
               setSize(30);
       //LIMIT_REPLY_TIME
@@ -296,6 +299,7 @@ public class ConEngineerNotice extends HzASPPageProviderWf
       
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONENGINEERNOTICECREATETIME: Create Time").
               setSize(30);
       
@@ -315,6 +319,12 @@ public class ConEngineerNotice extends HzASPPageProviderWf
               setLabel("CONENGINEERNOTICECONTENT: Content").
               setSize(120).
               setHeight(5);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("NOTICE_THEME").
+              setLabel("FLOWTITLE: Flow Title");
 
       headblk.setView("CON_ENGINEER_NOTICE");
       headblk.defineCommand("CON_ENGINEER_NOTICE_API","New__,Modify__,Remove__");

@@ -264,6 +264,7 @@ public class ContractQtyVisa extends HzASPPageProviderWf
               setMandatory().
               setDynamicLOV("GENERAL_PROJECT").
               setInsertable().  
+              setDefaultNotVisible().
               setLabel("CONTRACTQTYVISAPROJNO: Proj No").
               setSize(30);  
       headblk.addField("GENERAL_PROJECT_PROJ_DESC").
@@ -289,6 +290,7 @@ public class ContractQtyVisa extends HzASPPageProviderWf
       headblk.addField("VISA_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTQTYVISAVISANO: Visa No").
               setSize(30);  
       headblk.addField("VISA_NAME").
@@ -303,6 +305,7 @@ public class ContractQtyVisa extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("SUB_PROJ_NO").
               setInsertable(). 
+              setDefaultNotVisible().
               setDynamicLOV("CON_QUA_TREE","PROJ_NO").
               setLOVProperty("TREE_PARE_FIELD", "PARENT_ID").
               setLOVProperty("TREE_DISP_FIELD", "NODE_NO,NODE_NAME").    
@@ -324,11 +327,13 @@ public class ContractQtyVisa extends HzASPPageProviderWf
    // 3
       headblk.addField("REPORTOR").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTQTYVISAREPORTOR: Reportor").
             setDynamicLOV("PERSON_INFO_LOV").
             setSize(30);
       headblk.addField("REPORTOR_NAME").
             setReadOnly().
+            setDefaultNotVisible().
             setFunction("PERSON_INFO_API.GET_NAME(:REPORTOR)").
             setLabel("CONTRACTQTYVISAREPORTORNAME: Reportor Name").
             setSize(30);
@@ -336,17 +341,20 @@ public class ContractQtyVisa extends HzASPPageProviderWf
       
       headblk.addField("REPORT_DATE", "Date").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTQTYVISAREPORTDATE: Report Date").
             setSize(30);
       
       // 4
       headblk.addField("INSPECTOR").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTQTYVISAINSPECTOR: Inspector").
             setDynamicLOV("PERSON_INFO").
             setSize(30);
       headblk.addField("INSPECTOR_NAME").
             setReadOnly().
+            setDefaultNotVisible().
             setFunction("PERSON_INFO_API.GET_NAME(:INSPECTOR)").
             setLabel("CONTRACTQTYVISAINSPECTORNAME: Inspector Name").
             setSize(30);
@@ -354,17 +362,20 @@ public class ContractQtyVisa extends HzASPPageProviderWf
       
       headblk.addField("INSPECT_DATE", "Date").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTQTYVISAINSPECTDATE: Inspect Date").
             setSize(30);
       
       // 5
       headblk.addField("APPROVER").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTQTYVISAAPPROVER: Approver").
             setDynamicLOV("PERSON_INFO").
             setSize(30);
       headblk.addField("APPROVER_NAME").
             setReadOnly().
+            setDefaultNotVisible().
             setFunction("PERSON_INFO_API.GET_NAME(:APPROVER)").
             setLabel("CONTRACTQTYVISAAPPROVERNAME: Approver Name").
             setSize(30);
@@ -372,17 +383,20 @@ public class ContractQtyVisa extends HzASPPageProviderWf
       
       headblk.addField("APPROVE_DATE", "Date").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTQTYVISAAPPROVEDATE: Approve Date").
             setSize(30);
       
       // 6
       headblk.addField("AUDITOR").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTQTYVISAAUDITOR: Auditor").
             setDynamicLOV("PERSON_INFO").
             setSize(30);
       headblk.addField("AUDITOR_NAME").
             setReadOnly().
+            setDefaultNotVisible().
             setFunction("PERSON_INFO_API.GET_NAME(:AUDITOR)").
             setLabel("CONTRACTQTYVISAAUDITORNAME: Auditor Name").
             setSize(30);
@@ -390,11 +404,13 @@ public class ContractQtyVisa extends HzASPPageProviderWf
       
       headblk.addField("AUDIT_DATE", "Date").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTQTYVISAAUDITDATE: Audit Date").
             setSize(30);
       
       headblk.addField("COMPLETE_DATE", "Date").
             setReadOnly().
+            setDefaultNotVisible().
             setLabel("CONTRACTQTYVISACOMPLETEDATE: Complete Date").
             setSize(30);  
       headblk.addField("ALL_OWNER_TOTAL", "Number" ,"#0.00").

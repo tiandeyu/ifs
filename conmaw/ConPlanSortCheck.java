@@ -258,6 +258,7 @@ public class ConPlanSortCheck extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONPLANSORTCHECKPROJNO: Proj No").
               setSize(30);
@@ -276,6 +277,7 @@ public class ConPlanSortCheck extends HzASPPageProviderWf
       
       headblk.addField("CONTRACT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //              setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
               setLabel("CONPLANSORTCHECKCONTRACTNO: Contract No").
@@ -296,6 +298,7 @@ public class ConPlanSortCheck extends HzASPPageProviderWf
 
       headblk.addField("SECOND_SIDE_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
               setLabel("CONPLANSORTCHECKSECONDSIDENAME: Constraction Org Name").
               setSize(25);
@@ -308,12 +311,11 @@ public class ConPlanSortCheck extends HzASPPageProviderWf
       
       headblk.addField("CHECK_LIST_NO").
               setInsertable().
-              setWfProperties().
               setLabel("CONPLANSORTCHECKCHECKLISTNO: Check List No").
               setSize(30);
       headblk.addField("CHECK_LIST_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONPLANSORTCHECKCHECKLISTNAME: Check List Name").
               setSize(30);
       headblk.addField("CREATE_PERSON").
@@ -331,6 +333,7 @@ public class ConPlanSortCheck extends HzASPPageProviderWf
       
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONPLANSORTCHECKCREATETIME: Create Time").
               setSize(30);
       headblk.addField("STATUS").
@@ -345,7 +348,14 @@ public class ConPlanSortCheck extends HzASPPageProviderWf
               setInsertable().
               setLabel("CONPLANSORTCHECKNOTE: Note").
               setSize(130).
+              setDefaultNotVisible().
               setHeight(5);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("CHECK_LIST_NAME").
+              setLabel("FLOWTITLE: Flow Title");
 
       headblk.setView("CON_PLAN_SORT_CHECK");
       headblk.defineCommand("CON_PLAN_SORT_CHECK_API","New__,Modify__,Remove__");

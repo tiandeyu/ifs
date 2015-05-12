@@ -314,7 +314,8 @@ public class DocReceiveTrans extends HzASPPageProviderWf {
       headblk.addField("REV_TITLE").
       setInsertable().
       setLabel("DOCRECEIVETRANSREVTITLE: Rev Title").
-      setReadOnly().setWfProperties().
+      setReadOnly().
+//      setWfProperties().
       setSize(size_long);
 
       headblk.addField("DOC_CODE").
@@ -577,6 +578,14 @@ public class DocReceiveTrans extends HzASPPageProviderWf {
       setLabel("DOCISSUERECEIVERECEIVEDATE: Receive Date").
       setReadOnly().
       setSize(20);
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("REV_TITLE").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
       
       headblk.setView("DOC_RECEIVE_TRANS_REFERENCE");
       headblk.defineCommand("DOC_RECEIVE_TRANS_API","New__,Modify__,Remove__,Close__,Re_Open__");

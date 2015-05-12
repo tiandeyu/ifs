@@ -304,22 +304,21 @@ public class ContractPaymentOth extends HzASPPageProviderWf
               setHidden();
       headblk.addField("PROJ_NO").
               setMandatory().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setInsertable().    
               setLabel("CONTRACTPAYMENTPROJNO: Proj No").
               setSize(30);
       headblk.addField("GENERAL_PROJECT_PROJ_DESC").
               setReadOnly().
-              setWfProperties(). 
               setFunction("GENERAL_PROJECT_API.GET_PROJ_DESC (:PROJ_NO)").
               setLabel("PROJECTCONTRACTGENERALPROJECTPROJDESC: General Project Proj Desc").
               setSize(30); 
       mgr.getASPField("PROJ_NO").setValidation("GENERAL_PROJECT_PROJ_DESC");
       headblk.addField("CONTRACT_ID").
-              setWfProperties(). 
               setMandatory().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
-              setLOVProperty("WHERE", "SCHEDULE = 'FALSE'").
+              setLOVProperty("WHERE", "SCHEDULE = 'FALSE' AND CLASS_NO NOT IN ('SB','WZ','WX')").
               setLOVProperty("ORDER_BY", "CONTRACT_ID").
               setInsertable().    
               setLabel("CONTRACTPAYMENTCONTRACTID: Contract Id").
@@ -335,17 +334,17 @@ public class ContractPaymentOth extends HzASPPageProviderWf
               setReadOnly().
               unsetInsertable().
               setHidden().
-              setWfProperties(). 
               setInsertable().
               setLabel("CONTRACTPAYMENTPAYMENTNO: Payment No").
               setSize(30);
       headblk.addField("PAYMENT_SEQ").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTPAYMENTSEQ: Payment Seq").
               setSize(30);
       headblk.addField("PAYMENT_DESC").
-              setInsertable().    
-              setWfProperties().  
+              setInsertable(). 
+              setMandatory().
               setLabel("CONTRACTPAYMENTPAYMENTDESC: Payment Desc").
               setSize(30);
       // 3
@@ -369,11 +368,13 @@ public class ContractPaymentOth extends HzASPPageProviderWf
       // 5
       headblk.addField("PAYMENT_METHOD").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTPAYMENTMETHOD: Payment Method").
               setDynamicLOV("PAY_METHOD").
               setSize(30);
       headblk.addField("PAYMENT_METHOD_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTPAYMENTMETHODNAME: Payment Method Name").
               setFunction("PAY_METHOD_API.Get_Method_Name(:PAYMENT_METHOD)").
               setSize(30);
@@ -381,11 +382,13 @@ public class ContractPaymentOth extends HzASPPageProviderWf
       
       headblk.addField("PAYMENT_TYPE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTPAYMENTTYPE: Payment Type").
               setDynamicLOV("CONTRACT_PAYMENT_TYPE").
               setSize(30);
       headblk.addField("PAYMENT_TYPE_DESC").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTPAYMENTTYPEDESC: Payment Type Desc").
               setFunction("CONTRACT_PAYMENT_TYPE_API.Get_Type_Desc(:PAYMENT_TYPE)").
               setSize(30);  
@@ -395,11 +398,13 @@ public class ContractPaymentOth extends HzASPPageProviderWf
       headblk.addField("PAY_MIN_TYPE").
               setInsertable().
               setMandatory().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTPAYMINTYPE: Payment Min Type").
               setDynamicLOV("CONTRACT_PAY_MIN_TYPE", "", 500, 550, true, true).
               setSize(30);
       headblk.addField("PAY_MIN_TYPE_DESC").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTPAYMINTYPEDESC: Payment Min Type Desc").
               setFunction("CONTRACT_PAY_MIN_TYPE_API.Get_Type_Desc(:PAY_MIN_TYPE)").
               setSize(30);
@@ -420,6 +425,7 @@ public class ContractPaymentOth extends HzASPPageProviderWf
       headblk.addField("CHANGE_PRICE","Number","#0.00").
               unsetInsertable().
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("PROJECT_CONTRACT_API.Cal_Chg_Contract_Total(:PROJ_NO, :CONTRACT_ID)").
               setLabel("CONTRACTPAYMENTCHANGEPRICE: Change Price").  
               setSize(20); 
@@ -435,6 +441,7 @@ public class ContractPaymentOth extends HzASPPageProviderWf
       
       headblk.addField("CON_DET_PAY_CST", "Money","#0.00").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("Contract_Payment_API.Cal_Payment_Detain(:PROJ_NO,:CONTRACT_ID,:PAYMENT_NO)").
               setLabel("CONTRACTPAYMENTCONDETPAYCST: Con Det Pay Cst").
               setSize(30);
@@ -442,12 +449,14 @@ public class ContractPaymentOth extends HzASPPageProviderWf
       // 6.5
       headblk.addField("PRE_PAY_CST", "Money","#0.00").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("Contract_Payment_API.Cal_All_Contract_Payment(:PROJ_NO,:CONTRACT_ID,:PAYMENT_NO - 1)").
               setLabel("CONTRACTPAYMENTPREPAYCST: Pre Pay Cst").
               setSize(30);
         
       headblk.addField("CON_PAY_CST", "Money","#0.00"). 
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("Contract_Payment_API.Cal_Contract_Payment(:PROJ_NO,:CONTRACT_ID,:PAYMENT_NO)").
               setLabel("CONTRACTPAYMENTCONPAYCST: Con Pay Cst").
               setSize(30);
@@ -460,6 +469,7 @@ public class ContractPaymentOth extends HzASPPageProviderWf
       
       headblk.addField("ACTUAL_PAYMENT", "Money","#0.00").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTACTUALPAYMENT: Actual Payment").
               setSize(30);  
       // 7
@@ -493,12 +503,14 @@ public class ContractPaymentOth extends HzASPPageProviderWf
       
       headblk.addField("PAYMENT_CURRENCY").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTPAYMENTCURRENCY: Payment Currency").
               setDynamicLOV("ISO_CURRENCY").
               setHidden().       
               setSize(30);
       headblk.addField("PAYMENT_CURRENCY_DESC"). 
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTPAYMENTCURRENCYDESC: Payment Currency Desc").
               setFunction("Iso_Currency_API.Get_Description(:PAYMENT_CURRENCY)").
               setSize(30);
@@ -511,10 +523,12 @@ public class ContractPaymentOth extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("PAYMENT_DATE","Date").   
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTPAYMENTDATE: Payment Date").
               setSize(30);
       headblk.addField("REPORT_DATE","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTREPORTDATE: Report Date").
               setSize(30);
 
@@ -526,6 +540,7 @@ public class ContractPaymentOth extends HzASPPageProviderWf
               setSize(30);    
       headblk.addField("SECEND_SIDE").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("PROJECT_CONTRACT_API.Get_Secend_Side_Desc(:PROJ_NO, :CONTRACT_ID)").
               setLabel("CONTRACTPAYMENTSECENDSIDE: Secend Side").    
               setSize(50); 
@@ -535,11 +550,13 @@ public class ContractPaymentOth extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("PAYMENT_ACCORD").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTPAYMENYACCORD: Payment Accord").
               setSize(120).
               setHeight(6);
       headblk.addField("PAYMENT_CONDITION").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONTRACTPAYMENTPAYMENYCONDITION: Payment Condition").
               setSize(120).
               setHeight(6);
@@ -547,7 +564,14 @@ public class ContractPaymentOth extends HzASPPageProviderWf
               setInsertable().
               setLabel("CONTRACTPAYMENTNOTE: Note").
               setSize(120).
+              setDefaultNotVisible().
               setHeight(4);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("PAYMENT_DESC").
+              setLabel("FLOWTITLE: Flow Title");
       headblk.addField("UNDERTAKE_DEPT").setHidden();
       headblk.addField("UNDERTAKE_DEPT_NAME").setHidden();
       headblk.setView("CONTRACT_PAYMENT");
@@ -557,7 +581,6 @@ public class ContractPaymentOth extends HzASPPageProviderWf
       headbar.addCustomCommand("import_Payment_Item","CONTRACTPAYMENTIMPORTPAYMENTITEM: Import Payment Item..");
       headbar.addSecureCustomCommand("Approve","CONTRACTPAYMENTAPPROVE: Approve Contract Payment", "CONTRACT_PAYMENT_API.Approve__");
       headbar.addSecureCustomCommand("Release","CONTRACTPAYMENTRELEASE: Release Contract Payment", "CONTRACT_PAYMENT_API.Release__");
-      headbar.addCustomCommand("printReport", "CONTRACTPAYMENTPRINTREPORT: Print Report...");
       headbar.addCommandValidConditions("Approve",     "OBJSTATE",    "Enable",      "Initialization");  
       headbar.addCommandValidConditions("Release",     "OBJSTATE",    "Enable",      "Approving");      
       headbar.addCustomCommand("printReportPrePay", "PROJECTCONTRACTPRINTREPORTPREPAY: Print Report Pre Pay...");
@@ -853,22 +876,7 @@ public class ContractPaymentOth extends HzASPPageProviderWf
       tabs.setTabWidth(100);
 
    }
-   public void  printReport() throws FndException, UnsupportedEncodingException
-   {
-    ASPManager mgr = getASPManager();
-    ASPConfig cfg = getASPConfig();
-    String URL=cfg.getParameter("APPLICATION/RUNQIAN/SERVER_URL");
-    if (headlay.isMultirowLayout())
-       headset.goTo(headset.getRowSelected());
-    if (headset.countRows()>0 )
-          {   
-             String proj_no = headset.getValue("PROJ_NO");
-             String contract_id = headset.getValue("CONTRACT_ID");
-             String payment_no = headset.getValue("PAYMENT_NO");
-              appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=RptContractPaymentOth.raq&proj_no="+proj_no+"&contract_id="+contract_id+"&payment_no="+payment_no
-                + "','_blank','height=600, width=780, top=200, left=350, toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');");                                
-         }
-   }  
+  
    
    public void activateItems()
    {
@@ -911,7 +919,10 @@ public class ContractPaymentOth extends HzASPPageProviderWf
           if( headlay.isSingleLayout() && ("Released".equals(state))){ 
              headbar.disableCommand(headbar.DELETE);
              headbar.disableCommand(headbar.EDITROW);       
+             contract_payment_item_bar.disableCommand(contract_payment_item_bar.DELETE);
              contract_payment_item_bar.disableCommand(contract_payment_item_bar.EDITROW);
+             contract_payment_detain_bar.disableCommand(contract_payment_detain_bar.EDITROW);
+             contract_payment_detain_bar.disableCommand(contract_payment_detain_bar.NEWROW);
       }
       }
       }

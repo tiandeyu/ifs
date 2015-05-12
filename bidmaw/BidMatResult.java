@@ -207,6 +207,7 @@ public class BidMatResult extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("BIDMATRESULTPROJNO: Proj No").
               setSize(30);
@@ -223,6 +224,7 @@ public class BidMatResult extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("SUPPLIER").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("SUPPLIER_INFO").
               setLabel("BIDMATRESULTSUPPLIER: Supplier").
               setSize(30);
@@ -239,6 +241,7 @@ public class BidMatResult extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("PURCH_CONTRACT_ID").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT","PROJ_NO").
               setLOVProperty("WHERE", " CLASS_NO IN ('SB','WX','WZ') ").
               setLabel("BIDMATRESULTPURCHCONTRACTID: Purch Contract Id").
@@ -251,32 +254,42 @@ public class BidMatResult extends HzASPPageProviderWf
       mgr.getASPField("PURCH_CONTRACT_ID").setValidation("PURCH_CONTRACT_NAME");
       headblk.addField("CREATE_PERSON").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PERSON_INFO").
               setLabel("BIDMATRESULTCREATEPERSON: Create Person").
               setSize(20);
       headblk.addField("CREATE_PERSON_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("PERSON_INFO_API.GET_NAME (:CREATE_PERSON)").
               setLabel("BIDMATRESULTCREATEPERSONNAME: Create Person Name").
               setSize(30);
       mgr.getASPField("CREATE_PERSON").setValidation("CREATE_PERSON_NAME");
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDMATRESULTCREATETIME: Create Time").
               setSize(30);
       headblk.addField("PURCH_ID").
               setInsertable().
               setReadOnly().
+              setDefaultNotVisible().
+              setMandatory().
               setDynamicLOV("BID_MAT_PURCH","PROJ_NO").
               setLOVProperty("WHERE", " CREATE_RESULT = 'FALSE' AND STATUS = '2' ").
               setLabel("BIDMATRESULTPURCHID: Purch Id").
               setSize(30);
       headblk.addField("BID_MAT_PURCH_PURCH_NAME").
               setReadOnly().
-              setWfProperties().
               setFunction("BID_MAT_PURCH_API.GET_PURCH_NAME ( :PROJ_NO,:PURCH_ID)").
               setLabel("BIDMATRESULTBIDMATPURCHPURCHNAME: Bid Mat Purch Purch Name").
               setSize(30);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("BID_MAT_PURCH_API.GET_PURCH_NAME ( :PROJ_NO,:PURCH_ID)").
+              setLabel("FLOWTITLE: Flow Title");
       mgr.getASPField("PURCH_ID").setValidation("BID_MAT_PURCH_PURCH_NAME");
       headblk.addField("GENERATED_CONTRACT").setHidden().setSize(30);
       headblk.setView("BID_MAT_RESULT");

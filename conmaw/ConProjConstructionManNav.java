@@ -168,6 +168,7 @@ public class ConProjConstructionManNav extends ASPPageProvider
 //              setDynamicLOV("GENERAL_PROJECT").
 //              setInsertable().        
               setLabel("CONPROJCONSTRUCTIONMANPROJNO: Proj No").
+              setDefaultNotVisible().
               setSize(30);      
       headblk.addField("PROJ_DESC").
               setFunction("GENERAL_PROJECT_API.Get_Proj_Desc(:PROJ_NO)").
@@ -181,6 +182,7 @@ public class ConProjConstructionManNav extends ASPPageProvider
 //              setMandatory().
 //              setDynamicLOV("GENERAL_MACH_GROUP").
               setLabel("CONPROJCONSTRUCTIONMANUNIT: Unit").
+              setDefaultNotVisible().
               setSize(30);
       headblk.addField("UNIT_DESC").
               setReadOnly().
@@ -196,6 +198,7 @@ public class ConProjConstructionManNav extends ASPPageProvider
               //setLOVProperty("TREE_PARE_FIELD", "PRE_CONTRACT_NO").
               //setLOVProperty("TREE_DISP_FIELD", "CONTRACT_ID,CONTRACT_DESC").
               setLabel("CONPROJCONSTRUCTIONMANCONTRACTNO: Contract No").
+              setDefaultNotVisible().
               setSize(30);
       headblk.addField("CONTRACT_DESC").
               setReadOnly().
@@ -207,6 +210,7 @@ public class ConProjConstructionManNav extends ASPPageProvider
       headblk.addField("CONSTRUCT_ORG").
 //              setInsertable().
               setLabel("CONPROJCONSTRUCTIONMANCONSTRUCTORG: Construct Org").     
+              setDefaultNotVisible().
               setSize(30).
               setDynamicLOV("GENERAL_ORGANIZATION");
       headblk.addField("CONSTRUCT_ORG_NAME").

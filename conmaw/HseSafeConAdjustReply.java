@@ -324,7 +324,7 @@ public class HseSafeConAdjustReply extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("ADJUST_REPLY_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONADJUSTREPLYADJUSTREPLYNAME: Adjust Reply Name").
               setSize(30);
       
@@ -367,6 +367,12 @@ public class HseSafeConAdjustReply extends HzASPPageProviderWf
               setHidden().
               setLabel("CONADJUSTNOTICENOTE: Type Id").
               setSize(20);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("ADJUST_REPLY_NAME").
+              setLabel("FLOWTITLE: Flow Title"); 
 
       headblk.setView("CON_ADJUST_REPLY");
       headblk.defineCommand("CON_ADJUST_REPLY_API","New__,Modify__,Remove__");

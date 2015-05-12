@@ -234,6 +234,7 @@ public class ConDesignTechNotify extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONDESIGNTECHNOTIFYPROJNO: Proj No").
               setSize(30);
@@ -251,6 +252,7 @@ public class ConDesignTechNotify extends ASPPageProvider
               setSize(30);
       headblk.addField("CONTRACT_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //              setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
               setLabel("CONDESIGNTECHNOTIFYCONTRACTNO: Contract No").
@@ -271,6 +273,7 @@ public class ConDesignTechNotify extends ASPPageProvider
 
       headblk.addField("SECOND_SIDE_NAME").
               setReadOnly().
+              setDefaultNotVisible().
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_NO))").
               setLabel("CONDESIGNTECHNOTIFYSECONDSIDENAME: Constraction Org Name").
               setSize(25);
@@ -294,10 +297,12 @@ public class ConDesignTechNotify extends ASPPageProvider
       
       headblk.addField("TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONDESIGNTECHNOTIFYTIME: Time").
               setSize(30);
       headblk.addField("LOCATION").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONDESIGNTECHNOTIFYLOCATION: Location").
               setSize(30);
       headblk.addField("NOTIFY_NO").
@@ -324,6 +329,7 @@ public class ConDesignTechNotify extends ASPPageProvider
       
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONDESIGNTECHNOTIFYCREATETIME: Create Time").
               setSize(30);
       headblk.addField("STATE").
@@ -341,6 +347,7 @@ public class ConDesignTechNotify extends ASPPageProvider
 //              setSize(30);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONDESIGNTECHNOTIFYNOTE: Note").
               setSize(130).
               setHeight(5);

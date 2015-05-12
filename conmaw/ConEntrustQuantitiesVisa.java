@@ -295,6 +295,7 @@ public class ConEntrustQuantitiesVisa extends HzASPPageProviderWf
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("CONENTRUSTQUANTITIESVISAPROJNO: Proj No").
               setSize(30);
@@ -313,6 +314,7 @@ public class ConEntrustQuantitiesVisa extends HzASPPageProviderWf
               setHidden();
       headblk.addField("SERIAL_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("BID_PROJ_ENTRUST","PROJ_NO").
               setLOVProperty("WHERE", " IS_VALID = 'TRUE' AND ENTRUST_TYPE = 'TRUE' AND STATUS = '2' AND IS_FEEDBACK = 'FALSE' ").
               setLabel("CONQUANTITIESVISAENTRUSTNO: Entrust No").
@@ -325,12 +327,11 @@ public class ConEntrustQuantitiesVisa extends HzASPPageProviderWf
               setReadOnly();
       headblk.addField("VISA_NO").
               setInsertable().
-              setWfProperties().
               setLabel("CONQUANTITIESVISAVISANO: Visa No").
               setSize(30);
       headblk.addField("VISA_NAME").
               setInsertable().
-              setWfProperties().
+              setMandatory().
               setLabel("CONQUANTITIESVISAVISANAME: Visa Name").
               setSize(30);
       headblk.addField("CONTRACT_ENTRUST_NO").
@@ -348,10 +349,12 @@ public class ConEntrustQuantitiesVisa extends HzASPPageProviderWf
               setFunction("GENERAL_ORGANIZATION_API.GET_ORG_DESC ( BID_PROJ_ENTRUST_API.Get_Entrust_Org ( :PROJ_NO,:SERIAL_NO))").
               setLabel("CONENTRUSTQUANTITIESVISACONSTRUCTIONORGNAME: Construction Org Name").
               setSize(30).
+              setDefaultNotVisible().
               setReadOnly();
       
       headblk.addField("SUB_PROJ_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("CON_QUA_TREE","PROJ_NO").
               setLOVProperty("TREE_PARE_FIELD", "PARENT_ID").
               setLOVProperty("TREE_DISP_FIELD", "NODE_NO,NODE_NAME").
@@ -366,14 +369,17 @@ public class ConEntrustQuantitiesVisa extends HzASPPageProviderWf
       mgr.getASPField("SUB_PROJ_NO").setValidation("SUB_PROJ_DESC");
       headblk.addField("REAL_ESTIMATE_COST","Money","#0.00").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("CONQUANTITIESVISAREALESTIMATECOST: Real Estimate Cost").
               setSize(30);
       headblk.addField("ESTIMATE_COST","Money","#0.00").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("CONQUANTITIESVISAESTIMATECOST: Estimate Cost").
               setSize(30);
       headblk.addField("CREATE_PERSON").
               setDynamicLOV("PERSON_INFO").
+              setDefaultNotVisible().
               setLabel("CONENTRUSTQUANTITIESVISACREATEPERSON: Create Person").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
@@ -385,6 +391,7 @@ public class ConEntrustQuantitiesVisa extends HzASPPageProviderWf
       
       headblk.addField("CREATE_TIME","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONQUANTITIESVISACREATETIME: Create Time").
               setSize(30);
       headblk.addField("STATUS").
@@ -398,9 +405,16 @@ public class ConEntrustQuantitiesVisa extends HzASPPageProviderWf
               setSize(30);
       headblk.addField("VISA_REASON").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("CONQUANTITIESVISAVISAREASON: Visa Reason").
               setSize(120).
               setHeight(5);
+      headblk.addField("FLOW_TITLE").
+              setWfProperties().
+              setReadOnly().
+              setHidden().
+              setFunction("VISA_NAME").
+              setLabel("FLOWTITLE: Flow Title");
       //Virtual Field
       headblk.addField("CONTRACT_ID").setFunction("''").setHidden();
       //Entrust_No is used for 'IS_VALID'!

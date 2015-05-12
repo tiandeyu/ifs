@@ -296,6 +296,7 @@ public class MatBorrowReturn extends ASPPageProvider
              setHidden();
       headblk.addField("PROJ_NO").
             setReadOnly().
+            setDefaultNotVisible().
             setDynamicLOV("GENERAL_PROJECT",600,445).
             setLabel("MATBORROWRETURNPROJNO: Proj No").
             setSize(50);
@@ -308,6 +309,7 @@ public class MatBorrowReturn extends ASPPageProvider
       //Dec4th add Contract_Id and Contract_desc by @natic
       headblk.addField("CONTRACT_ID").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
               setLOVProperty("WHERE", "CLASS_NO IN ('SB','WZ')").
               setLabel("MATBORROWRETURNCONTRACTID: Contract Id").
@@ -355,6 +357,7 @@ public class MatBorrowReturn extends ASPPageProvider
 
       headblk.addField("BORROW_ORG").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("MATBORROWBORROWORG: Borrow Org").
               setDynamicLOV("PERSON_ZONE", "BORROW_PERSON PERSON_ID").
 //              setFunction("PERSON_ZONE_API.Get_User_Zones (:BORROW_PERSON)").
@@ -363,6 +366,7 @@ public class MatBorrowReturn extends ASPPageProvider
       headblk.addField("BORROW_ORG_NAME").
               setFunction("general_zone_api.Get_Zone_Desc ( :BORROW_ORG)").
               setLabel("MATBORROWBORROWORGNAME: Borrow Org Name").
+              setDefaultNotVisible().
               setReadOnly().
               setSize(30);
       mgr.getASPField("BORROW_ORG").setValidation("BORROW_ORG_NAME");
@@ -380,11 +384,13 @@ public class MatBorrowReturn extends ASPPageProvider
             setSize(30);
       headblk.addField("CREATE_PERSON").
             setReadOnly().
+            setDefaultNotVisible().
             setDynamicLOV("PERSON_INFO").
             setLabel("MATBORROWRETURNCREATEPERSON: Create Person").
             setSize(20);
       headblk.addField("CREATE_PERSON_NAME").
             setFunction("PERSON_INFO_API.GET_NAME ( :CREATE_PERSON)").
+            setDefaultNotVisible().
             setLabel("MATBORROWRETURNCREATEPERSONINFONAME: Create Person Name").
             setReadOnly().
             setSize(30);
@@ -412,6 +418,7 @@ public class MatBorrowReturn extends ASPPageProvider
            setSize(150);
       headblk.addField("NOTE").
            setReadOnly().
+           setDefaultNotVisible().
            setLabel("MATBORROWRETURNNOTE: Note").
            setHeight(4).
            setSize(150);
@@ -468,6 +475,12 @@ public class MatBorrowReturn extends ASPPageProvider
       mat_borrow_line_blk.addField("BORROW_QTY","Number").
                         setReadOnly().
                         setLabel("MATBORROWRETURNLINEBORROWQTY: Borrow Qty").
+                        setSize(30);
+
+      mat_borrow_line_blk.addField("ITEM1_RETURN_QTY","Number").
+                        setDbName("RETURN_QTY").
+                        setReadOnly().
+                        setLabel("MATBORROWRETURNLINERETURNQTY: Return Qty").
                         setSize(30);
       mat_borrow_line_blk.addField("ITEM0_CREATE_TIME","Date").
                         setDbName("CREATE_TIME").
@@ -603,6 +616,19 @@ public class MatBorrowReturn extends ASPPageProvider
                           setInsertable().
                           setLabel("MATRETURNLINERETURNTIME: Return Time").
                           setSize(30);
+
+      mat_return_line_blk.addField("STATUS").
+                          setReadOnly().
+                          setHidden().
+                          setLabel("MATRETURNLINESTATUS: Status").
+                          setSize(30);
+
+      mat_return_line_blk.addField("ITEM2_STATUS_DESC").
+              setReadOnly().
+              setFunction("FLOW_STATUS_API.Get_Status_Desc (:STATUS)").
+              setLabel("MATBORROWRETURNSTATUS: Status").
+              setSize(30);
+      
       mat_return_line_blk.addField("ITEM1_CREATE_TIME","Date").
                           setDbName("CREATE_TIME").
                           setReadOnly().
@@ -620,6 +646,8 @@ public class MatBorrowReturn extends ASPPageProvider
       mat_return_line_bar = mgr.newASPCommandBar(mat_return_line_blk);
       mat_return_line_bar.defineCommand(mat_return_line_bar.OKFIND, "okFindITEM2");
       mat_return_line_bar.defineCommand(mat_return_line_bar.NEWROW, "newRowITEM2");
+      mat_return_line_bar.addCustomCommand("doMatReturn",mgr.translate("DOMATRETURN: Do Mat Return"));
+      mat_return_line_bar.addCommandValidConditions("doMatReturn", "STATUS", "Enable", "0");
       mat_return_line_tbl = mgr.newASPTable(mat_return_line_blk);
       mat_return_line_tbl.setTitle("MATRETURNLINEITEMHEAD2: MatReturnLine");
       mat_return_line_tbl.enableRowSelect();
@@ -635,29 +663,29 @@ public class MatBorrowReturn extends ASPPageProvider
       ASPManager mgr = getASPManager();
       ASPCommand cmdBuf; 
       ASPTransactionBuffer trans = mgr.newASPTransactionBuffer();
-      String sql = "";
-      int returnCount = 0;
-      int count = 0;
-      //校验归还的数量是否等于借出的数量
-      sql = "select sum(nvl(return_qty,0)) return_count from mat_return_line ";
-      sql = sql + "where proj_no = '"+headset.getValue("PROJ_NO")+"' and borrow_id = '"+headset.getValue("BORROW_ID")+"'";
-      trans.clear();
-      trans.addQuery("ITEMS",sql);
-      trans = mgr.perform(trans);
-      count =(int)trans.getNumberValue("ITEMS/DATA/RETURN_COUNT");
-      
-      //获取总共应还数量
-      String bor_qty="";
-      for(int i = 0;i< mat_borrow_line_set.countRows();i++){
-         bor_qty=mat_borrow_line_set.getValueAt(i, "BORROW_QTY");
-         returnCount = returnCount + Integer.parseInt(mgr.isEmpty(bor_qty)?"0":bor_qty);
-      }
-      if(count == 0){
-         mgr.showAlert("MATBORROWRETURNZERO: There are no mats have returned!");
-      }else if(count != returnCount){
-         mgr.showAlert("MATBORROWRETURNFAIL: The returned number is not equal to the borrowed number!");
-      }else{
-         trans.clear();
+//      String sql = "";
+//      int returnCount = 0;
+//      int count = 0;
+//      //校验归还的数量是否等于借出的数量
+//      sql = "select sum(nvl(return_qty,0)) return_count from mat_return_line ";
+//      sql = sql + "where proj_no = '"+headset.getValue("PROJ_NO")+"' and borrow_id = '"+headset.getValue("BORROW_ID")+"'";
+//      trans.clear();
+//      trans.addQuery("ITEMS",sql);
+//      trans = mgr.perform(trans);
+//      count =(int)trans.getNumberValue("ITEMS/DATA/RETURN_COUNT");
+//      
+//      //获取总共应还数量
+//      String bor_qty="";
+//      for(int i = 0;i< mat_borrow_line_set.countRows();i++){
+//         bor_qty=mat_borrow_line_set.getValueAt(i, "BORROW_QTY");
+//         returnCount = returnCount + Integer.parseInt(mgr.isEmpty(bor_qty)?"0":bor_qty);
+//      }
+//      if(count == 0){
+//         mgr.showAlert("MATBORROWRETURNZERO: There are no mats have returned!");
+//      }else if(count != returnCount){
+//         mgr.showAlert("MATBORROWRETURNFAIL: The returned number is not equal to the borrowed number!");
+//      }else{
+//         trans.clear();
          if("".equals(headset.getValue("STATUS_BORROW"))||headset.getValue("STATUS_BORROW") == null){                        
             mgr.showAlert("MATBORROWRETURNREFUSE: The borrowed mats have not been borrowed!");
          }else if("11".equals(headset.getValue("STATUS_BORROW"))){
@@ -666,23 +694,47 @@ public class MatBorrowReturn extends ASPPageProvider
             cmdBuf.addParameter("BORROW_ID", headset.getValue("BORROW_ID"));     
             cmdBuf.addParameter("OBJID", "ReturnAccept");
             mgr.perform(trans);
-            okFind();
+//            okFind();
+            headset.refreshRow();
             okFindITEM1();
          }else{
             mgr.showAlert("MATBORROWSTATUS: The borrow bill was already done.");
          }
       }    
-   }
+//   }
    
 
+   public void doMatReturn() throws FndException{
+      ASPManager mgr = getASPManager();
+      ASPCommand cmdBuf; 
+      ASPTransactionBuffer trans = mgr.newASPTransactionBuffer();
+        if("0".equals(mat_return_line_set.getValue("STATUS"))){
+            cmdBuf = trans.addCustomCommand("DOMATRETURN", "MAT_RETURN_LINE_API.Do_Mat_Return__");
+            cmdBuf.addParameter("PROJ_NO", headset.getValue("PROJ_NO"));
+            cmdBuf.addParameter("BORROW_ID", headset.getValue("BORROW_ID"));     
+            cmdBuf.addParameter("RETURN_NO", mat_return_line_set.getValue("RETURN_NO"));
+            mgr.perform(trans);
+            mat_borrow_line_set.refreshRow();
+            mat_return_line_set.refreshRow();
+         }else{
+            mgr.showAlert("MATBORROWSTATUS: The borrow bill was already done.");
+         }
+      }    
    public void  adjust()
    {
       if(headset.countRows()>0){
+         mat_return_line_bar.disableCommand(mat_return_line_bar.DELETE);
+         mat_return_line_bar.disableCommand(mat_return_line_bar.EDITROW);
+         if(mat_return_line_set.countRows()>0&&mat_return_line_lay.isSingleLayout()&&"12".equals(mat_return_line_set.getValue("STATUS"))){               
+            mat_return_line_bar.enableCommand(mat_return_line_bar.DELETE);
+            mat_return_line_bar.enableCommand(mat_return_line_bar.EDITROW);
+//            mat_return_line_bar.disableCommand(mat_return_line_bar.NEWROW);
+         }       
          if("12".equals(headset.getValue("STATUS_BORROW"))){               
-            mat_return_line_bar.disableCommand(mat_return_line_bar.DELETE);
-            mat_return_line_bar.disableCommand(mat_return_line_bar.EDITROW);
+//            mat_return_line_bar.disableCommand(mat_return_line_bar.DELETE);
+//            mat_return_line_bar.disableCommand(mat_return_line_bar.EDITROW);
             mat_return_line_bar.disableCommand(mat_return_line_bar.NEWROW);
-         }
+         }        
       }
    }
    
@@ -731,6 +783,11 @@ public class MatBorrowReturn extends ASPPageProvider
       }
       if (mat_borrow_line_lay.isVisible())
           appendToHTML(mat_borrow_line_lay.show());
+      else if(headlay.isCustomLayout())
+      {
+         mat_borrow_line_lay.setLayoutMode(headlay.CUSTOM_LAYOUT);
+         appendToHTML(mat_borrow_line_lay.show());
+      }
       if (mat_return_line_lay.isVisible())
           appendToHTML(mat_return_line_lay.show());
 

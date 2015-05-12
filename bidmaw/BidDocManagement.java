@@ -396,6 +396,7 @@ public class BidDocManagement extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_PROJECT").
               setLabel("BIDDOCMANPROJNO: Proj No").
               setSize(30);
@@ -407,6 +408,7 @@ public class BidDocManagement extends ASPPageProvider
       mgr.getASPField("PROJ_NO").setValidateFunction("GENERAL_PROJECT_PROJ_DESC");
       headblk.addField("CRE_ID").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("BID_CRE_PROJ_APPLY_LOV", "PROJ_NO").
               setLabel("BIDDOCMANCREID: Cre Id").
               setCustomValidation("PROJ_NO,CRE_ID", "CREATE_BID_NAME,BID_PROJ_TYPE").
@@ -427,6 +429,7 @@ public class BidDocManagement extends ASPPageProvider
       headblk.addField("PLAN_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("BID_PLAN").
               setLabel("BIDDOCMANPLANNO: Plan No").
               setSize(30);
@@ -439,6 +442,7 @@ public class BidDocManagement extends ASPPageProvider
       
       headblk.addField("CREATE_ORG").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDDOCMANCREATEORG: Create Org").
               setSize(30).
               setDynamicLOV("GENERAL_ORGANIZATION");
@@ -457,10 +461,12 @@ public class BidDocManagement extends ASPPageProvider
               setSize(30);
       headblk.addField("PLAN_DATE","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDDOCMANPLANDATE: Plan Date").
               setSize(30);
       headblk.addField("CREATE_DATE","Date").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDDOCMANCREATEDATE: Create Date").
               setSize(30);
       headblk.addField("STATUS").
@@ -478,6 +484,7 @@ public class BidDocManagement extends ASPPageProvider
       
       headblk.addField("BID_METHOD_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("BID_METHOD").
               setLabel("BIDDOCMANBIDMETHODNO: Bid Method No").
               setSize(30);
@@ -489,15 +496,18 @@ public class BidDocManagement extends ASPPageProvider
       mgr.getASPField("BID_METHOD_NO").setValidation("DESCRIPTION");
       headblk.addField("CREATE_PERSON").
               setReadOnly().
+              setDefaultNotVisible().
               setLabel("BIDDOCMANCREATEPERSON: Create Person").
               setSize(30);
       headblk.addField("CREATE_PERSON_NAME").
               setFunction("PERSON_INFO_API.GET_NAME ( :CREATE_PERSON)").
               setLabel("BIDMATENQJUDGECREATEPERSONNAME: Create Person Name").
               setSize(30).
+              setDefaultNotVisible().
               setReadOnly();
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("BIDDOCMANNOTE: Note").
               setSize(129).
               setHeight(5);

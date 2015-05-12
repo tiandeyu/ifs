@@ -190,6 +190,7 @@ public class QuaSupervision extends ASPPageProvider
       headblk.addField("PROJ_NO").
               setMandatory().
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUASUPERVISIONPROJNO: Proj No").
               setDynamicLOV("GENERAL_PROJECT",600,445).
               setSize(35);
@@ -201,6 +202,7 @@ public class QuaSupervision extends ASPPageProvider
       mgr.getASPField("PROJ_NO").setValidation("GENERAL_PROJECT_PROJ_DESC");
       headblk.addField("ORG_NO").
               setInsertable().
+              setDefaultNotVisible().
               setDynamicLOV("GENERAL_ZONE", "PROJ_NO").
               setLabel("QUASUPERVISIONORGNO: Org No").
               setSize(35);
@@ -222,6 +224,7 @@ public class QuaSupervision extends ASPPageProvider
               //setMaxLength(200);
       headblk.addField("NOTE").
               setInsertable().
+              setDefaultNotVisible().
               setLabel("QUASUPERVISIONNOTE: Note").
               setSize(150).
               setMaxLength(200).

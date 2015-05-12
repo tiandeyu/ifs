@@ -269,7 +269,14 @@ public abstract class HzASPPageProviderWf extends ASPPageProvider implements HzC
 	   public void adjust() throws FndException{
 	      ASPManager mgr = getASPManager();
 	      String fromPage = mgr.readValue(FROM_FLAG,FROM_NAVIGATOR);
-	      
+	      //add by natic May 7th 2015
+	      //Make it auto refresh. 
+	      String comnd = mgr.readValue("__COMMAND");
+         if (  "MAIN.SaveReturn".equals(comnd))
+            headset.refreshAllRows();
+         else if("MAIN.SaveNew".equals(comnd))
+            headset.refreshAllRows();
+         //add end
 	      if (false == FROM_NAVIGATOR.equals(fromPage)) {
 	      	if(!headlay.isEditLayout() && !headlay.isSingleLayout()){
 	      		headlay.setLayoutMode(headlay.SINGLE_LAYOUT);

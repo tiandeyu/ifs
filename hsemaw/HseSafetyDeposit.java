@@ -198,7 +198,7 @@ public class HseSafetyDeposit extends HzASPPageProviderWf
               setHidden();
       headblk.addField("PROJ_NO").
               setMandatory().
-              setWfProperties().
+//              setWfProperties().
               setInsertable().
               setDynamicLOV("PROJECT_CONTRACT").
               setLabel("HSESAFETYDEPOSITPROJNO: Proj No").
@@ -224,7 +224,7 @@ public class HseSafetyDeposit extends HzASPPageProviderWf
               setCustomValidation("PROJ_NO,CONTRACT_ID", "CONTRACT_NAME,SECOND_SIDE,SECOND_SIDE_NAME");
       headblk.addField("CONTRACT_NAME").
               setReadOnly().
-              setWfProperties().
+//              setWfProperties().
               setFunction("PROJECT_CONTRACT_API.Get_Contract_Desc (:PROJ_NO,:CONTRACT_ID)").
               setLabel("HSESAFETYDEPOSITCONTRACTNAME: Contract Name").
               setSize(30);
@@ -238,7 +238,7 @@ public class HseSafetyDeposit extends HzASPPageProviderWf
 
       headblk.addField("SECOND_SIDE_NAME").
               setReadOnly().
-              setWfProperties().
+//              setWfProperties().
               setFunction("SUPPLIER_INFO_API.GET_NAME (PROJECT_CONTRACT_API.Get_Secend_Side (:PROJ_NO,:CONTRACT_ID))").
               setLabel("HSESAFETYDEPOSITSECONDSIDENAME: Constraction Org Name").
               setSize(30);
@@ -307,6 +307,15 @@ public class HseSafetyDeposit extends HzASPPageProviderWf
               setInsertable().
               setLabel("HSESAFETYDEPOSITCREATETIME: Create Time").
               setSize(30);
+      
+      headblk.addField("FLOW_TITLE").
+      setWfProperties().
+      setReadOnly().
+      setHidden().
+      setFunction("PROJECT_CONTRACT_API.Get_Contract_Desc (:PROJ_NO,:CONTRACT_ID)").
+      setLabel("FLOWTITLE: Flow Title").
+      setSize(30);
+     
       headblk.setView("HSE_SAFETY_DEPOSIT");
       headblk.defineCommand("HSE_SAFETY_DEPOSIT_API","New__,Modify__,Remove__");
       headset = headblk.getASPRowSet();
