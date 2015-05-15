@@ -22,8 +22,8 @@ public class MatmawNavigator implements Navigator
       n.addItem("MATMAWNAVIGATORMATCODENAV: Mat Code Nav", "matmaw/MatCodeNav.page");
       n.addItem("MATMAWNAVIGATORMATSUPEQUIPMENT: Mat Sup Equipment", "matmaw/MatSupEquipment.page");
       
-      ASPNavigatorNode n_two = matmaw_nav.addNode(mgr.translate( "MATMAWNAVIGATORINSTALLREQUIREPLAN: Install Require Plan" ));
-      n_two.addItem("MATMAWNAVIGATORMATINSTALLREQPLAN: Mat Install Req Plan","matmaw/MatInstalReqPlan.page");
+//      ASPNavigatorNode n_two = matmaw_nav.addNode(mgr.translate( "MATMAWNAVIGATORINSTALLREQUIREPLAN: Install Require Plan" ));
+//      n_two.addItem("MATMAWNAVIGATORMATINSTALLREQPLAN: Mat Install Req Plan","matmaw/MatInstalReqPlan.page");
       
       ASPNavigatorNode n_sup = matmaw_nav.addNode(mgr.translate( "MATMAWNAVIGATORSUPERVISIONMANAGEMENT: Supervision Management" ));
       n_sup.addItem("MATMAWNAVIGATORMATSUPPROJECT: Mat Sup Project","matmaw/MatSupProject.page");

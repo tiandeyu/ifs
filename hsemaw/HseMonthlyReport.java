@@ -498,7 +498,7 @@ public class HseMonthlyReport extends ASPPageProvider
           {   
              String proj_no = headset.getValue("PROJ_NO");
              String id = headset.getValue("ID");
-              appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=RptElectricityMonthlyReport.raq&proj_no="+proj_no+"&id_="+id
+              appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=RptElectricityMonthlyReport.raq&proj_no="+proj_no+"&id="+id
                 + "','_blank','height=600, width=780, top=200, left=350, toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');");                                
          }
    }
@@ -515,7 +515,7 @@ public class HseMonthlyReport extends ASPPageProvider
           {   
              String proj_no = headset.getValue("PROJ_NO");
              String id = headset.getValue("ID");
-              appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=RptElectricityYearReport.raq&proj_no="+proj_no+"&id_="+id
+              appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=RptElectricityYearReport.raq&proj_no="+proj_no+"&id="+id
                 + "','_blank','height=600, width=780, top=200, left=350, toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');");                                
          }
    }

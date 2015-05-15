@@ -577,7 +577,7 @@ public class MatBill extends ASPPageProvider
          {   
             String proj_no = headset.getValue("PROJ_NO");
             String accept_id = headset.getValue("BILL_CODE");
-             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=MatBill.raq&PROJ_NO="+proj_no+"&BILL_CODE="+accept_id
+             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=MatBill.raq&proj_no="+proj_no+"&bill_code="+accept_id
                + "','_blank','height=600, width=780, top=200, left=350, toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');");                                
         }
   }   

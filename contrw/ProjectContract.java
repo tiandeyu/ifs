@@ -1660,7 +1660,7 @@ public class ProjectContract extends HzASPPageProviderWf
              String class_no = headset.getValue("CLASS_NO");
              String proj_no = headset.getValue("PROJ_NO");
              String contract_id = headset.getValue("CONTRACT_ID");
-             if("WZ".equals(class_no) || "SB".equals(class_no)){
+             if("WZ".equals(class_no) || "SB".equals(class_no) || "WX".equals(class_no)){
               appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=RptContractContactMat.raq&proj_no="+proj_no+"&contract_id="+contract_id
                 + "','_blank','height=600, width=780, top=200, left=350, toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');");                                
              }else{

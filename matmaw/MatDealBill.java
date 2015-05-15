@@ -405,7 +405,7 @@ public class MatDealBill extends ASPPageProvider
             String proj_no = mat_deal_bill_line_set.getValue("PROJ_NO");
             String deal_bill_no = mat_deal_bill_line_set.getValue("DEAL_BILL_NO");
             String deal_line_no = mat_deal_bill_line_set.getValue("DEAL_LINE_NO");
-             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=MatDealBill.raq&PROJ_NO="+proj_no+"&DEAL_BILL_NO="+deal_bill_no+"&DEAL_LINE_NO="+deal_line_no
+             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=MatDealBill.raq&proj_no="+proj_no+"&deal_bill_no="+deal_bill_no+"&deal_line_no="+deal_line_no
                + "','_blank','height=600, width=780, top=200, left=350, toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');");                                
         }
   }   

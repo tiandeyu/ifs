@@ -260,7 +260,6 @@ public class BidMatResult extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("CREATE_PERSON_NAME").
               setReadOnly().
-              setDefaultNotVisible().
               setFunction("PERSON_INFO_API.GET_NAME (:CREATE_PERSON)").
               setLabel("BIDMATRESULTCREATEPERSONNAME: Create Person Name").
               setSize(30);

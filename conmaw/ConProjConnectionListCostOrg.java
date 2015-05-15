@@ -246,6 +246,7 @@ public class ConProjConnectionListCostOrg extends HzASPPageProviderWf {
          headblk.addField("CONTRACT_ID").
                  setInsertable().
                  setDefaultNotVisible().
+                 setMandatory().
                  setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //                 setLOVProperty("WHERE", "SCHEDULE = 'TRUE'").
                  setLabel("CONPROJCONNECTIONLISTCOSTORGCONTRACTID: Contract Id").

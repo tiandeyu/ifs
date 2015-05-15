@@ -39,6 +39,7 @@ public class HzwflwNavigator  implements Navigator,HzConstants{
       config.addItem("HZWFLWNAVIGATORFLOWINFOSYNCSET: Flow Info Sync Set","hzwflw/HzFlowInfoSyncSet.page","HZ_FLOW_INFO_SYNC_SET");
       config.addItem("HZWFLWNAVIGATORPROCESSADMINISTRATORSET: Administror Set","hzwflw/HzAdministratorSet.page", "HZ_WF_ADMIN");
       config.addItem("HZWFLWNAVIGATORFNDUSERUMMAP: User Map","hzwflw/FndUserUmMap.page", "FND_USER_UM_MAP");      
+      config.addItem("HZWFLWNAVIGATORREPORTLIST: Report List","hzwflw/HzReportList.page", "HZ_REPORT_LIST");      
       
       workbenchNode.addItem("HZWFLWNAVIGATORTODOWORKBENCH: Todo Workbench","hzwflw/HzTodoWorkbench.page");
       workbenchNode.addItem("HZWFLWNAVIGATORDONEWORKBENCH: Done Workbench","hzwflw/HzDoneWorkbench.page");

@@ -1408,7 +1408,10 @@ public class MatAccept extends ASPPageProvider
    {
 //      super.adjust();
       // fill function body
-      if(headset.countRows() > 0&&headlay.isSingleLayout()&&!"待验收".equals(headset.getValue("STATUS"))){
+      if(headset.countRows() > 0&&headlay.isMultirowLayout()){
+         headbar.disableCommand(headbar.EDITROW);
+         headbar.disableCommand(headbar.DELETE);}
+      else if(headset.countRows() > 0&&headlay.isSingleLayout()&&!"待验收".equals(headset.getValue("STATUS"))){
        headbar.disableCommand(headbar.EDITROW);
        headbar.disableCommand(headbar.DELETE);
        mat_accept_line_bar.disableCommand(mat_accept_line_bar.NEWROW);

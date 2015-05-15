@@ -170,8 +170,8 @@ public class ProjectContractMat extends ProjectContractBase {
    if (headset.countRows()>0 )
          {   
             String proj_no = headset.getValue("PROJ_NO");
-            String accept_id = headset.getValue("CONTRACT_ID");
-             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=ProjectContractMat.raq&proj_no="+proj_no+"&contract_id="+accept_id
+            String contract_id = headset.getValue("CONTRACT_ID");
+             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=ProjectContractMat.raq&proj_no="+proj_no+"&contract_id="+contract_id
                + "','_blank','height=600, width=780, top=200, left=350, toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');");                                
         }
   }   

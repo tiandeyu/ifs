@@ -750,7 +750,7 @@ public class MatBorrowReturn extends ASPPageProvider
          {   
             String proj_no = headset.getValue("PROJ_NO");
             String accept_id = headset.getValue("BORROW_ID");
-             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=MatBorrowReturn.raq&projNo="+proj_no+"&borrowId="+accept_id
+             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=MatBorrowReturn.raq&proj_no="+proj_no+"&borrow_id="+accept_id
                + "','_blank','height=600, width=780, top=200, left=350, toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');");                                
         }
   }   

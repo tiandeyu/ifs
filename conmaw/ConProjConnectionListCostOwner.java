@@ -243,6 +243,7 @@ public class ConProjConnectionListCostOwner extends HzASPPageProviderWf {
          mgr.getASPField("PROJ_NO").setValidation("GENERAL_PROJECT_PROJ_DESC");
          headblk.addField("CONTRACT_ID").
                  setInsertable().
+                 setMandatory().
                  setDefaultNotVisible().
                  setDynamicLOV("PROJECT_CONTRACT_LOV","PROJ_NO").
 //                 setLOVProperty("WHERE", "SCHEDULE='TRUE'").

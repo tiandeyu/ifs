@@ -250,7 +250,6 @@ public class BidMatPurch extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("CREATE_PERSON_NAME").
               setReadOnly().
-              setDefaultNotVisible().
               setFunction("PERSON_INFO_API.GET_NAME (:CREATE_PERSON)").
               setLabel("BIDMATPURCHCREATEPERSONNAME: Create Person Name").
               setSize(30);
@@ -454,8 +453,8 @@ public class BidMatPurch extends HzASPPageProviderWf
    if (headset.countRows()>0 )
          {   
             String proj_no = headset.getValue("PROJ_NO");
-            String accept_id = headset.getValue("PURCH_ID");
-             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=BidMatPurch.raq&proj_no="+proj_no+"&id="+accept_id
+            String purch_id = headset.getValue("PURCH_ID");
+             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=BidMatPurch.raq&proj_no="+proj_no+"&purch_id="+purch_id
                + "','_blank','height=600, width=780, top=200, left=350, toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');");                                
         }
   }   
@@ -470,8 +469,8 @@ public class BidMatPurch extends HzASPPageProviderWf
    if (headset.countRows()>0 )
          {   
             String proj_no = headset.getValue("PROJ_NO");
-            String accept_id = headset.getValue("PURCH_ID");
-             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=BidMatPurch2.raq&proj_no="+proj_no+"&id="+accept_id
+            String purch_id = headset.getValue("PURCH_ID");
+             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=BidMatPurch2.raq&proj_no="+proj_no+"&purch_id="+purch_id
                + "','_blank','height=600, width=780, top=200, left=350, toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');");                                
         }
   }   

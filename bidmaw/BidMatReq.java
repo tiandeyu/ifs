@@ -250,7 +250,6 @@ public class BidMatReq extends HzASPPageProviderWf
               setSize(20);
       headblk.addField("CREATE_PERSON_NAME").
               setReadOnly().
-              setDefaultNotVisible().
               setFunction("PERSON_INFO_API.GET_NAME (:CREATE_PERSON)").
               setLabel("BIDMATREQCREATEPERSONNAME: Create Person Name").
               setSize(30);
@@ -413,8 +412,8 @@ public class BidMatReq extends HzASPPageProviderWf
    if (headset.countRows()>0 )
          {   
             String proj_no = headset.getValue("PROJ_NO");
-            String accept_id = headset.getValue("REQ_ID");
-             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=BidMatReq.raq&proj_no="+proj_no+"&id="+accept_id
+            String req_id = headset.getValue("REQ_ID");
+             appendDirtyJavaScript("window.open('"+URL+"/showReport.jsp?raq=BidMatReq.raq&proj_no="+proj_no+"&req_id="+req_id
                + "','_blank','height=600, width=780, top=200, left=350, toolbar=no, menubar=no, scrollbars=yes, resizable=yes,location=no, status=no');");                                
         }
   }   

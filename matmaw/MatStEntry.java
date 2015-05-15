@@ -696,8 +696,13 @@ public class MatStEntry extends ASPPageProvider
    public void  adjust()
    {
       // fill function body
-      if(headset.countRows() > 0&&headlay.isSingleLayout()&&"已入库".equals(headset.getValue("STATUS"))){
+
+      if(headset.countRows() > 0&&headlay.isMultirowLayout()){
          headbar.disableCommand(headbar.EDITROW);
+         headbar.disableCommand(headbar.DELETE);}
+      else if(headset.countRows() > 0&&headlay.isSingleLayout()&&"已入库".equals(headset.getValue("STATUS"))){
+         headbar.disableCommand(headbar.EDITROW);
+         headbar.disableCommand(headbar.DELETE);
          mat_st_entry_line_bar.disableCommand(mat_st_entry_line_bar.NEWROW);
          mat_st_entry_line_bar.disableCommand(mat_st_entry_line_bar.EDITROW);
          mat_st_entry_line_bar.disableCommand(mat_st_entry_line_bar.DELETE);
